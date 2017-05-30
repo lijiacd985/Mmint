@@ -15,6 +15,7 @@ This script will plot the Mean CpG methylation ratio and number of CpG sites und
 
 2. PCA.meth.py
 
+This script take methylation ratio matrix for multiple samples as input output a PCA plot.
 
 3. Meth2ChIP.py
 
