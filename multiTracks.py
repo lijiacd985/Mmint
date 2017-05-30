@@ -49,7 +49,7 @@ for k in range(len(array1)):
     		subprocess.call("sed -i 's/nan/0/g' %s" % args.RawCounts[i], shell=True)
 
 	for i in range(len(args.bigwig)):
-    		subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % args.RawCounts[i],shell=True)
+    		subprocess.call("sh format.shareX.sh %s" % args.RawCounts[i],shell=True)
 
 
 	dt = pd.read_table("merge.clean",header=1)
