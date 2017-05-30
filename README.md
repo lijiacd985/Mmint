@@ -21,6 +21,10 @@ multiBw2bed.py / multiBw2multiBed.py
 
 This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.
 
+horizonalHeatmap.py
+
+This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
+
 
 
 
