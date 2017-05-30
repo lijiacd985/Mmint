@@ -81,7 +81,7 @@ for k in range(len(array1)):
     	    ax1 = subplot(len(y_trans),1,v)   
     	    ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
     #ax1.set_title(args.label[i])
-    	    plt.ylabel(args.labels[i],rotation=90)
+    	    plt.ylabel(args.labels[i],rotation=90,fontsize=7)
     	    d = scipy.zeros(300)
      	    ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
     	    ax1.spines['top'].set_visible(False)
