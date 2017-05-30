@@ -73,7 +73,7 @@ for k in range(len(array1)):
 	#print y_smooth
 #plot
 #	y_smooth2 = spline(x_trans[0], y_trans[1], x_smooth)
-	fig,ax1 = plt.subplots()
+	fig,ax1 = plt.subplots(figsize=(15,10))
 	#ax1.set_title(array[k])
 	for i,v in enumerate(xrange(len(y_trans))):
     	    #ax1.set_title(array[k])
@@ -81,7 +81,7 @@ for k in range(len(array1)):
     	    ax1 = subplot(len(y_trans),1,v)   
     	    ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
     #ax1.set_title(args.label[i])
-    	    plt.ylabel(args.labels[i],rotation=90,fontsize=7)
+    	    plt.ylabel(args.labels[i],rotation=90,fontsize=12)
     	    d = scipy.zeros(300)
      	    ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
     	    ax1.spines['top'].set_visible(False)
@@ -93,7 +93,7 @@ for k in range(len(array1)):
             ax1.yaxis.set_ticks_position('left')
     	    ax1.xaxis.set_ticks_position('none')
     	    #ax1.set_ylim([0,max(y_smooth[i])+0.2])
-    	    ax1.ticklabel_format(axis='x', style='sci', scilimits=(0,100))
+    	    ax1.ticklabel_format(axis='x', style='sci', scilimits=(0,100),fontsize=14)
 	    subplots_adjust(hspace=0)
     	    plt.setp(ax1.get_xticklabels(), visible=False)
 #ax1.fill_between(x_smooth,y_smooth2,where=y_smooth2>=d,interpolate=True,color="r")
