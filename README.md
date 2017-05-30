@@ -17,6 +17,17 @@ This script will plot the Mean CpG methylation ratio and number of CpG sites und
 
 This script take methylation ratio matrix for multiple samples as input output a PCA plot.
 
+Example Command:
+python PCA.meth.py -i merge.mC -n 5 -r 1 -N A B C D E -o meth.PCA
+
+merge.mC:
+CpG A B C
+chr10-100083445-100083643	1.00	0.50	0.38
+chr10-10031131-10031160	0.99	0.73	0.97
+chr10-1006098-1006108	0.89	0.50	1.00
+chr10-100847166-100847457	0.93	0.79	0.94
+chr10-10084773-10085013	1.00	0.68	0.95
+
 3. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
