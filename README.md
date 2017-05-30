@@ -21,7 +21,9 @@ Example Command:
 python PCA.meth.py -i merge.mC -n 5 -r 1 -N A B C D E -o meth.PCA
 
 merge.mC:
+
 CpG A B C
+
 chr10-100083445-100083643	1.00	0.50	0.38
 
 chr10-10031131-10031160	0.99	0.73	0.97
@@ -53,9 +55,14 @@ Example command:
 python  multiTracks.py -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -out testRegions1.npz testRegions2.npz testRegions3.npz testRegions4.npz testRegions5.npz -outRawCounts testRegions1.tab testRegions2.tab testRegions3.tab testRegions4.tab testRegions5.tab -c r g b black yellow
 
 regions.txt:
+
 chr4:82878750:82888151	geneName1
+
 chr14:56255857:56265260	geneName2
+
 chr7:44809255:44818658	geneName3
+
 chr7:45915022:45924426	geneName4
+
 chr8:85068756:85078161	geneName5
 
