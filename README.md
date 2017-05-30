@@ -9,24 +9,27 @@ matplotlib
 
 Installation
 
-mdepth.py
+1. mdepth.py
 
 This script will plot the Mean CpG methylation ratio and number of CpG sites under a series depth for multiple samples. The input file is the output file (*stat.txt) from mcall (MOABS).
 
-Meth2ChIP.py
+2. PCA.meth.py
+
+
+3. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
-multiBw2bed.py / multiBw2multiBed.py
+4. multiBw2bed.py / multiBw2multiBed.py
 
 This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.
 
-horizonalHeatmap.py
+5. horizonalHeatmap.py
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
 
-multiTracks.py
+6. multiTracks.py
 
 This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically) 
 
@@ -39,3 +42,4 @@ chr14:56255857:56265260	geneName2
 chr7:44809255:44818658	geneName3
 chr7:45915022:45924426	geneName4
 chr8:85068756:85078161	geneName5
+
