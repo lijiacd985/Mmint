@@ -38,6 +38,14 @@ chr10-10084773-10085013	1.00	0.68	0.95
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
+ChIP-seq signals intensity file:
+chr peak.start  peak.end  intensity
+chr1    100113803       100113954       0.219254
+chr1    100715377       100715412       0.1062
+chr1    1007642 1007662 0.107425
+chr1    100816764       100816969       0.35706
+chr1    100817693       100817732       0.113485
+
 4. multiBw2bed.py / multiBw2multiBed.py
 
 This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.
