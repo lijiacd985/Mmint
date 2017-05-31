@@ -40,11 +40,17 @@ This script will plot the average ChIP-seq signals at certain methylation ratio 
 
 ChIP-seq signals intensity file:
 chr peak.start  peak.end  intensity
+
 chr1    100113803       100113954       0.219254
+
 chr1    100715377       100715412       0.1062
+
 chr1    1007642 1007662 0.107425
+
 chr1    100816764       100816969       0.35706
+
 chr1    100817693       100817732       0.113485
+
 
 4. multiBw2bed.py / multiBw2multiBed.py
 
