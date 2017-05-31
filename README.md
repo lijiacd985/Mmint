@@ -39,6 +39,7 @@ chr10-10084773-10085013	1.00	0.68	0.95
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
 ChIP-seq signals intensity file:
+
 chr peak.start  peak.end  intensity
 
 chr1    100113803       100113954       0.219254
