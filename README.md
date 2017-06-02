@@ -57,12 +57,16 @@ chr1    100817693       100817732       0.113485
 
 This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.
 
-5. horizonalHeatmap.py
+5. curveDualYaxis.py
+
+This script generate a two Yaxis (One for mCG/CG; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.
+
+6. horizonalHeatmap.py
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
 
-6. multiTracks.py
+7. multiTracks.py
 
 This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically) 
 
