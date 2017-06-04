@@ -34,7 +34,17 @@ chr10-100847166-100847457	0.93	0.79	0.94
 
 chr10-10084773-10085013	1.00	0.68	0.95
 
-3. Meth2ChIP.py
+3. mCor.py
+
+This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.
+
+Input:
+
+chr start end methRatio
+
+
+
+4. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
