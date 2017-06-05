@@ -99,7 +99,7 @@ ax2.grid(False)
 #plt.patch.set_facecolor('grey')
 
 ax1.hist([float(z) for z in n],facecolor='green',bins=40,bottom=0, weights=np.zeros_like(np.array([float(z) for z in n]))+100./len([float(z) for z in n]),align='mid',alpha=0.9)
-ax1.set_xlabel('Methylation Ratio',fontsize=18)
+ax1.set_xlabel('Methylation Ratio',fontsize=17)
 ax1.set_ylabel('Frequency',color="green",fontsize=18)
 ax1.set_xlim((-0.05,1.05))
 ax1.yaxis.set_tick_params(labelsize=13)
@@ -155,7 +155,7 @@ x2 = [0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.
 #plt.show()
 ##plot curve
 ax2.plot(x2,m,'-o',color="red")
-ax2.set_ylabel('Chip-seq Signal',color="red",fontsize=18)
+ax2.set_ylabel('ChIP-Seq Signal',color="red",fontsize=18)
 ax2.set_ylim((0,max(m)+1))
 ax2.yaxis.set_tick_params(labelsize=13)
 #ax2.set_ylim(0,1)
