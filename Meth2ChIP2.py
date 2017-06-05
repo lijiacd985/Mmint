@@ -104,6 +104,7 @@ for line in formatfile2:
     n.append(rows[4])
 ##plot
 fig,ax1 = plt.subplots()
+fig.subplots_adjust(bottom=0.125,right=0.85)
 ax2 = ax1.twinx()
 
 ax1.grid(False)
