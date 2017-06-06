@@ -25,7 +25,7 @@ args = parser.parse_args()
 ##gene3	.......
 #.
 #.
-def pca(parser):
+def run(parser):
     args = parser.parse_args()
     data = np.genfromtxt(args.inputfile,skip_header=1)[:,1:]
     #data = np.loadtxt(args.inputfile)

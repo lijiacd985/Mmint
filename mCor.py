@@ -32,7 +32,7 @@ def run(parser):
     #print df_list
     #dfs=[test3,test3,test1]
     #merge = pd.concat(df_list,axis = 1,join='inner')
-    #merge = reduce(lambda left,right: pd.merge(left,right,on=['chr','start','end']), df_list)
+    merge = reduce(lambda left,right: pd.merge(left,right,on=['chr','start','end']), df_list)
     #print merge.ix[:,3:]#extract from the third column to the last column
 
     #merge.columns = [x for x in args.methfile]

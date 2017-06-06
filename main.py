@@ -18,17 +18,17 @@ def main():
        # pca(argparser)
     if subcommand=='mcor':
         from mCor import run
-    if subcommand='meth2chip':
+    if subcommand=='meth2chip':
         from Meth2ChIP import run
-    if subcommand='multibw2bed':
+    if subcommand=='multibw2bed':
         from multiBw2bed import run
-    if subcommand='multibw2multibed':
+    if subcommand=='multibw2multibed':
         from multiBw2multiBed import run
-    if subcommand='curveDualYaxis':
+    if subcommand=='curveDualYaxis':
         from curveDualYaxis import run
-    if subcommand='horizonalHeatmap':
+    if subcommand=='horizonalHeatmap':
         from horizonalHeatmap import run
-    if subcommand='multiTracks':
+    if subcommand=='multiTracks':
         from multiTracks import run
     run(argparser)
 
@@ -105,8 +105,8 @@ def add_multibw2bed_parsers(s):
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
 
 def add_meth2chip_parsers(s):
-    parser = s.add_parser("meth2chip",help="This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.")
-    parser.add_argument('-m','--methfile',help="input methylation Ratio file (the output file from mcall) ", metavaar="FILE")
+    parser = s.add_parser("meth2chip",help="This script will plot the average ChIP-seq signals at certain methylation ratio range; the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.")
+    parser.add_argument('-m','--methfile',help="input methylation Ratio file (the output file from mcall) ", metavar="FILE")
     parser.add_argument('-p','--peakfile',help="input peaks signal file (bedgraph format) ", metavar="FILE")
     parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
 
