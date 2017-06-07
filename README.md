@@ -94,3 +94,7 @@ chr7:45915022:45924426	geneName4
 
 chr8:85068756:85078161	geneName5
 
+
+NOTE:
+
+the #6,#7,#8 -o option need to be *.gz format and the number of -o option is the same to your input files number
