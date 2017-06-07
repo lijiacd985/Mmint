@@ -2,7 +2,10 @@
 
 Requirements:
 
+python2
+
 DeepTools
+
 matplotlib
 
 
