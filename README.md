@@ -46,7 +46,7 @@ Input:
 chr start end methRatio
 
 
-5. Meth2ChIP.py
+4. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
@@ -65,22 +65,24 @@ chr1    100816764       100816969       0.35706
 chr1    100817693       100817732       0.113485
 
 
-6. multiBw2bed.py / multiBw2multiBed.py
+5. multiBw2bed.py / multiBw2multiBed.py
 
 This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.
 
-7. curveDualYaxis.py
+6. curveDualYaxis.py
 
 This script generate a two Yaxis (One for mCG/CG; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.
 
-8. horizonalHeatmap.py
+7. horizonalHeatmap.py
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
 
-9. multiTracks.py
+8. multiTracks.py/multiTracks.meth.py
 
 This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically) 
+The multiTracks.meth.py is taking methylation bw files as input and output the up/dn 5000 bp of the intereseted regions;with 
+red dashed lines as the boundaries of the interested regions.
 
 Example command:
 python  multiTracks.py -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -out testRegions1.npz testRegions2.npz testRegions3.npz testRegions4.npz testRegions5.npz -outRawCounts testRegions1.tab testRegions2.tab testRegions3.tab testRegions4.tab testRegions5.tab -c r g b black yellow
