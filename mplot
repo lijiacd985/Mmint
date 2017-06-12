@@ -3,13 +3,17 @@
 
 import sys
 import argparse
-#func_list=['mdepth','pca','mcor','meth2chip','multiBw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
+
+func_list=['mdepth','pca','mcor','annotate','multibw2multibed','meth2chip','multiBw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
 
 def main():
     argparser = common_parser()
     #print(argparser)
     args = argparser.parse_args()
     subcommand = args.subcommand
+    if not subcommand in func_list:
+        print subcommand+' can not be recognized in mplot!'
+        return
     if subcommand=='mdepth':
         from mdepth import run
        # mdepth(argparser)
@@ -30,6 +34,10 @@ def main():
         from horizonalHeatmap import run
     if subcommand=='multiTracks':
         from multiTracks import run
+    if subcommand=='annotate':
+        from annotate import run
+    if subcommand=='multiTracksmeth':
+        from multiTracksmeth import run
     run(argparser)
 
 def common_parser():
@@ -44,7 +52,25 @@ def common_parser():
     add_curveDualYaxis_parsers(subparsers)
     add_horizonalHeatmap_parsers(subparsers)
     add_multiTracks_parsers(subparsers)
+    add_annotate_parsers(subparsers)
+    add_multiTracksmeth_parsers(subparsers)
     return argparser
+
+def add_multiTracksmeth_parsers(s):
+    parser = s.add_parser("multiTracksmeth",help="help")
+    parser.add_argument('-b','--bigwig',help="input file (bw format)",nargs="*", metavar="FILE")
+    parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
+    parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
+    parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
+    parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
+    parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
+    parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
+    parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
+
+def add_annotate_parsers(s):
+    parser = s.add_parser("annotate",help="help")
+    parser.add_argument('-b','--bedfile',help="bedfile to annotate", metavar="FILE")
+    parser.add_argument('-o','--output',help="the output file", metavar="FILE")
 
 def add_multiTracks_parsers(s):
     parser = s.add_parser("multiTracks",help="This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically)")
