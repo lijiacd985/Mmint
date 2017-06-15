@@ -62,7 +62,7 @@ subprocess.call("rm tmp", shell=True)
 fig.savefig(args.output[0]+"-Ratio.pdf")
 '''
 
-c=['r','b','g','y','p','c','m']
+c=['r','b','g','y','c','m','k']
 fig,ax = plt.subplots()
 plt.xlim(0,11)
 
