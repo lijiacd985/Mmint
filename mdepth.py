@@ -21,7 +21,7 @@ args = parser.parse_args()
 #        print >>sys.stderr, 'cannot open', filename
 #        raise SystemExit
 '''
-def mdepth(parser):
+def run(parser):
     args = parser.parse_args()
     for i in range(len(args.methfile)):
         subprocess.call("sed -n '27,48p' %s | cut -f1,3,8 | sed 's/NA/0/g'| sed 's/(genome)//g' | sed '1d'> %s\.cov" % (args.methfile[i],args.methfile[i]), shell=True)

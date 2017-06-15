@@ -4,7 +4,7 @@
 import sys
 import argparse
 
-func_list=['mdepth','pca','mcor','annotate','multibw2multibed','meth2chip','multiBw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
+func_list=['multiTracksmeth','mdepth','pca','mcor','annotate','multibw2multibed','meth2chip','multiBw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
 
 def main():
     argparser = common_parser()
