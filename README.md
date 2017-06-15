@@ -18,7 +18,7 @@ This script will plot the Mean CpG methylation ratio and number of CpG sites und
 
 2. DepthvsReadsNum.py
 
-This script will plot the total reads numbers at depth >=x (x=1,2,4,8,16,32,64,128,256) to detect if there are high duplication level or sequence bias. If the sequence is random with no bias and no duplication, the total reads number should decrease with the increase of depth; if there is bias or high duplication level, the curve should be a flat line at certain depth (see the example).  
+This script will plot the reads numbers percentage (Y-axis) at depth >=x (x=1,2,4,8,16,32,64,128,256) (X-axis) to detect if there are high duplication level or sequence bias. If the sequence is random with no bias and no duplication, the total reads number should decrease with the increase of depth; if there is bias or high duplication level, the curve should be a flat line at certain depth (see the example).  
 
 Example Command:
 
