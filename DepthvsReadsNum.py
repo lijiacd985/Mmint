@@ -110,6 +110,7 @@ for i in range(len(args.methfile)):
     plt.legend(loc="lower left")
 plt.xticks(xaxis, labels)
 plt.xlabel('Coverage (>=)')
-plt.ylabel('Reads Number Percentage')
+#plt.ylabel('Reads Number Percentage')
+plt.ylabel('Normalized Wig sum for selected CpGs (Percentage)')
 
 fig.savefig(args.output[0]+"-Cov.pdf")
