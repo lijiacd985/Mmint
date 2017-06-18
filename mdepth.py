@@ -24,7 +24,7 @@ args = parser.parse_args()
 def run(parser):
     args = parser.parse_args()
     for i in range(len(args.methfile)):
-        subprocess.call("sed -n '27,48p' %s | cut -f1,3,8 | sed 's/NA/0/g'| sed 's/(genome)//g' | sed '1d'> %s\.cov" % (args.methfile[i],args.methfile[i]), shell=True)
+        subprocess.call("sed -n '27,48p' %s | cut -f1,3,8 | sed 's/NA/0/g'| sed 's/(genome)//g' | sed '1,2d'> %s\.cov" % (args.methfile[i],args.methfile[i]), shell=True)
 
 
     linestyles = ['-', '--', '-.', ':']
@@ -37,7 +37,7 @@ def run(parser):
         ax2 = ax1.twinx()
         ax1.plot(m[0],m[2],c=c,label=args.label[i],marker="^")
         #ax2.plot(m[0],m[1]/28217448*100,marker="^",linestyle=linestyles[1],c=c)
-        ax2.plot(m[0],m[1]/1000000,marker="^",linestyle=linestyles[1],c=c)
+        ax2.plot(m[0],m[1]/1000000,marker="P",linestyle=linestyles[2],c=c)
     	#ax2.plot(m[0],m[1],linestyle=linestyles[1],c=c)
         #ax1.legend(loc="center right",fontsize=10)
         #ax2.yaxis.set_visible(False)
@@ -51,7 +51,7 @@ def run(parser):
     ax1.legend(loc="center right",fontsize=10)
     #ax1.text(10, 0.95, 'Total CpG sites (hg19) : 28217448',color='black', fontsize=10)
     ax1.set_ylim([0,1])
-    ax1.set_xlim([-2,22])
+    ax1.set_xlim([-1,26])
     #ax2.set_ylim([0,100])
     #ax2.set_yticklabels(["1000","90","80","70","60","50","40","30","20","10"])
     ax1.set_ylabel('Mean CpG Meth Ratio(-)')
