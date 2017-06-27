@@ -32,18 +32,21 @@ def run(parser):
     ##pass the python variables to subprocess
     subprocess.call("rm merge.ave.txt", shell=True)
     ##iterate multiple input files
+    outFile=[]
+    for i in args.rowlabels:
+        outFile.append(i+'.gz')
     for i in range(len(args.bigwig)):
 
-        subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, args.outFile[i]),shell=True)
+        subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, outFile[i]),shell=True)
 
 
     for i in range(len(args.bigwig)):
-        subprocess.call("gunzip -f %s" % args.outFile[i], shell=True)
+        subprocess.call("gunzip -f %s" % outFile[i], shell=True)
 
 
     for i in range(len(args.bigwig)):
-        subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
-        #subprocess.call("sh format.meth.sh %s" % args.outFile[i],shell=True)
+        #subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
+        subprocess.call("sh format.meth.sh %s" % outFile[i],shell=True)
     #subprocess.call("rm merge.ave.txt", shell=True)
     dt = pd.read_table("merge.ave.txt",header=None)
     #data = np.random.rand(7,24)
