@@ -12,7 +12,7 @@ def run(parser):
     nl=-1*(np.log(data.iloc[:,4].values.astype(float))/np.log(10))
     md=data.iloc[:,3].values.astype(float)
     plt.plot(md[np.where(nl>=args.p)[0]],nl[np.where(nl>=args.p)[0]],'r.')
-    plt.plot(md[np.where(nl<args.p)[0]],nl[np.where(nl<args.p)[0]],'w.')
+    plt.plot(md[np.where(nl<args.p)[0]],nl[np.where(nl<args.p)[0]],'g.')
     #plt.ylim(0,100)
     plt.ylabel('-log10p-value')
     plt.xlabel('Hypomethylated                      Hypermethylated')
