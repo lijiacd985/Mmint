@@ -115,3 +115,15 @@ chr8:85068756:85078161	geneName5
 NOTE:
 
 the #6,#7,#8 -o option need to be *.gz format and the number of -o option is the same to your input files number
+
+9. volcano
+This script will draw volcano plot about bed files
+
+Example command:
+mplot volcano -f dmrtest.bed -p 5 -o test
+
+dmrtest.bed:
+
+chr1    start   end methylation_difference  p_value
+
+Fields seperate by tab.
