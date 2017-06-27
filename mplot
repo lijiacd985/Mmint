@@ -4,7 +4,7 @@
 import sys
 import argparse
 
-func_list=['mdepth','pca','mcor','annotate','multibw2multibed','meth2chip','multiBw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
+func_list=['mdepth','pca','mcor','annotate','multibw2multibed','meth2chip','multibw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
 
 def main():
     argparser = common_parser()
@@ -24,8 +24,8 @@ def main():
         from mCor import run
     if subcommand=='meth2chip':
         from Meth2ChIP import run
-    if subcommand=='multibw2bed':
-        from multiBw2bed import run
+    if subcommand=='multibw2Bed':
+        from multiBw2Bed import run
     if subcommand=='multibw2multibed':
         from multiBw2multiBed import run
     if subcommand=='curveDualYaxis':
@@ -119,7 +119,7 @@ def add_multibw2multibed_parsers(s):
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
 
 def add_multibw2bed_parsers(s):
-    parser = s.add_parser("multibw2bed",help="This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.")
+    parser = s.add_parser("multibw2Bed",help="This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.")
     parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", nargs="*",metavar="FILE")
     parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
     parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
