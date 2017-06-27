@@ -4,7 +4,7 @@
 import sys
 import argparse
 
-func_list=['mdepth','pca','mcor','annotate','multibw2multibed','meth2chip','multibw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
+func_list=['mdepth','volcano','pca','mcor','annotate','multibw2multibed','meth2chip','multibw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
 
 def main():
     argparser = common_parser()
@@ -38,6 +38,8 @@ def main():
         from annotate import run
     if subcommand=='multiTracksmeth':
         from multiTracksmeth import run
+    if subcommand=='volcano':
+        from volcano import run
     run(argparser)
 
 def common_parser():
@@ -54,7 +56,14 @@ def common_parser():
     add_multiTracks_parsers(subparsers)
     add_annotate_parsers(subparsers)
     add_multiTracksmeth_parsers(subparsers)
+    add_volcano_parsers(subparsers)
     return argparser
+
+def add_volcano_parsers(s):
+    parser = s.add_parser("volcano",help="Volcano plot for bedfile")
+    parser.add_argument('-f','--file',help=r'DMR file. Format: chr start end ratio_difference p_value. Seperate:\t')
+    parser.add_argument('-p','--p',help='cutoff p value',type=int)
+    parser.add_argument('-o','--output',help='output file name')
 
 def add_multiTracksmeth_parsers(s):
     parser = s.add_parser("multiTracksmeth",help="help")
