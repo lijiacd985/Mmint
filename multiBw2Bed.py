@@ -43,6 +43,7 @@ def run(parser):
 
     for i in range(len(args.bigwig)):
         subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
+        #subprocess.call("sh format.meth.sh %s" % args.outFile[i],shell=True)
     #subprocess.call("rm merge.ave.txt", shell=True)
     dt = pd.read_table("merge.ave.txt",header=None)
     #data = np.random.rand(7,24)
