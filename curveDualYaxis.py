@@ -54,6 +54,7 @@ def run(parser):
     y=array
     x=np.arange((int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize))
     fig,ax1 = plt.subplots()
+    fig.subplots_adjust(bottom=0.125,right=0.85)
     ax2 = ax1.twinx()
 
     ax1.grid(False)
