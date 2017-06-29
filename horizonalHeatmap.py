@@ -45,6 +45,7 @@ def run(parser):
 
     for i in range(len(args.bigwig)):
         subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
+        #subprocess.call("sh format.meth.sh %s" % outFile[i],shell=True)
     ##plot horizon heatmap
     dt = pd.read_table("merge.ave.txt",header=None)
     row_labels = [a for a in args.rowlabels]
@@ -55,7 +56,7 @@ def run(parser):
 
     #cmap=ListedColormap('YlOrRd')
     #heatmap=ax.pcolor(stats.zscore(array,axis=1),cmap=cmap)
-    heatmap=ax.pcolor(array,cmap=cmap,vmin=0,vmax=3)
+    heatmap=ax.pcolor(array,cmap=cmap,vmin=0,vmax=2)
     #cbar = plt.colorbar(heatmap)
     #cbar.ax.set_yticklabels(['0','1','2','3','4','5','6','7','8'])
     #heatmap.set_clim(vmin=-1,vmax=4)

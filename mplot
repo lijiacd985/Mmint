@@ -11,6 +11,7 @@ def main():
     #print(argparser)
     args = argparser.parse_args()
     subcommand = args.subcommand
+    #print subcommand
     if not subcommand in func_list:
         print subcommand+' can not be recognized in mplot!'
         return

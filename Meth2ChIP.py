@@ -38,10 +38,10 @@ def run(parser):
     chrlist2=[]
 
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-m','--methfile',help="input methylation Ratio file (the output file from mcall) ", metavar="FILE")
-    parser.add_argument('-p','--peakfile',help="input peaks signal file (bedgraph format) ", metavar="FILE")
-    parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument('-m','--methfile',help="input methylation Ratio file (the output file from mcall) ", metavar="FILE")
+    #parser.add_argument('-p','--peakfile',help="input peaks signal file (bedgraph format) ", metavar="FILE")
+    #parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
     args = parser.parse_args()
 
     '''
