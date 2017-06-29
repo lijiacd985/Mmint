@@ -59,7 +59,7 @@ def run(parser):
     ax1.grid(False)
     ax2.grid(False)
     ax1.plot(x,y[0],color="red",linewidth=4)
-    ax1.set_xlabel('H3K4me3 Broad Peaks',fontsize=13)
+    ax1.set_xlabel('Regions',fontsize=13)
     ax1.set_ylabel('Methylation Ratio',color="red",fontsize=13)
     ax1.set_ylim((0,1))
 
