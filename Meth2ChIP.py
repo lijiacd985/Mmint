@@ -146,7 +146,24 @@ def run(parser):
     ax1.yaxis.set_tick_params(labelsize=13)
     ax1.xaxis.set_tick_params(labelsize=13)
     ax1.set_xlim((-0.05,1.05))
-    ax1.set_ylim((0,np.max(ratio)+5))
+    ax1.set_ylim((0,np.max(ratio)+10))
+    region=[]
+    region.append([0.0,0.0,0.09,0.09])
+    region.append([0.11,0.11,0.49,0.49])
+    region.append([0.51,0.51,0.89,0.89])
+    region.append([0.91,0.91,1.0,1.0])
+    regiony=[np.max(ratio)+6,np.max(ratio)+7,np.max(ratio)+7,np.max(ratio)+6]
+    r=[]
+    r.append(np.sum(ratio[:2]))
+    r.append(np.sum(ratio[2:10]))
+    r.append(np.sum(ratio[10:-2]))
+    r.append(np.sum(ratio[-2:]))
+    from decimal import Decimal
+    for j in range(4):
+        r[j] = Decimal(str(r[j])).quantize(Decimal('0.00'))
+    for j in range(4):
+        ax1.plot(region[j],regiony,lw=1.5,color='green')
+        ax1.text((region[j][1]+region[j][2])/2,np.max(ratio)+8,r[j]+'%',ha='center', va='bottom')
     ax1.set_title("Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
     d = {m:n for m,n in zip(x,y)}
     #d = {}
@@ -198,7 +215,7 @@ def run(parser):
     ##plot curve
     ax2.plot(x2,m,'-o',color="red")
     ax2.set_ylabel('ChIP-Seq Signal',color="red",fontsize=18)
-    ax2.set_ylim((0,max(m)+1))
+    ax2.set_ylim((0,max(m)*1.2))
     ax2.yaxis.set_tick_params(labelsize=13)
     #ax2.set_ylim(0,1)
     #plt.show()
