@@ -163,7 +163,7 @@ def run(parser):
         r[j] = Decimal(str(r[j])).quantize(Decimal('0.00'))
     for j in range(4):
         ax1.plot(region[j],regiony,lw=1.5,color='green')
-        ax1.text((region[j][1]+region[j][2])/2,np.max(ratio)+8,r[j]+'%',ha='center', va='bottom')
+        ax1.text((region[j][1]+region[j][2])/2,np.max(ratio)+8,str(r[j])+'%',ha='center', va='bottom')
     ax1.set_title("Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
     d = {m:n for m,n in zip(x,y)}
     #d = {}
