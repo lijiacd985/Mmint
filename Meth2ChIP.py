@@ -130,13 +130,23 @@ def run(parser):
     #ax1.set_axis_bgcolor('grey')
     #plt.patch.set_facecolor('grey')
 
-    ax1.hist([float(z) for z in n],facecolor='green',bins=40,bottom=0, weights=np.zeros_like(np.array([float(z) for z in n]))+100./len([float(z) for z in n]),align='mid',alpha=0.9)
+    ratio=np.zeros(20)
+    for z in n:
+        if z=='1':
+            ratio[-1]+=1
+            continue
+        #if np.floor((float(z))/0.025)==40:
+        #    print(z)
+        ratio[int(np.floor((float(z))/0.05))]+=1
+    ratio = ratio*100/float(np.sum(ratio))
+    print(ratio)
+    ax1.bar(np.arange(0,1,0.05),ratio,facecolor='green',bottom=0, alpha=0.9,width=0.03)#weights=np.zeros_like(np.array([float(z) for z in n]))+100./len([float(z) for z in n]),align='mid',alpha=0.9)
     ax1.set_xlabel('Methylation Ratio',fontsize=17)
     ax1.set_ylabel('Frequency',color="green",fontsize=18)
     ax1.yaxis.set_tick_params(labelsize=13)
     ax1.xaxis.set_tick_params(labelsize=13)
     ax1.set_xlim((-0.05,1.05))
-    #ax1.set_ylim((0,16))
+    ax1.set_ylim((0,50))
     ax1.set_title("Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
     d = {m:n for m,n in zip(x,y)}
     #d = {}
