@@ -145,6 +145,7 @@ def add_meth2chip_parsers(s):
     parser.add_argument('-m','--methfile',help="input methylation Ratio file (the output file from mcall) ", metavar="FILE")
     parser.add_argument('-p','--peakfile',help="input peaks signal file (bedgraph format) ", metavar="FILE")
     parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
+    parser.add_argument('-a','--annotationfile',help="annotate different peaks", metavar="FILE")
 
 def add_mcor_parsers(s):
     parser = s.add_parser("mcor",help="This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.")

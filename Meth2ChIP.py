@@ -52,15 +52,18 @@ def run(parser):
     '''
 
 
+
     targetbed = pybedtools.BedTool(args.peakfile)
     try:
             file=open(args.peakfile,'r')
     except IOError:
             print >>sys.stderr, 'cannot open', filename
             raise SystemExit
+    peaks=[]
     for line in file:
         rows=line.strip().split("\t")
         l.append(rows[3])
+        peaks.append(line)
     #print len(l) ## print the total peaks number
 
     bed1 = pybedtools.BedTool(args.methfile)
@@ -129,8 +132,33 @@ def run(parser):
     ax2.grid(False)
     #ax1.set_axis_bgcolor('grey')
     #plt.patch.set_facecolor('grey')
-
+    r_divide=[]
+    peaks=np.array(peaks)
+    #print peaks.shape
+#==================================divide peaks========================================
+    nn=np.array(n).astype(float)
+    #print(nn)
+    #print(np.where(nn<0.1))
+    #print(np.where(((nn>0.1) & (nn<0.5))))
+    #print(np.where(((nn>0.5) & (nn<0.9))))
+    #print(np.where(nn>0.9))
+    r_divide.append(peaks[np.where(n<=0.1)])
+    r_divide.append(peaks[np.where(((nn>0.1) & (nn<0.5)))])
+    r_divide.append(peaks[np.where(((nn>0.5) & (nn<0.9)))])
+    r_divide.append(peaks[np.where(n>0.9)])
+    filenames=[args.output+'.umr.bed',args.output+'.lmr.bed',args.output+'.mmr.bed',args.output+'.hmr.bed']
+    for j in range(4):
+        filecontent=[]
+        #for re in r_divide[i]:
+            #filecontent.append(re[0]+'\t'+re[1]+'\t'+re[2]+'\t'+re[3]+'\n')
+        with open(filenames[j],'w') as f:
+            f.writelines(r_divide[j])#filecontent)
+        if args.annotationfile:
+            subprocess.call('sort -k1,1 -k2n,2 -o '+filenames[j]+' '+filenames[j],shell=True)
+            subprocess.call('bedtools closest -D b -a '+filenames[j]+' -b '+args.annotationfile+' > '+filenames[j]+'.annotated',shell=True)
+#======================================================================================
     ratio=np.zeros(20)
+
     for z in n:
         if z=='1':
             ratio[-1]+=1
@@ -138,8 +166,9 @@ def run(parser):
         #if np.floor((float(z))/0.025)==40:
         #    print(z)
         ratio[int(np.floor((float(z))/0.05))]+=1
+
     ratio = ratio*100/float(np.sum(ratio))
-    print(ratio)
+    #print(ratio)
     ax1.bar(np.arange(0,1,0.05),ratio,facecolor='green',align='edge',bottom=0, alpha=0.9,width=0.04)#weights=np.zeros_like(np.array([float(z) for z in n]))+100./len([float(z) for z in n]),align='mid',alpha=0.9)
     ax1.set_xlabel('Methylation Ratio',fontsize=17)
     ax1.set_ylabel('Percentage',color="green",fontsize=18)
