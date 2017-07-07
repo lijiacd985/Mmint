@@ -92,7 +92,7 @@ def run(parser):
 
 
     with open ("mCG-peaks","w") as f2:
-           subprocess.call("bedtools groupby -i intersect.bed  -g 1,2,3 -c 4,8 -o mean,mean | awk '{a[$5]+=$4;n[$5]+=1}END{for (b in a){print b,a[b]/n[b]}}'",stdout=f2,shell=True)
+        subprocess.call("bedtools groupby -i intersect.bed  -g 1,2,3 -c 4,8 -o mean,mean | awk '{a[$5]+=$4;n[$5]+=1}END{for (b in a){print b,a[b]/n[b]}}'",stdout=f2,shell=True)
     try:
     	formatfile=open("mCG-peaks",'r')
     except IOError:
