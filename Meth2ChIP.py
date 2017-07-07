@@ -155,7 +155,7 @@ def run(parser):
             f.writelines(r_divide[j])#filecontent)
         if args.annotationfile:
             subprocess.call('sort -k1,1 -k2n,2 -o '+filenames[j]+' '+filenames[j],shell=True)
-            subprocess.call('bedtools closest -D b -a '+filenames[j]+' -b '+args.annotationfile+' > '+filenames[j]+'.annotated',shell=True)
+            subprocess.call('bedtools closest -D b -a '+filenames[j]+' -b '+args.annotationfile+' > '+filenames[j]+'.ann',shell=True)
 #======================================================================================
     ratio=np.zeros(20)
 
