@@ -142,10 +142,10 @@ def run(parser):
     #print(np.where(((nn>0.1) & (nn<0.5))))
     #print(np.where(((nn>0.5) & (nn<0.9))))
     #print(np.where(nn>0.9))
-    r_divide.append(peaks[np.where(nn<=0.1)])
-    r_divide.append(peaks[np.where(((nn>0.1) & (nn<0.5)))])
-    r_divide.append(peaks[np.where(((nn>0.5) & (nn<0.9)))])
-    r_divide.append(peaks[np.where(nn>0.9)])
+    r_divide.append(peaks[np.where(nn<0.1)])
+    r_divide.append(peaks[np.where(((nn>=0.1) & (nn<0.5)))])
+    r_divide.append(peaks[np.where(((nn>=0.5) & (nn<0.9)))])
+    r_divide.append(peaks[np.where(nn>=0.9)])
     filenames=[args.output+'.umr.bed',args.output+'.lmr.bed',args.output+'.mmr.bed',args.output+'.hmr.bed']
     for j in range(4):
         filecontent=[]
