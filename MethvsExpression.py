@@ -32,7 +32,17 @@ def run(parser):
         if len(dic[d])!=2: continue
         rexp.append(dic[d][0])
         mlevel.append(dic[d][1])
+    rexp = np.array(rexp)
+    mlevel = np.array(mlevel)
+    pos=np.where(rexp>0)
+    mlevel=mlevel[pos]
+    rexp=rexp[pos]
+    #rexp[np.where(rexp==0)]=0.01
+    #low=np.sort(rexp)[len(rexp)//10]
+    rexp = np.log(rexp)/np.log(10)
     max_exp = np.max(rexp)
+    #i#print(low)
+    #print(np.where(rexp>low)[0])
     plt.plot(rexp,mlevel,'r.',alpha=0.2)
     plt.xlim(0,max_exp)
     plt.ylim(0,1)

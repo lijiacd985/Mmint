@@ -39,6 +39,8 @@ def main():
         from multiTracksmeth import run
     if subcommand=='volcano':
         from volcano import run
+    if subcommand=='methvsexpression':
+        from MethvsExpression import run
     run(argparser)
 
 def common_parser():
@@ -57,7 +59,17 @@ def common_parser():
     add_multiTracksmeth_parsers(subparsers)
     add_volcano_parsers(subparsers)
     add_cluster_parsers(subparsers)
+    add_methvsexpression_parsers(subparsers)
     return argparser
+
+def add_methvsexpression_parsers(s):
+    parser = s.add_parser("methvsexpression",help="Methylation profile versus expression profile")
+    parser.add_argument('-m','--methfile',help=r"Bed files describe sample, 4 columns: chr\tstart\tend\tratio",required=True)
+    parser.add_argument('-r','--reference',help="select from hg19/mm10 or the TSS region self defined",required=True)
+    parser.add_argument('-u','--upstream',help='TSS upstream (default 1000bp)',type=int,default=1000)
+    parser.add_argument('-d','--downstream',help="TSS downstream (default 1000bp)",type=int,default=1000)
+    parser.add_argument('-R','--RNAseq',help=r"result, format(\t==Tab): Genename\tExpression_level",required=True)
+    parser.add_argument('-o','--output',help="output file name",required=True)
 
 def add_volcano_parsers(s):
     parser = s.add_parser("volcano",help="Volcano plot for bedfile")

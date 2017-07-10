@@ -33,35 +33,11 @@ def run(parser):
     names = args.name
     data = pd.read_csv(args.inputfile,header=None,names = names,sep='\t').values.T
     plt.figure()
+    plt.ylabel("Distance")
     z=linkage(data,args.linktype)
     dendrogram(z,no_labels=False,leaf_label_func=lambda x:names[x])
 #    plt.xticks(np.arange(len(names)),names)
     plt.savefig(args.output+'.pdf')
-    #data = np.loadtxt(args.inputfile)
-    #data1=np.transpose(data)
-    #X=data1
-    #y=np.array([0,0,1,1,2,2,3,3,4,4])
-    #y=np.arange(0,int(args.number),1)
-    #Y=np.repeat(y,int(args.replicate))
-    #names = np.array(['A','B','C','D','E'])
-    #names = np.arange(0,int(args.number),1)
-    #names = args.name
-    #pca = PCA(n_components=2)
-    #X_r = pca.fit(X).transform(X)
-    #for c, i, name, markers in zip("rgbky", [0, 1, 2, 3, 4], names, ('o', 'v', '^', '<', '>')):
-    #for c, i, name, markers in zip("rgbky", np.arange(0,int(args.number)), names, ('o', 'v', '^', '<', '>','')):
-    ##shape and color setting
-    #x = np.arange(int(args.number))
-    #ys = [i+x+(i*x)**2 for i in range(int(args.number))]
-    #colors = cm.rainbow(np.linspace(0, 1, len(ys)))
-   # print(colors)
-   # print(np.arange(0,int(args.number)+2))
-   # print(names)
-    #for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('^', '^','^','^','^','^','^', '^','^','^','^','^','^', '^','^','^','^','^','^', '^','^','^','^','^')):
-   # 	plt.scatter(X_r[Y == i, 0], X_r[Y == i, 1], c=c, label=name,alpha=0.8,marker=markers,s=80)
-   # plt.legend(loc=2)
-   # plt.savefig(args.output+".pdf")
-    #plt.show()
 
 
     ##python PCA.meth.py -i inputfile -n 5 -r 2 -N A B C D E -o PCA

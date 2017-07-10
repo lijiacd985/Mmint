@@ -60,7 +60,8 @@ def run(parser):
     plt.style.use('ggplot')
     fig = plt.figure()
     ax = plt.subplot()
-    ax.pcolor(col_max,cmap=plt.cm.OrRd)
+    hm=ax.pcolor(col_max,cmap=plt.cm.OrRd)
+    plt.colorbar(hm)
     ax.set_xticks(np.arange(0,labelnum)+0.5)
     ax.set_yticks(np.arange(0,labelnum)+0.5)
     from decimal import Decimal
