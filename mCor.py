@@ -50,6 +50,30 @@ def run(parser):
     df = pd.DataFrame(array2, columns=[f for f in args.methfile]) # set the input file name as the column names
 
     print (df.corr()) #calculate the correlation bewteen any two columns
+
+#===============================New feature: correlationship heatmap=======================
+    labelname=[]
+    for name in args.methfile:
+        labelname.append(name[:name.rfind('.')])
+    labelnum=len(labelname)
+    col_max=df.corr().values
+    plt.style.use('ggplot')
+    fig = plt.figure()
+    ax = plt.subplot()
+    ax.pcolor(col_max,cmap=plt.cm.OrRd)
+    ax.set_xticks(np.arange(0,labelnum)+0.5)
+    ax.set_yticks(np.arange(0,labelnum)+0.5)
+    from decimal import Decimal
+    for i in np.arange(0,labelnum):
+        for j in np.arange(0,labelnum):
+            plt.text(i+0.5,j+0.2,str(Decimal(str(col_max[i,j])).quantize(Decimal('0.00'))),ha='center', va='bottom')
+    ax.xaxis.tick_bottom()
+    ax.yaxis.tick_left()
+    ax.set_xticklabels(labelname,minor=False,fontsize=20)
+    ax.set_yticklabels(labelname,minor=False,fontsize=20)
+    plt.savefig(args.output+'_heatmap.pdf')
+#==========================================================================================
+
     print (df.describe()) #output the basic statistics of each column
     #color = [[x for x in np.arange(0,1,0.1)] for y in np.arange(0,1,0.1)]
     #color =[[0.1,0.2,0.3],[0.1,0.2,0.3]]

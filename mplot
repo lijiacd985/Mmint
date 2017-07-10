@@ -4,7 +4,6 @@
 import sys
 import argparse
 
-func_list=['mdepth','volcano','pca','mcor','annotate','multibw2multibed','meth2chip','multibw2Bed','curveDualYaxis','horizonalHeatmap','multiTracks']
 
 def main():
     argparser = common_parser()
@@ -12,15 +11,14 @@ def main():
     args = argparser.parse_args()
     subcommand = args.subcommand
     #print subcommand
-    if not subcommand in func_list:
-        print subcommand+' can not be recognized in mplot!'
-        return
     if subcommand=='mdepth':
         from mdepth import run
        # mdepth(argparser)
     if subcommand=='pca':
         from PCAmeth import run
        # pca(argparser)
+    if subcommand=='cluster':
+        from cluster import run
     if subcommand=='mcor':
         from mCor import run
     if subcommand=='meth2chip':
@@ -58,6 +56,7 @@ def common_parser():
     add_annotate_parsers(subparsers)
     add_multiTracksmeth_parsers(subparsers)
     add_volcano_parsers(subparsers)
+    add_cluster_parsers(subparsers)
     return argparser
 
 def add_volcano_parsers(s):
@@ -157,6 +156,13 @@ def add_mdepth_parsers(s):
     parser.add_argument('-m','--methfile',help="The output *stat.txt from mcall",nargs="*",metavar="FILE")
     parser.add_argument('-l','--label',help="Labels for samples",nargs="*",metavar="FILE")
     parser.add_argument('-o','--output',help="The output file: *.pdf, *.png...", metavar="FILE")
+
+def add_cluster_parsers(s):
+    parser = s.add_parser("cluster",help="This script take methylation ratio matrix for multiplt samples as input to show the cluster result between samples.")
+    parser.add_argument('-i','--inputfile',help='input file name',metavar="FILE")
+    parser.add_argument('-N','--name',nargs='+',help="sample's name",required=True)
+    parser.add_argument('-o','--output',help="output file name")
+    parser.add_argument('-l','--linktype',help='linkage type for scipy, such as single,average,ward,cosine and so on.')
 
 def add_pca_parsers(s):
     parser = s.add_parser("pca",help="This script take methylation ratio matrix for multiple samples as input output a PCA plot.")
