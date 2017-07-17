@@ -64,10 +64,16 @@ def run(parser):
             y_smooth.append(spline(x_trans[0], y_trans[i], x_smooth))
             ymax.append(max(y_trans[i]))
         fig,ax1 = plt.subplots(figsize=(15,10))
+
+        mmax=np.zeros(len(args.labels)//args.replicate)
+        for i in range(len(args.labels)//args.replicate):
+            for j in range(args.replicate):
+                mmax[i] = max(mmax[i],np.max(y_smooth[i*args.replicate+j]))
         for i,v in enumerate(xrange(len(y_trans))):
             v=v+1
             ax1 = subplot(len(y_trans),1,v)
             ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
+            ax1.ylim(0,mmax[v//args.replicate])
             plt.ylabel(args.labels[i],rotation=90,fontsize=12)
             d = scipy.zeros(1000)
             ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
