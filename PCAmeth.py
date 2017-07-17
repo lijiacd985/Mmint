@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.cm as cm
 import argparse
+from Format import formdata
 '''
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--inputfile',help="input file name", metavar="FILE")
@@ -27,9 +28,10 @@ args = parser.parse_args()
 #.
 def run(parser):
     args = parser.parse_args()
-    data = np.genfromtxt(args.inputfile,skip_header=1)[:,1:]
+    data=formdata(args.inputfile)
+    #data = np.genfromtxt(args.inputfile,skip_header=1)[:,1:]
     #data = np.loadtxt(args.inputfile)
-    data1=np.transpose(data)
+    data1=np.transpose(data).astype(float)
     X=data1
     #y=np.array([0,0,1,1,2,2,3,3,4,4])
     y=np.arange(0,int(args.number),1)
