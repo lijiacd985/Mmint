@@ -73,7 +73,7 @@ def run(parser):
             v=v+1
             ax1 = subplot(len(y_trans),1,v)
             ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
-            ax1.ylim(0,mmax[v//args.replicate])
+            ax1.set_ylim(0,mmax[v//args.replicate])
             plt.ylabel(args.labels[i],rotation=90,fontsize=12)
             d = scipy.zeros(1000)
             ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
