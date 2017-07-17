@@ -69,18 +69,19 @@ def run(parser):
         for i in range(len(args.labels)//args.replicate):
             for j in range(args.replicate):
                 mmax[i] = max(mmax[i],np.max(y_smooth[i*args.replicate+j]))
+        print mmax
         for i,v in enumerate(xrange(len(y_trans))):
             v=v+1
             ax1 = subplot(len(y_trans),1,v)
             ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
-            ax1.set_ylim(0,mmax[v//args.replicate])
+            ax1.set_ylim(0,mmax[i//args.replicate])
             plt.ylabel(args.labels[i],rotation=90,fontsize=12)
             d = scipy.zeros(1000)
             ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
             ax1.spines['top'].set_visible(False)
             ax1.spines['right'].set_visible(False)
             ax1.spines['bottom'].set_visible(False)
-            ax1.set_ylim(0,max(ymax))
+            #ax1.set_ylim(0,max(ymax))
             ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
             ax1.yaxis.set_ticks_position('left')
             ax1.xaxis.set_ticks_position('none')
