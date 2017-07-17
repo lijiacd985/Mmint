@@ -32,7 +32,9 @@ def run(parser)
     plt.style.use('ggplot')
     print args.bigwig
     print args.file
-
+    out=[]
+    for label in args.labels:
+        out.append(label+'.gz')
     FILE = open(args.file,'r')
     array1 = []
     array2 = []
@@ -45,7 +47,7 @@ def run(parser)
 
     	for i in range(len(args.bigwig)):
     	#	subprocess.call("multiBigwigSummary bins -bs %s -r chr1:907000:910000 -b d01.bam.norm2.bw d03.bam.norm.bw d14.bam.norm.bw --labels %s -out %s --outRawCounts %s" % (args.binsize,args.labels,args.out,args.RawCounts),shell=False)
-        		subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],args.out[i],args.RawCounts[i]),shell=True)
+        		subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],args.RawCounts[i]),shell=True)
 
     	for i in range(len(args.bigwig)):
         		subprocess.call("sed -i 's/nan/0/g' %s" % args.RawCounts[i], shell=True)

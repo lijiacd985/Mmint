@@ -29,21 +29,24 @@ def run(parser):
     ##pass the python variables to subprocess
     #subprocess.call("rm merge.ave.txt")
     ##iterate multiple input files
+    out=[]
+    for label in args.rowlabels:
+        out.append(label+'.gz')
     for i in range(len(args.bigwig)):
 
-        subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, args.outFile[i]),shell=True)
+        subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, out[i]),shell=True)
 
 
     for i in range(len(args.bigwig)):
-        subprocess.call("gunzip -f %s" % args.outFile[i], shell=True)
+        subprocess.call("gunzip -f %s" % out[i], shell=True)
 
     subprocess.call("rm merge.ave.txt", shell=True)
     #subprocess.call("rm test*", shell=True)
 
     #for i in range(len(args.bigwig)):
     #    subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
-    subprocess.call("sh format.meth.sh %s" % args.outFile[0],shell=True)
-    subprocess.call("sh format.sh %s" % args.outFile[1],shell=True)
+    subprocess.call("sh format.meth.sh %s" % out[0],shell=True)
+    subprocess.call("sh format.sh %s" % out[1],shell=True)
 
 
     dt = pd.read_table("merge.ave.txt",header=None)

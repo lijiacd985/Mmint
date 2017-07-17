@@ -83,7 +83,7 @@ def add_multiTracksmeth_parsers(s):
     parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
     parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
-    parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
+    #parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
     parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
     parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
@@ -99,7 +99,6 @@ def add_multiTracks_parsers(s):
     parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
     parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
-    parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
     parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
     parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
@@ -112,7 +111,6 @@ def add_horizonalHeatmap_parsers(s):
     parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
     parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
-    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--name',help="name for picture", metavar="FILE")
 
@@ -124,7 +122,6 @@ def add_curveDualYaxis_parsers(s):
     parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
     parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
-    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
 
@@ -135,7 +132,6 @@ def add_multibw2multibed_parsers(s):
     parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
     parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
-    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
 

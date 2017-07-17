@@ -23,21 +23,23 @@ import subprocess
 def run(parser):
     args = parser.parse_args()
 
-
+    out=[]
+    for label in args.rowlabels:
+        out.append(label+'.gz')
     ##need to install computeMatrix and add it to your ~/.bashrc file
     ##pass the python variables to subprocess
     subprocess.call("rm merge.ave.txt", shell=True)
     ##iterate multiple input files
     for i in range(len(args.bigwig)):
-        subprocess.call("computeMatrix reference-point --referencePoint center -S %s -R %s -a %s -b %s -bs %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,args.outFile[i]),shell=True)
+        subprocess.call("computeMatrix reference-point --referencePoint center -S %s -R %s -a %s -b %s -bs %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,out[i]),shell=True)
 
 
     for i in range(len(args.bigwig)):
-        subprocess.call("gunzip -f %s" % args.outFile[i], shell=True)
+        subprocess.call("gunzip -f %s" % out[i], shell=True)
 
     for i in range(len(args.bigwig)):
     #    subprocess.call("sh format.meth.sh %s" % args.outFile[i],shell=True)
-         subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
+         subprocess.call("sh format.sh %s" % out[i],shell=True)
     #subprocess.call("rm merge.ave.txt", shell=True)
     dt = pd.read_table("merge.ave.txt",header=None)
     #data = np.random.rand(7,24)
