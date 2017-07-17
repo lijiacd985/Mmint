@@ -40,74 +40,48 @@ def run(parser):
     for label in arg.labels:
         out.append(label+'.gz')
     for line in FILE:
-    	line=line.strip().split('\t')
-    	array1.append(line[0])
-    	array2.append(line[1])
+        line=line.strip().split('\t')
+        array1.append(line[0])
+        array2.append(line[1])
     for k in range(len(array1)):
-#	print array1[k]
-	    for i in range(len(args.bigwig)):
-	#	subprocess.call("multiBigwigSummary bins -bs %s -r chr1:907000:910000 -b d01.bam.norm2.bw d03.bam.norm.bw d14.bam.norm.bw --labels %s -out %s --outRawCounts %s" % (args.binsize,args.labels,args.out,args.RawCounts),shell=False)
-    		subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],args.RawCounts[i]),shell=True)
-	    for i in range(len(args.bigwig)):
+        for i in range(len(args.bigwig)):
+            subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],args.RawCounts[i]),shell=True)
+        for i in range(len(args.bigwig)):
     		subprocess.call("sed -i 's/nan/0/g' %s" % args.RawCounts[i], shell=True)
-
-	    for i in range(len(args.bigwig)):
-    		subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % args.RawCounts[i],shell=True)
-
-
-	    dt = pd.read_table("merge.clean",header=1)
-#print dt.as_matrix(columns=dt.columns[2:])
-	    x_sub_flat = dt.as_matrix(columns=dt.columns[2:3])
-	    x_trans = map(list,zip(*x_sub_flat))
-#print x_trans
-	#print dt.shape[1]
-	    y_sub = [a for a in dt.as_matrix(columns = dt.columns[3:dt.shape[1]])]
-	    y_trans = map(list,zip(*y_sub))
-	#print len(y_trans)
-	    plt.close('all')
-
-
-#smooth the lines
-	    x_smooth = np.linspace(min(x_trans[0]), max(x_trans[0]), 1000)
-	    y_smooth=[]
-	    for i in range(len(y_trans)):
-    		y_smooth.append(spline(x_trans[0], y_trans[i], x_smooth))
+        for i in range(len(args.bigwig)):
+            subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % args.RawCounts[i],shell=True)
+        dt = pd.read_table("merge.clean",header=1)
+        x_sub_flat = dt.as_matrix(columns=dt.columns[2:3])
+        x_trans = map(list,zip(*x_sub_flat))
+        y_sub = [a for a in dt.as_matrix(columns = dt.columns[3:dt.shape[1]])]
+        y_trans = map(list,zip(*y_sub))
+        plt.close('all')
+        x_smooth = np.linspace(min(x_trans[0]), max(x_trans[0]), 1000)
+        y_smooth=[]
+        for i in range(len(y_trans)):
+            y_smooth.append(spline(x_trans[0], y_trans[i], x_smooth))
             ymax.append(max(y_trans[i]))
-            #print ymax
-	  #  print max(ymax)
-
-#plot
-#	y_smooth2 = spline(x_trans[0], y_trans[1], x_smooth)
-    	fig,ax1 = plt.subplots(figsize=(15,10))
-	#ax1.set_title(array[k])
-	    for i,v in enumerate(xrange(len(y_trans))):
-    	    #ax1.set_title(array[k])
-	        v=v+1
-    	    ax1 = subplot(len(y_trans),1,v)
-    	    ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
-    #ax1.set_title(args.label[i])
-    	    plt.ylabel(args.labels[i],rotation=90,fontsize=12)
-    	    d = scipy.zeros(1000)
-     	    ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
-    	    ax1.spines['top'].set_visible(False)
-    	    ax1.spines['right'].set_visible(False)
-    	    ax1.spines['bottom'].set_visible(False)
+        fig,ax1 = plt.subplots(figsize=(15,10))
+        for i,v in enumerate(xrange(len(y_trans))):
+            v=v+1
+            ax1 = subplot(len(y_trans),1,v)
+            ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
+            plt.ylabel(args.labels[i],rotation=90,fontsize=12)
+            d = scipy.zeros(1000)
+            ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
+            ax1.spines['top'].set_visible(False)
+            ax1.spines['right'].set_visible(False)
+            ax1.spines['bottom'].set_visible(False)
             ax1.set_ylim(0,max(ymax))
-    	    #ax1.yaxis.set_ticks(np.arange(0, max(y_smooth[i])+max(y_smooth[i])/3, max(y_smooth[i])/3))
             ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
             ax1.yaxis.set_ticks_position('left')
-    	    ax1.xaxis.set_ticks_position('none')
-    	    #ax1.set_ylim([0,max(y_smooth[i])+0.2])
-    	    #ax1.ticklabel_format(axis='x', style='sci', scilimits=(0,100),fontsize=14)
-	        subplots_adjust(hspace=0.15)
-    	    plt.setp(ax1.get_xticklabels(), visible=False)
-
-#ax1.fill_between(x_smooth,y_smooth2,where=y_smooth2>=d,interpolate=True,color="r")
-	    plt.setp(ax1.get_xticklabels(), visible=True)
-	#ax1.ticklabel_format(axis='x', style='sci', scilimits=(1,8))
-#plt.setp([a.get_xticklabels() for a in axes[:-1]], visible=False)
-	    plt.xlabel(array2[k]+" "+str(array1[k]))
+            ax1.xaxis.set_ticks_position('none')
+            subplots_adjust(hspace=0.15)
+            plt.setp(ax1.get_xticklabels(), visible=False)
+        plt.setp(ax1.get_xticklabels(), visible=True)
+        plt.xlabel(array2[k]+" "+str(array1[k]))
         ymax=[]
-	    fig.savefig(str(array2[k])+'.pdf')
-        #plt.show()
+        fig.savefig(str(array2[k])+'.pdf')
 
+if __name__=="__main__":
+    print 'aa'
