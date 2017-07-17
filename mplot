@@ -84,8 +84,8 @@ def add_multiTracksmeth_parsers(s):
     parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
     #parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
-    parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
-    parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
+    #parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
+    #parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
 
 def add_annotate_parsers(s):
@@ -99,8 +99,7 @@ def add_multiTracks_parsers(s):
     parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
     parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
-    parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
-    parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
+    parser.add_argument('-r','--replicate',help="Biological replicates",type=int,default=1)
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
 
 def add_horizonalHeatmap_parsers(s):
@@ -167,7 +166,7 @@ def add_mdepth_parsers(s):
 
 def add_cluster_parsers(s):
     parser = s.add_parser("cluster",help="This script take methylation ratio matrix for multiplt samples as input to show the cluster result between samples.")
-    parser.add_argument('-i','--inputfile',help='input file name',metavar="FILE")
+    parser.add_argument('-i','--inputfile',nargs='+',help='input file name',metavar="FILE")
     parser.add_argument('-N','--name',nargs='+',help="sample's name",required=True)
     parser.add_argument('-o','--output',help="output file name")
     parser.add_argument('-l','--linktype',help='linkage type for scipy, such as single,average,ward,cosine and so on.')

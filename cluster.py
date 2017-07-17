@@ -7,6 +7,7 @@ import argparse
 import pandas as pd
 import seaborn as sns
 from scipy.cluster.hierarchy import dendrogram, linkage
+from Format import formdata
 '''
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--inputfile',help="input file name", metavar="FILE")
@@ -31,7 +32,7 @@ args = parser.parse_args()
 def run(parser):
     args = parser.parse_args()
     names = args.name
-    data = pd.read_csv(args.inputfile,header=None,names = names,sep='\t').values.T
+    data = np.array(formdata).T #pd.read_csv(args.inputfile,header=None,names = names,sep='\t').values.T
     plt.figure()
     plt.ylabel("Distance")
     z=linkage(data,args.linktype)

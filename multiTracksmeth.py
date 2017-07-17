@@ -33,8 +33,10 @@ def run(parser)
     print args.bigwig
     print args.file
     out=[]
+    RawCounts=[]
     for label in args.labels:
-        out.append(label+'.gz')
+        out.append(label+'.npz')
+        RawCounts.append(label+'.tab')
     FILE = open(args.file,'r')
     array1 = []
     array2 = []
@@ -47,13 +49,13 @@ def run(parser)
 
     	for i in range(len(args.bigwig)):
     	#	subprocess.call("multiBigwigSummary bins -bs %s -r chr1:907000:910000 -b d01.bam.norm2.bw d03.bam.norm.bw d14.bam.norm.bw --labels %s -out %s --outRawCounts %s" % (args.binsize,args.labels,args.out,args.RawCounts),shell=False)
-        		subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],args.RawCounts[i]),shell=True)
+        		subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],RawCounts[i]),shell=True)
 
     	for i in range(len(args.bigwig)):
-        		subprocess.call("sed -i 's/nan/0/g' %s" % args.RawCounts[i], shell=True)
+        		subprocess.call("sed -i 's/nan/0/g' %s" % RawCounts[i], shell=True)
 
     	for i in range(len(args.bigwig)):
-        		subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % args.RawCounts[i],shell=True)
+        		subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % RawCounts[i],shell=True)
 
 
     	dt = pd.read_table("merge.clean",header=1)

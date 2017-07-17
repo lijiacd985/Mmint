@@ -37,19 +37,21 @@ def run(parser):
     array2 = []
     ymax=[]
     out=[]
-    for label in arg.labels:
-        out.append(label+'.gz')
+    RawCounts=[]
+    for label in args.labels:
+        out.append(label+'.npz')
+        RawCounts.append(label+'.tab')
     for line in FILE:
         line=line.strip().split('\t')
         array1.append(line[0])
         array2.append(line[1])
     for k in range(len(array1)):
         for i in range(len(args.bigwig)):
-            subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],args.RawCounts[i]),shell=True)
+            subprocess.call("multiBigwigSummary bins -bs %s -r %s -b %s --labels %s -out %s --outRawCounts %s" % (args.binsize, array1[k],args.bigwig[i],args.labels[i],out[i],RawCounts[i]),shell=True)
         for i in range(len(args.bigwig)):
-    		subprocess.call("sed -i 's/nan/0/g' %s" % args.RawCounts[i], shell=True)
+    		subprocess.call("sed -i 's/nan/0/g' %s" % RawCounts[i], shell=True)
         for i in range(len(args.bigwig)):
-            subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % args.RawCounts[i],shell=True)
+            subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % RawCounts[i],shell=True)
         dt = pd.read_table("merge.clean",header=1)
         x_sub_flat = dt.as_matrix(columns=dt.columns[2:3])
         x_trans = map(list,zip(*x_sub_flat))
@@ -76,7 +78,7 @@ def run(parser):
             ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
             ax1.yaxis.set_ticks_position('left')
             ax1.xaxis.set_ticks_position('none')
-            subplots_adjust(hspace=0.15)
+            subplots_adjust(hspace=0.05)
             plt.setp(ax1.get_xticklabels(), visible=False)
         plt.setp(ax1.get_xticklabels(), visible=True)
         plt.xlabel(array2[k]+" "+str(array1[k]))
