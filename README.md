@@ -1,12 +1,12 @@
-# practice
+# Mplot
 
-Requirements:
+<h3>Requirements:</h3>
 
-python2
+- python2
 
-DeepTools
+- DeepTools
 
-matplotlib
+- matplotlib
 
 
 
