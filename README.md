@@ -2,11 +2,11 @@
 
 Requirements:
 
-python2
+- python2
 
-DeepTools
+- DeepTools
 
-matplotlib
+- matplotlib
 
 
 
