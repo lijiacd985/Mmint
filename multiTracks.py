@@ -43,7 +43,10 @@ def run(parser):
         RawCounts.append(label+'.tab')
     for line in FILE:
         line=line.strip().split('\t')
-        array1.append(line[0])
+        chr,start,end = line[0].split(':')
+        start = str(int(start)-args.upstream)
+        end = str(int(end)+args.downstream)
+        array1.append(chr+':'+start+':'+end)
         array2.append(line[1])
     for k in range(len(array1)):
         for i in range(len(args.bigwig)):
@@ -51,7 +54,7 @@ def run(parser):
         for i in range(len(args.bigwig)):
     		subprocess.call("sed -i 's/nan/0/g' %s" % RawCounts[i], shell=True)
         for i in range(len(args.bigwig)):
-            subprocess.call("sh /data/jiali/mplot_related/python_related/6-visual.tracks/format.shareX.sh %s" % RawCounts[i],shell=True)
+            subprocess.call("sh ./format.shareX.sh %s" % RawCounts[i],shell=True)
         dt = pd.read_table("merge.clean",header=1)
         x_sub_flat = dt.as_matrix(columns=dt.columns[2:3])
         x_trans = map(list,zip(*x_sub_flat))
@@ -77,6 +80,8 @@ def run(parser):
             #print i,v
             ax1.set_ylim(0,mmax[i//args.replicate])
             plt.ylabel(args.labels[i],rotation=90,fontsize=12)
+            plt.axvline(x_trans[0][0]+args.upstream,color='red',linewidth=2,linestyle='dashed')
+            plt.axvline(x_trans[0][-1]-args.downstream,color='red',linewidth=2,linestyle='dashed')
             d = scipy.zeros(1000)
             ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
             ax1.spines['top'].set_visible(False)

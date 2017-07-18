@@ -99,7 +99,9 @@ def add_multiTracks_parsers(s):
     parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
     parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
     parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
-    parser.add_argument('-r','--replicate',help="Biological replicates",type=int,default=1)
+    parser.add_argument('-up','--upstream',help="upstream length of regions in bed file. DEFAULT=1000",type=int,default=1000)
+    parser.add_argument('-dn','--downstream',help="downstream length of regions in bed file. DEFAULT=1000",type=int,default=1000)
+    parser.add_argument('-r','--replicate',help="Biological replicates. DEFAULT=1",type=int,default=1)
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
 
 def add_horizonalHeatmap_parsers(s):
