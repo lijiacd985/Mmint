@@ -32,7 +32,7 @@ args = parser.parse_args()
 def run(parser):
     args = parser.parse_args()
     names = args.name
-    data = np.array(formdata).astype(float).T #pd.read_csv(args.inputfile,header=None,names = names,sep='\t').values.T
+    data = np.array(formdata(args.inputfile)).astype(float).T #pd.read_csv(args.inputfile,header=None,names = names,sep='\t').values.T
     plt.figure()
     plt.ylabel("Distance")
     z=linkage(data,args.linktype)
