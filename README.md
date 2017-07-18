@@ -54,6 +54,7 @@ chr10-10084773-10085013	1.00	0.68	0.95
 mplot cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
 A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least four columns:
+
 chr1  start   end   methylationRatio
 
 
