@@ -41,6 +41,8 @@ def main():
         from volcano import run
     if subcommand=='methvsexpression':
         from MethvsExpression import run
+    if subcommand=='DepthVSReadnum':
+        from DepthvsReadsNum import run
     run(argparser)
 
 def common_parser():
@@ -59,6 +61,7 @@ def common_parser():
     add_multiTracksmeth_parsers(subparsers)
     add_volcano_parsers(subparsers)
     add_cluster_parsers(subparsers)
+    add_depthvsreadsnum_parsers(subparsers)
     add_methvsexpression_parsers(subparsers)
     return argparser
 
@@ -103,6 +106,12 @@ def add_multiTracks_parsers(s):
     parser.add_argument('-dn','--downstream',help="downstream length of regions in bed file. DEFAULT=1000",type=int,default=1000)
     parser.add_argument('-r','--replicate',help="Biological replicates. DEFAULT=1",type=int,default=1)
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
+
+def add_depthvsreadsnum_parsers(s):
+    parser = s.add_parser("DepthVSReadnum",help="This script will draw figure about depth and reads' number.")
+    parser.add_argument('-m','--methfile',help="The output from mcall: *.G.bed",nargs="*", metavar="FILE")
+    parser.add_argument('-l','--label',help="The labels",nargs="*", metavar="FILE")
+    parser.add_argument('-o','--output',help="The output file",nargs="*", metavar="FILE")
 
 def add_horizonalHeatmap_parsers(s):
     parser = s.add_parser("horizonalHeatmap",help="This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.")
