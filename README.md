@@ -34,26 +34,13 @@ input file can be the ouput file (*.G.bed) from MOABS (mcall) or a file with at 
 
 chr start end ratio total-C total-mC
 
-2. PCA.meth.py
+2. PCA and cluster
 
 This script take methylation ratio matrix for multiple samples as input output a PCA plot.
 
 Example Command:
-python PCA.meth.py -i merge.mC -n 5 -r 1 -N A B C D E -o meth.PCA
 
-merge.mC:
-
-CpG A B C
-
-chr10-100083445-100083643	1.00	0.50	0.38
-
-chr10-10031131-10031160	0.99	0.73	0.97
-
-chr10-1006098-1006108	0.89	0.50	1.00
-
-chr10-100847166-100847457	0.93	0.79	0.94
-
-chr10-10084773-10085013	1.00	0.68	0.95
+mplot pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -o meth.PCA
 
 mplot cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
