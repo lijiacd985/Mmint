@@ -18,6 +18,10 @@ Installation
 
 This script will plot the Mean CpG methylation ratio and number of CpG sites under a series depth for multiple samples. The input file is the output file (*stat.txt) from mcall (MOABS).
 
+mplot mdepth -m DE_stat.txt GT_stat.txt FG_stat.txt PE_stat.txt -l A B C D -o mdepth.test.pdf
+
+
+
 2. DepthvsReadsNum.py
 
 This script will plot the reads numbers percentage (Y-axis) at depth >=x (x=1,2,4,8,16,32,64,128,256) (X-axis) to detect if there are high duplication level or sequence bias. If the sequence is random with no bias and no duplication, the total reads number should decrease with the increase of depth; if there is bias or high duplication level, the curve should be a flat line at certain depth (see the example).  
@@ -30,30 +34,28 @@ input file can be the ouput file (*.G.bed) from MOABS (mcall) or a file with at 
 
 chr start end ratio total-C total-mC
 
-2. PCA.meth.py
+2. PCA and cluster
 
 This script take methylation ratio matrix for multiple samples as input output a PCA plot.
 
 Example Command:
-python PCA.meth.py -i merge.mC -n 5 -r 1 -N A B C D E -o meth.PCA
 
-merge.mC:
+mplot pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -o meth.PCA
 
-CpG A B C
+mplot cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
-chr10-100083445-100083643	1.00	0.50	0.38
+A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least four columns:
 
-chr10-10031131-10031160	0.99	0.73	0.97
+chr  start   end   methRatio
 
-chr10-1006098-1006108	0.89	0.50	1.00
-
-chr10-100847166-100847457	0.93	0.79	0.94
-
-chr10-10084773-10085013	1.00	0.68	0.95
 
 3. mCor.py
 
 This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.
+
+Example Command:
+
+mplot  mcor -m test1.bed test2.bed test3.bed -o mCorr
 
 Input:
 
@@ -63,6 +65,10 @@ chr start end methRatio
 4. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
+
+Example Command:
+
+mplot meth2chip -m A.G.bed -p ChIP.bed -o meth2ChIP
 
 ChIP-seq signals intensity file:
 
