@@ -18,6 +18,10 @@ Installation
 
 This script will plot the Mean CpG methylation ratio and number of CpG sites under a series depth for multiple samples. The input file is the output file (*stat.txt) from mcall (MOABS).
 
+mplot mdepth -m DE_stat.txt GT_stat.txt FG_stat.txt PE_stat.txt -l A B C D -o mdepth.test.pdf
+
+
+
 2. DepthvsReadsNum.py
 
 This script will plot the reads numbers percentage (Y-axis) at depth >=x (x=1,2,4,8,16,32,64,128,256) (X-axis) to detect if there are high duplication level or sequence bias. If the sequence is random with no bias and no duplication, the total reads number should decrease with the increase of depth; if there is bias or high duplication level, the curve should be a flat line at certain depth (see the example).  
