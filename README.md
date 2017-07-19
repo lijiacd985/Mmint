@@ -46,12 +46,16 @@ mplot cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
 A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least four columns:
 
-chr1  start   end   methylationRatio
+chr  start   end   methRatio
 
 
 3. mCor.py
 
 This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.
+
+Example Command:
+
+mplot  mcor -m test1.bed test2.bed test3.bed -o mCorr
 
 Input:
 
