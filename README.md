@@ -28,9 +28,9 @@ This script will plot the reads numbers percentage (Y-axis) at depth >=x (x=1,2,
 
 Example Command:
 
-python DepthvsReadsNum.py -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
+mplot DepthvsReadsNum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
 
-input file can be the ouput file (*.G.bed) from MOABS (mcall) or a file with at least 5 columns:
+input file can be the ouput file (*.G.bed) from MOABS (mcall) or a file with at least 6 columns:
 
 chr start end ratio total-C total-mC
 
