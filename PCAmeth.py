@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 #from sklearn import datasets
 from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 import matplotlib.cm as cm
 import argparse
 from Format import formdata
@@ -39,8 +40,14 @@ def run(parser):
     #names = np.array(['A','B','C','D','E'])
     #names = np.arange(0,int(args.number),1)
     names = args.name
-    pca = PCA(n_components=2)
-    X_r = pca.fit(X).transform(X)
+    if not args.method in ['pca','TSNE']:
+        raise Exception("Unacceptable method")
+    if args.method=='pca':
+        pca = PCA(n_components=2)
+        X_r = pca.fit(X).transform(X)
+    else:
+        tsne = TSNE(n_components=2)
+        X_r = tsne.fit_transform(X)
     #for c, i, name, markers in zip("rgbky", [0, 1, 2, 3, 4], names, ('o', 'v', '^', '<', '>')):
     #for c, i, name, markers in zip("rgbky", np.arange(0,int(args.number)), names, ('o', 'v', '^', '<', '>','')):
     ##shape and color setting

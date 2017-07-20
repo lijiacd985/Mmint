@@ -189,6 +189,7 @@ def add_pca_parsers(s):
     parser.add_argument('-r','--replicate',help="the replicates for each sample")
     parser.add_argument('-N','--name', nargs='+', help="the samples' names", required=True)
     parser.add_argument('-o','--output',help="the output file")
+    parser.add_argument('-m','--method',help="pca or TSNE")
 
 if __name__=="__main__":
     main()
