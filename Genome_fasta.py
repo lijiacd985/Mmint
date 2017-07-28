@@ -18,9 +18,12 @@ def get_fasta(file):
     return ans,chr_order
 
 if __name__=="__main__":
+    import time
+    t = time.time()
     bases,chr=get_fasta('/data/yyin/data/ref/hg19/hg19.fa')
     for c in bases:
         print(len(bases[c]))
+    print(time.time()-t)
 
 '''
 ll=len(s)

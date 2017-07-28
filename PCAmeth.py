@@ -42,6 +42,7 @@ def run(parser):
     names = args.name
     if not args.method in ['pca','TSNE']:
         raise Exception("Unacceptable method")
+    print X.shape
     if args.method=='pca':
         pca = PCA(n_components=2)
         X_r = pca.fit(X).transform(X)
