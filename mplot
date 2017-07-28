@@ -43,6 +43,8 @@ def main():
         from MethvsExpression import run
     if subcommand=='DepthVSReadnum':
         from DepthvsReadsNum import run
+    if subcommand=='CGratio':
+        from CGratio import run
     run(argparser)
 
 def common_parser():
@@ -63,6 +65,7 @@ def common_parser():
     add_cluster_parsers(subparsers)
     add_depthvsreadsnum_parsers(subparsers)
     add_methvsexpression_parsers(subparsers)
+    add_qc_parsers(subparsers)
     return argparser
 
 def add_methvsexpression_parsers(s):
@@ -188,8 +191,15 @@ def add_pca_parsers(s):
     parser.add_argument('-n','--number',help="the number of samples")
     parser.add_argument('-r','--replicate',help="the replicates for each sample")
     parser.add_argument('-N','--name', nargs='+', help="the samples' names", required=True)
+    parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
     parser.add_argument('-o','--output',help="the output file")
     parser.add_argument('-m','--method',help="pca or TSNE")
+
+def add_qc_parsers(s):
+    parser = s.add_parser("CGratio",help="CG containing reads ratio")
+    parser.add_argument('-b','--bamfile',help="bam file name", metavar="FILE")
+    parser.add_argument('-g','--genome',help="Genome fasta file path")
+    parser.add_argument('-o','--output',help="pie figure's filename")
 
 if __name__=="__main__":
     main()

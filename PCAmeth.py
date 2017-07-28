@@ -29,7 +29,7 @@ args = parser.parse_args()
 #.
 def run(parser):
     args = parser.parse_args()
-    data=formdata(args.inputfile)
+    data=formdata(args.inputfile,args.cov)
     #data = np.genfromtxt(args.inputfile,skip_header=1)[:,1:]
     #data = np.loadtxt(args.inputfile)
     data1=np.transpose(data).astype(float)
@@ -47,7 +47,8 @@ def run(parser):
         X_r = pca.fit(X).transform(X)
     else:
         tsne = TSNE(n_components=2)
-        X_r = tsne.fit_transform(X)
+        X_r = tsne.fit_transform(X)*10
+    print X_r
     #for c, i, name, markers in zip("rgbky", [0, 1, 2, 3, 4], names, ('o', 'v', '^', '<', '>')):
     #for c, i, name, markers in zip("rgbky", np.arange(0,int(args.number)), names, ('o', 'v', '^', '<', '>','')):
     ##shape and color setting
@@ -57,9 +58,11 @@ def run(parser):
    # print(colors)
    # print(np.arange(0,int(args.number)+2))
    # print(names)
-    for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('^', '^','^','^','^','^','^', '^','^','^','^','^','^', '^','^','^','^','^','^', '^','^','^','^','^')):
+    plt.figure(figsize=(20,20))
+    plt.subplot(111)
+    for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^')):
     	plt.scatter(X_r[Y == i, 0], X_r[Y == i, 1], c=c, label=name,alpha=0.8,marker=markers,s=80)
-    plt.legend(loc=2)
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.savefig(args.output+".pdf")
     #plt.show()
 
