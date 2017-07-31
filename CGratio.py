@@ -70,9 +70,9 @@ def run(parser):
     plt.bar(np.arange(20),t)
     ax.set_xticks(np.arange(20))
     ax.set_xticklabels(labels)
-    ax.set_ylabel('Percent of reads include CG')
+    ax.set_ylabel('Percentage of reads including CG')
     ax.set_xlabel('CG number per read')
-    plt.text(4,max(t)+4,'All reads include CG site: '+str(sum(reads_cg_num)))
+    plt.text(4,max(t)+4,'All reads including CG site: '+str(sum(reads_cg_num)))
     #print args.output+'.pdf'
     plt.savefig(args.output+'.pdf')
 
