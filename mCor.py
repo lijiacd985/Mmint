@@ -12,6 +12,7 @@ from pandas.tools.plotting import scatter_matrix
 import pylab
 from scipy import stats, integrate
 import seaborn as sns
+from Format import formdata
 def run(parser):
     sns.set(color_codes=True)
     plt.style.use('ggplot')
@@ -24,22 +25,23 @@ def run(parser):
 
     args = parser.parse_args()
     #print args.methfile
-
+    #print(reduce(print, args.methfile))
     #for n in args.methfile:
 	#print (n)
-    df_list = [pd.read_table(f,header=None,names=['chr','start','end','ratio']) for f in args.methfile]
+    #df_list = [pd.read_table(f,header=None,names=['chr','start','end','ratio']) for f in args.methfile]
     #dfs = [f for f in args.methfile]
     #print df_list
     #dfs=[test3,test3,test1]
     #merge = pd.concat(df_list,axis = 1,join='inner')
-    merge = reduce(lambda left,right: pd.merge(left,right,on=['chr','start','end']), df_list)
+    #merge = reduce(lambda x,y:formdata([x,y],args.cov), args.methfile)
     #print merge.ix[:,3:]#extract from the third column to the last column
 
     #merge.columns = [x for x in args.methfile]
     #merge.rename(columns= lambda x : for x in args.methfile, inplace=True)
     #print merge
     #merge.columns = ['chr', 'start', 'end','s1','s2','s3','s4']
-    merge2 = merge.ix[:,3:]
+    #merge2 = merge#.ix[:,3:]
+    merge2 = pd.DataFrame(formdata(args.methfile,args.cov))
     merge2.columns = [x for x in args.methfile]
     array = merge2.as_matrix(columns=merge2.columns[0:])
     #array = merge.as_matrix(columns=merge.columns[3:])
@@ -48,18 +50,19 @@ def run(parser):
     #print [[float(y) for y in x] for x in array]
     #df = pd.DataFrame(array2, columns=['T2', 'P2', 'P3'])
     df = pd.DataFrame(array2, columns=[f for f in args.methfile]) # set the input file name as the column names
-
     print (df.corr()) #calculate the correlation bewteen any two columns
 
 #===============================New feature: correlationship heatmap=======================
     labelname=[]
     for name in args.methfile:
-        labelname.append(name[:name.rfind('.')])
+        labelname.append(name[name.rfind('/')+1:name.rfind('.')])
+    df.columns = labelname
     labelnum=len(labelname)
     col_max=df.corr().values
     plt.style.use('ggplot')
-    fig = plt.figure()
+    fig = plt.figure(figsize=(10,10))
     ax = plt.subplot()
+    fig.subplots_adjust(bottom=0.125,right=0.85)
     hm=ax.pcolor(col_max,cmap=plt.cm.OrRd)
     plt.colorbar(hm)
     ax.set_xticks(np.arange(0,labelnum)+0.5)

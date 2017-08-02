@@ -170,6 +170,7 @@ def add_meth2chip_parsers(s):
 def add_mcor_parsers(s):
     parser = s.add_parser("mcor",help="This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.")
     parser.add_argument('-m','--methfile',help="The output from mcall",nargs='*', metavar="FILE")
+    parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
     parser.add_argument('-o','--output',help="The output file", metavar="FILE")
 
 def add_mdepth_parsers(s):
