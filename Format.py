@@ -1,10 +1,10 @@
 import subprocess
 
-def processline(line,dic,order):
-    if line[0]=='#': continue
+def processline(line,dic,order,cov):
+    if line[0]=='#': return
     t = line.strip().split()
     key=(t[0],t[1])
-    if len(t)>4 and int(t[4])<cov: continue
+    if len(t)>4 and int(t[4])<cov: return
     if not key in dic:
         if order==0:
             dic[key]=[t[3]]
@@ -18,11 +18,11 @@ def formdata(files,cov=0,bedfile=''):
         if bedfile=='':
             with open(file) as f:
                 for line in f:
-                    processline(line,dic,i)
+                    processline(line,dic,i,cov)
         else:
             p = subprocess.Popen('bedtools intersect -a %s -b %s' %(file,bedfile),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             for line in p.stdout:
-                processline(line,dic,i)
+                processline(line,dic,i,cov)
         i+=1
     result=[]
     for key in dic:
