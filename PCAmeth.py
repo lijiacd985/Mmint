@@ -59,7 +59,8 @@ def run(parser):
    # print(colors)
    # print(np.arange(0,int(args.number)+2))
    # print(names)
-    plt.figure(figsize=(20,20))
+    plt.figure()
+    fig.subplots_adjust(right=0.05)
     plt.subplot(111)
     for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^')):
     	plt.scatter(X_r[Y == i, 0], X_r[Y == i, 1], c=c, label=name,alpha=0.8,marker=markers,s=80)

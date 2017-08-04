@@ -60,9 +60,9 @@ def run(parser):
     labelnum=len(labelname)
     col_max=df.corr().values
     plt.style.use('ggplot')
-    fig = plt.figure(figsize=(10,10))
+    fig = plt.figure()
     ax = plt.subplot()
-    fig.subplots_adjust(bottom=0.125,right=0.85)
+    fig.subplots_adjust(left=0.1)
     hm=ax.pcolor(col_max,cmap=plt.cm.OrRd)
     plt.colorbar(hm)
     ax.set_xticks(np.arange(0,labelnum)+0.5)
