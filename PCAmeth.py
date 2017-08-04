@@ -62,7 +62,7 @@ def run(parser):
    # print(names)
     fig=plt.figure()
     plt.subplot(111)
-    fig.subplots_adjust(left=0.05,right=0.95)
+    fig.subplots_adjust(left=0.1,right=0.8)
     for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^')):
     	plt.scatter(X_r[Y == i, 0], X_r[Y == i, 1], c=c, label=name,alpha=0.8,marker=markers,s=80)
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
