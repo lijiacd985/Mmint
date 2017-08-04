@@ -1,18 +1,29 @@
+import subprocess
 
-def formdata(files,cov=0):
+def processline(line,dic,order):
+    if line[0]=='#': continue
+    t = line.strip().split()
+    key=(t[0],t[1])
+    if len(t)>4 and int(t[4])<cov: continue
+    if not key in dic:
+        if order==0:
+            dic[key]=[t[3]]
+    else:
+        dic[key].append(t[3])
+
+def formdata(files,cov=0,bedfile=''):
     dic={}
+    i=0
     for file in files:
-        with open(file) as f:
-            for line in f:
-                if line[0]=='#': continue
-                t = line.strip().split()
-                key=(t[0],t[1],t[2])
-                if len(t)>4 and int(t[4])<cov: continue
-                if not key in dic:
-                    dic[key]=[t[3]]
-                else:
-                    dic[key].append(t[3])
-
+        if bedfile=='':
+            with open(file) as f:
+                for line in f:
+                    processline(line,dic,i)
+        else:
+            p = subprocess.Popen('bedtools intersect -a %s -b %s' %(file,bedfile),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            for line in p.stdout:
+                processline(line,dic,i)
+        i+=1
     result=[]
     for key in dic:
         if len(dic[key])==len(files):
