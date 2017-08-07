@@ -21,6 +21,6 @@ def run(parser):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-f','--file',help=r'DMR file. Format: chr start end ratio_difference p_value. Seperate:\t')
-    parser.add_argument('-p','--p',help='cutoff p value',type=int)
+    parser.add_argument('-p','--p',help='cutoff p value',type=float)
     parser.add_argument('-o','--output',help='output file name')
     run(parser)
