@@ -80,7 +80,7 @@ def add_methvsexpression_parsers(s):
 def add_volcano_parsers(s):
     parser = s.add_parser("volcano",help="Volcano plot for bedfile")
     parser.add_argument('-f','--file',help=r'DMR file. Format: chr start end ratio_difference p_value. Seperate:\t')
-    parser.add_argument('-p','--p',help='cutoff p value',type=int)
+    parser.add_argument('-p','--p',help='cutoff p value',type=float)
     parser.add_argument('-o','--output',help='output file name')
 
 def add_multiTracksmeth_parsers(s):
