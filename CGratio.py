@@ -66,6 +66,7 @@ def run(parser):
     for num in cgnum_per_read:
         t[min(num-1,19)]+=1
     labels = map(str,np.arange(1,20))+['20+']
+    print(t)
     t = (np.array(t).astype(float)/sum(reads_cg_num))*100
     plt.bar(np.arange(20),t)
     ax.set_xticks(np.arange(20))

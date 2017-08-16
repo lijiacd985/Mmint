@@ -73,7 +73,7 @@ def run(parser):
         #print args.rowlabels[i]
         #ax=fig.get_figure()
     ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.scaleregion))/int(args.binsize),(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize)])
-    ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Start','END',str(int(args.dnregions)/1000)+' kb'])
+    ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kb','Start','END',str(int(args.dnregions)/1000)+' kb'])
     #plt.title(args.rowlabels[i])
     ax.yaxis.set_tick_params(labelsize=13)
     ax.xaxis.set_tick_params(labelsize=13)

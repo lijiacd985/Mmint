@@ -95,7 +95,7 @@ def add_multiTracksmeth_parsers(s):
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
 
 def add_annotate_parsers(s):
-    parser = s.add_parser("annotate",help="help")
+    parser = s.add_parser("annotate",help="annotate the bed file")
     parser.add_argument('-b','--bedfile',help="bedfile to annotate", metavar="FILE")
     parser.add_argument('-o','--output',help="the output file", metavar="FILE")
 
