@@ -39,7 +39,7 @@ def main():
         from multiTracksmeth import run
     if subcommand=='volcano':
         from volcano import run
-    if subcommand=='methvsexpression':
+    if subcommand=='bedvsexpression':
         from MethvsExpression import run
     if subcommand=='DepthVSReadnum':
         from DepthvsReadsNum import run
@@ -69,9 +69,9 @@ def common_parser():
     return argparser
 
 def add_methvsexpression_parsers(s):
-    parser = s.add_parser("methvsexpression",help="Methylation profile versus expression profile")
-    parser.add_argument('-m','--methfile',help=r"Bed files describe sample, 4 columns: chr\tstart\tend\tratio",required=True)
-    parser.add_argument('-r','--reference',help="select from hg19/mm10 or the TSS region self defined",required=True)
+    parser = s.add_parser("bedvsexpression",help="Bed file versus expression profile")
+    parser.add_argument('-b','--bedfile',help=r"Bed files describe sample, 4 columns: chr\tstart\tend\tvalue",required=True)
+    parser.add_argument('-r','--reference',help="select from hg19/mm10 or the TSS region self defined. The format should be as same as hg19.tss.bed",required=True)
     parser.add_argument('-u','--upstream',help='TSS upstream (default 1000bp)',type=int,default=1000)
     parser.add_argument('-d','--downstream',help="TSS downstream (default 1000bp)",type=int,default=1000)
     parser.add_argument('-R','--RNAseq',help=r"result, format(\t==Tab): Genename\tExpression_level",required=True)
