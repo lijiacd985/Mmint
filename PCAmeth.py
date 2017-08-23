@@ -48,8 +48,10 @@ def run(parser):
         pca = PCA(n_components=2)
         X_r = pca.fit(X).transform(X)
     else:
+        pca = PCA(n_components=50)
+        xx = pca.fit_transform(X)
         tsne = TSNE(n_components=2)
-        X_r = tsne.fit_transform(X)*10
+        X_r = tsne.fit_transform(xx)
     #print X_r
     #for c, i, name, markers in zip("rgbky", [0, 1, 2, 3, 4], names, ('o', 'v', '^', '<', '>')):
     #for c, i, name, markers in zip("rgbky", np.arange(0,int(args.number)), names, ('o', 'v', '^', '<', '>','')):
@@ -62,6 +64,8 @@ def run(parser):
    # print(names)
     fig=plt.figure()
     plt.subplot(111)
+    plt.xlim(np.min(X_r[:,0])-0.2*np.abs(np.min(X_r[:,0])),np.max(X_r[:,0])+0.2*np.abs(np.max(X_r[:,0])))
+    plt.ylim(np.min(X_r[:,1])-0.2*np.abs(np.min(X_r[:,1])),np.max(X_r[:,1])+0.2*np.abs(np.max(X_r[:,1])))
     fig.subplots_adjust(left=0.1,right=0.8)
     for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^')):
     	plt.scatter(X_r[Y == i, 0], X_r[Y == i, 1], c=c, label=name,alpha=0.8,marker=markers,s=80)
