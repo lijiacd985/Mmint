@@ -76,6 +76,7 @@ def add_methvsexpression_parsers(s):
     parser.add_argument('-d','--downstream',help="TSS downstream (default 1000bp)",type=int,default=1000)
     parser.add_argument('-R','--RNAseq',help=r"result, format(\t==Tab): Genename\tExpression_level",required=True)
     parser.add_argument('-o','--output',help="output file name",required=True)
+    parser.add_argument('-ylab','--yaxislabel',help="Yaxis Label",required=True)    
 
 def add_volcano_parsers(s):
     parser = s.add_parser("volcano",help="Volcano plot for bedfile")

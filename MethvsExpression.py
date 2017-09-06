@@ -41,23 +41,35 @@ def run(parser):
     #low=np.sort(rexp)[len(rexp)//10]
     rexp = np.log(rexp)/np.log(10)
     max_exp = np.max(rexp)
+    min_exp = np.min(rexp)
+    max_mlevel = np.max(mlevel)
+    min_mlevel = np.min(mlevel)
     #i#print(low)
     #print(np.where(rexp>low)[0])
     plt.plot(rexp,mlevel,'r.',alpha=0.2)
-    plt.xlim(0,max_exp)
-    plt.ylim(0,1)
-    plt.xlabel('Gene Expression Level')
-    plt.ylabel('Methylation Ratio')
+    plt.xlim(min_exp*1.03,max_exp*1.03)
+    #plt.ylim(-1,1)
+    plt.ylim(min_mlevel*1.03,max_mlevel*1.03)
+    plt.xlabel('Gene Expression Level (Log10)')
+    #plt.ylabel('Methylation Ratio')
+    plt.ylabel(args.yaxislabel)
     plt.plot([0,np.max(rexp)],[1,0],'r-')
     spearman,p1 = spearmanr(rexp,mlevel)
     pearson,p2 = pearsonr(rexp,mlevel)
+    geneNum = len(rexp)
+    #print geneNum
+
 #Decimal(str(r[j])).quantize(Decimal('0.00'))
     from decimal import Decimal
     s1='Spearman correlation Coefficient: '+str(Decimal(str(spearman)).quantize(Decimal('0.000'))) + ' p-value: '+str(Decimal(str(p1)).quantize(Decimal('0.000')))
     s2='Pearson correlation Coefficient: '+str(Decimal(str(pearson)).quantize(Decimal('0.000'))) + ' p-value: '+str(Decimal(str(p2)).quantize(Decimal('0.000')))
+    s3='Total Genes:' +str(geneNum)
     #plt.text()
-    plt.text(0,1.1,s2)
-    plt.text(0,1.05,s1)
+    #plt.text(0,1.1,s2)
+    #plt.text(0,1.05,s1)
+    plt.text(0,max_mlevel*0.95,s3)
+    plt.text(0,max_mlevel*1.1,s2)
+    plt.text(0,max_mlevel*1.05,s1)
     plt.savefig(args.output+'.pdf')
 
 
@@ -73,5 +85,6 @@ if __name__=="__main__":
     parser.add_argument('-d','--downstream',help="TSS downstream (default 1000bp)",type=int,default=1000)
     parser.add_argument('-R','--RNAseq',help="result, format(\t==Tab): Genename\tExpression_level",required=True)
     parser.add_argument('-o','--output',help="output file name",required=True)
+    parser.add_argument('-ylab','--yaxislabel',help="Yaxis Label",required=True)
     run(parser)
 

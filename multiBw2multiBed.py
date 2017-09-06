@@ -38,8 +38,8 @@ def run(parser):
         subprocess.call("gunzip -f %s" % out[i], shell=True)
 
     for i in range(len(args.bigwig)):
-    #    subprocess.call("sh format.meth.sh %s" % args.outFile[i],shell=True)
-         subprocess.call("sh format.sh %s" % out[i],shell=True)
+        #subprocess.call("sh format.meth.sh %s" % out[i],shell=True)
+        subprocess.call("sh format.sh %s" % out[i],shell=True)
     #subprocess.call("rm merge.ave.txt", shell=True)
     dt = pd.read_table("merge.ave.txt",header=None)
     #data = np.random.rand(7,24)
@@ -59,8 +59,9 @@ def run(parser):
     #for i in range(len(x)):
     #fig=plt.figure()
     fig,ax = plt.subplots()
+    fig.subplots_adjust(bottom=0.125,right=0.85)
     plt.xlim(0,len(array[0]))
-    #plt.ylim(1.0,2.45)
+    plt.ylim(0.15,0.35)
     for i in range(len(array)):
         plt.plot(x,y[i],colours[i],linewidth=3,label=args.rowlabels[i])
         #plt.legend(args.rowlabels[i],loc="upper left")
@@ -73,7 +74,7 @@ def run(parser):
     ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Center',str(int(args.dnregions)/1000)+' kb'])
     #plt.title(args.rowlabels[i])
     plt.xlabel('Regions Relative Positions')
-    plt.ylabel('ATAC Signals')
+    plt.ylabel('Signals')
     #plt.ylabel('mCG/CG')
     #fig.savefig(str(args.rowlabels[i])+".pdf")
     fig.savefig(str(args.pdfName) + '.pdf')
