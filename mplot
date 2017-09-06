@@ -45,6 +45,10 @@ def main():
         from DepthvsReadsNum import run
     if subcommand=='CGratio':
         from CGratio import run
+    if subcommand=='HistoneGenes':
+        from HistoneGenes import run
+    if subcommand=='HistonePeaks':
+        from HistonePeaks import run
     run(argparser)
 
 def common_parser():
@@ -66,6 +70,8 @@ def common_parser():
     add_depthvsreadsnum_parsers(subparsers)
     add_methvsexpression_parsers(subparsers)
     add_qc_parsers(subparsers)
+    add_HistoneGenes_parsers(subparsers)
+    add_HistonePeaks_parsers(subparsers)
     return argparser
 
 def add_methvsexpression_parsers(s):
@@ -203,6 +209,39 @@ def add_qc_parsers(s):
     parser.add_argument('-b','--bamfile',help="bam file name", metavar="FILE")
     parser.add_argument('-g','--genome',help="Genome fasta file path")
     parser.add_argument('-o','--output',help="pie figure's filename")
+
+def add_HistoneGenes_parsers(s):
+    parser = s.add_parser("HistoneGenes",help="Classification of genes based on two histone markers")
+    parser.add_argument('-tss','--TSS',help="Genes TSS updn 1k bed file",metavar="FILE")
+    parser.add_argument('-gene','--GENE',help="Genes bed file",metavar="FILE")
+    parser.add_argument('-b1','--bed1',help="the first bedfile",metavar="FILE")
+    parser.add_argument('-b2','--bed2',help="the second bedfile",metavar="FILE")
+    parser.add_argument('-o1','--out',help="output file name",nargs="*",metavar="FILE")
+    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
+    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", metavar="FILE")
+    #parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
+    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
+    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
+    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
+    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
+    parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
+    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
+
+def add_HistonePeaks_parsers(s):
+
+    parser = s.add_parser("HistonePeaks",help="Classification of Peaks based on two histone markers")
+    parser.add_argument('-b1','--bed1',help="the first bedfile",metavar="FILE")
+    parser.add_argument('-b2','--bed2',help="the second bedfile",metavar="FILE")
+    parser.add_argument('-o1','--out',help="output file name",nargs="*",metavar="FILE")
+    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
+    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", metavar="FILE")
+    #parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
+    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
+    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
+    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
+    parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
+    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
+
 
 if __name__=="__main__":
     main()
