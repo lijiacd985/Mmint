@@ -13,7 +13,7 @@ def run(parser):
     elif args.reference=='mm10':
         reffile = './mm10.tss.bed'
     ref = pb.BedTool(reffile)
-    meth = pb.BedTool(args.methfile)
+    meth = pb.BedTool(args.bedfile)
     methtss = ref.window(meth,l=args.upstream,r=args.downstream).groupby(g=[1,2,3,4,5,6],c=10,o=['mean'])
     with open(args.RNAseq) as f:
         lines = f.readlines()
@@ -47,12 +47,19 @@ def run(parser):
     #i#print(low)
     #print(np.where(rexp>low)[0])
     plt.plot(rexp,mlevel,'r.',alpha=0.2)
+<<<<<<< HEAD
     plt.xlim(min_exp*1.03,max_exp*1.03)
     #plt.ylim(-1,1)
     plt.ylim(min_mlevel*1.03,max_mlevel*1.03)
     plt.xlabel('Gene Expression Level (Log10)')
     #plt.ylabel('Methylation Ratio')
     plt.ylabel(args.yaxislabel)
+=======
+    plt.xlim(0,max_exp)
+    plt.ylim(0,1)
+    plt.xlabel('Gene Expression Level')
+    plt.ylabel('Ratio')
+>>>>>>> ee2d90f8cae2348451a0949bf28b02bc12f2d1ae
     plt.plot([0,np.max(rexp)],[1,0],'r-')
     spearman,p1 = spearmanr(rexp,mlevel)
     pearson,p2 = pearsonr(rexp,mlevel)

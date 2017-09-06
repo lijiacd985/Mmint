@@ -31,4 +31,16 @@ def formdata(files,cov=0,bedfile=''):
     return result
 
 if __name__=="__main__":
-    formdata([1,2,3])
+    import sys
+    argv = sys.argv[1:]
+    final=[argv]
+    final.extend(formdata(argv))
+    ans=[]
+    for f in final:
+        s=str(f[0])
+        for i in range(1,len(f)):
+            s=s+','+str(f[i])
+        s=s+'/n'
+        ans.append(s)
+    with open('data.csv','w') as f:
+        f.writelines(ans)
