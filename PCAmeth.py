@@ -52,7 +52,7 @@ def run(parser):
         xx = pca.fit_transform(X)
         tsne = TSNE(n_components=2)
         X_r = tsne.fit_transform(xx)
-    #print X_r
+    print X_r
     #for c, i, name, markers in zip("rgbky", [0, 1, 2, 3, 4], names, ('o', 'v', '^', '<', '>')):
     #for c, i, name, markers in zip("rgbky", np.arange(0,int(args.number)), names, ('o', 'v', '^', '<', '>','')):
     ##shape and color setting
