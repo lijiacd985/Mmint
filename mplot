@@ -83,6 +83,8 @@ def add_methvsexpression_parsers(s):
     parser.add_argument('-R','--RNAseq',help=r"result, format(\t==Tab): Genename\tExpression_level",required=True)
     parser.add_argument('-o','--output',help="output file name",required=True)
     parser.add_argument('-ylab','--yaxislabel',help="Yaxis Label",required=True)    
+    parser.add_argument('-xlab','--xaxislabel',help="Xaxis Label",required=True)
+
 
 def add_volcano_parsers(s):
     parser = s.add_parser("volcano",help="Volcano plot for bedfile")

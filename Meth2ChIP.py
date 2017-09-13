@@ -13,6 +13,9 @@ plt.style.use('ggplot')
 from pybedtools import BedTool
 import pybedtools
 import subprocess
+#from Format import formdata
+import seaborn as sns
+sns.set(color_codes=True)
 
 def run(parser):
     hash={}
@@ -28,6 +31,7 @@ def run(parser):
     chipkey=[]
     chipvalue=[]
     x=[]
+    x1=[]
     y=[]
     a=[]
     n=[]
@@ -89,6 +93,26 @@ def run(parser):
     '''
     ##Calculate the mean methylation ratio for each ChIPSeq peaks
     ##calculate the mean ChIPseq intensity for the same methylation ratio
+    
+    with open ("peaks.mCG","w") as f1:
+        subprocess.call(" bedtools groupby -i intersect.bed  -g 1,2,3 -c 4,8 -o mean,mean ",stdout=f1,shell=True)
+    try:
+        formatfile1=open("peaks.mCG",'r')
+    except IOError:
+            print >>sys.stderr, 'cannot open', filename
+            raise SystemExit
+    for line in formatfile1:
+        rows=line.strip().split("\t")
+        x1.append(rows[3:])
+    array = [[float(z) for z in k] for k in x1]
+    merge = pd.DataFrame(array,columns=["x","y"])
+    g = sns.jointplot(x="y", y="x", data=merge,  kind="kde", color="m")
+    g.plot_joint(plt.scatter, c="b", s=30, linewidth=1, marker="+",alpha=0.1)
+    g.ax_joint.collections[0].set_alpha(0)
+    g.set_axis_labels("mCG/CG", "ChIP Signal")
+    g.savefig(args.output+"PeaksNum.pdf")
+   
+
 
 
     with open ("mCG-peaks","w") as f2:
@@ -108,10 +132,8 @@ def run(parser):
     #    else:
     #        a.append(0)
     #total.append(a)
-    #a = []
         x.append(rows[0])
         y.append(rows[1])
-
     #print len(x) ## print the number of peaks include CpGs.
 
     try:
