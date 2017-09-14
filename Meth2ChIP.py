@@ -33,6 +33,7 @@ def run(parser):
     x=[]
     x1=[]
     y=[]
+    y1=[]
     a=[]
     n=[]
     l=[]
@@ -96,6 +97,7 @@ def run(parser):
     
     with open ("peaks.mCG","w") as f1:
         subprocess.call(" bedtools groupby -i intersect.bed  -g 1,2,3 -c 4,8 -o mean,mean ",stdout=f1,shell=True)
+    '''
     try:
         formatfile1=open("peaks.mCG",'r')
     except IOError:
@@ -106,14 +108,15 @@ def run(parser):
         x1.append(rows[3:])
     array = [[float(z) for z in k] for k in x1]
     merge = pd.DataFrame(array,columns=["x","y"])
-    g = sns.jointplot(x="y", y="x", data=merge,  kind="kde", color="m")
-    g.plot_joint(plt.scatter, c="b", s=30, linewidth=1, marker="+",alpha=0.1)
-    g.ax_joint.collections[0].set_alpha(0)
+    #g = sns.jointplot(x="y", y="x", data=merge,  kind="kde", color="m",n_levels=12)
+    g = sns.jointplot(x="y", y="x", data=merge,alpha=0.05,s=20)
+    #g.plot_joint(plt.scatter, c="b", s=20, linewidth=1, marker=".",alpha=0.05)
+    #g.ax_joint.collections[0].set_alpha(0)
     g.set_axis_labels("mCG/CG", "ChIP Signal")
     g.savefig(args.output+"PeaksNum.pdf")
-   
+    ''' 
 
-
+  
 
     with open ("mCG-peaks","w") as f2:
         subprocess.call("bedtools groupby -i intersect.bed  -g 1,2,3 -c 4,8 -o mean,mean | awk '{a[$5]+=$4;n[$5]+=1}END{for (b in a){print b,a[b]/n[b]}}'",stdout=f2,shell=True)
@@ -274,3 +277,31 @@ def run(parser):
     fig.savefig(args.output+".pdf")
     #usage: python map_meth2peak.test4.py -m test2 -p chipseqtest
     #>>>>>>> upstream/master:Meth2ChIP3.py
+    
+    try:
+        formatfile1=open("peaks.mCG",'r')
+    except IOError:
+            print >>sys.stderr, 'cannot open', filename
+            raise SystemExit
+    for line in formatfile1:
+        rows=line.strip().split("\t")
+        x1.append(rows[3:])
+        y1.append(rows[3])
+    array = [[float(z) for z in k] for k in x1]
+    array2=[float(m) for m in y1] 
+    merge = pd.DataFrame(array,columns=["x","y"])
+    #g = sns.jointplot(x="y", y="x", data=merge,  kind="kde", color="m",n_levels=12)
+    g = sns.jointplot(x="y", y="x", data=merge,alpha=0.05,s=20,color="g")
+    #g.plot_joint(plt.scatter, c="b", s=20, linewidth=1, marker=".",alpha=0.05)
+    #g.ax_joint.collections[0].set_alpha(0)
+    regiony1=[np.max(array2)*0.75,np.max(array2)*0.75+1,np.max(array2)*0.75+1,np.max(array2)*0.75]
+    for j in range(4):
+        r[j] = Decimal(str(r[j])).quantize(Decimal('0.00'))
+    for j in range(4):
+        g.ax_joint.plot(region[j],regiony1,lw=1.5,color='green')
+        g.ax_joint.text((region[j][1]+region[j][2])/2,np.max(array2)*0.75+2,str(r[j])+'%',ha='center', va='bottom')
+    g.ax_joint.text(0,np.max(array2)*0.909090909090909090,"Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
+    
+    g.set_axis_labels("mCG/CG", "ChIP Signal")
+    g.savefig(args.output+"PeaksNum.pdf")
+    
