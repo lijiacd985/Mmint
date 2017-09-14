@@ -300,7 +300,7 @@ def run(parser):
     for j in range(4):
         g.ax_joint.plot(region[j],regiony1,lw=1.5,color='green')
         g.ax_joint.text((region[j][1]+region[j][2])/2,np.max(array2)*0.75+2,str(r[j])+'%',ha='center', va='bottom')
-    g.ax_joint.text(0,np.max(array2)*0.909090909090909090,"Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
+    g.ax_joint.text(0,np.max(array2)*0.90,"Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
     
     g.set_axis_labels("mCG/CG", "ChIP Signal")
     g.savefig(args.output+"PeaksNum.pdf")
