@@ -29,6 +29,8 @@ def run(parser):
 #        ls=end-start
         reads_num+=1
         cg=[bases[chr].count('CG',start,end)+bases[chr].count('Cg',start,end),bases[chr].count('cG',start,end)+bases[chr].count('cg',start,end)]
+#We need to consider strand specific situation.
+#'+' strand we have CG but '-' we should count 'GC'.
         #print cg
 #        for i in range(1,ls):
 #            r2=read[i]
