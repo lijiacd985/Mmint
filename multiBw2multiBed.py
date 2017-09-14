@@ -38,15 +38,14 @@ def run(parser):
         subprocess.call("gunzip -f %s" % out[i], shell=True)
 
     for i in range(len(args.bigwig)):
-<<<<<<< HEAD
+
         #subprocess.call("sh format.meth.sh %s" % out[i],shell=True)
-        subprocess.call("sh format.sh %s" % out[i],shell=True)
-=======
+        #subprocess.call("sh format.sh %s" % out[i],shell=True)
         if args.meth:
             subprocess.call("sh format.meth.sh %s" % out[i],shell=True)
         else:
             subprocess.call("sh format.sh %s" % out[i],shell=True)
->>>>>>> 3bcb394357b7845873e757846b9126d501dbbf46
+
     #subprocess.call("rm merge.ave.txt", shell=True)
     dt = pd.read_table("merge.ave.txt",header=None)
     #data = np.random.rand(7,24)
@@ -69,6 +68,7 @@ def run(parser):
     fig.subplots_adjust(bottom=0.125,right=0.85)
     plt.xlim(0,len(array[0]))
     plt.ylim(0,np.max(array)*1.1)
+    #plt.ylim(0.18,0.25)
     for i in range(len(array)):
         plt.plot(x,y[i],colours[i],linewidth=3,label=args.rowlabels[i])
         #plt.legend(args.rowlabels[i],loc="upper left")
