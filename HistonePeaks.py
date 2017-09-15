@@ -23,7 +23,7 @@ import subprocess
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-    
+    parser.add_argument('-m','--meth',help="If bw file is methylation file, use -m.",action="store_true")
     args = parser.parse_args()
     
     print args.bed1
@@ -38,7 +38,7 @@ def run(parser):
     subprocess.call("bedops -i %s %s > %s" % (args.bed1,args.bed2,args.out[0]),shell=True)
     subprocess.call("bedops -n 1 %s %s > %s" % (args.bed1,args.bed2,args.out[1]),shell=True)
     subprocess.call("bedops -n 1 %s %s > %s" % (args.bed2,args.bed1,args.out[2]),shell=True)
-    
+    subprocess.call("bedops -c %s %s > %s" % (args.bed1,args.bed2,args.out[3]),shell=True) 
     for i in range(len(args.out)):
     	subprocess.call("computeMatrix reference-point --referencePoint center -S %s -R %s -a %s -b %s -bs %s -o %s" % (args.bigwig,args.out[i],args.dnregions,args.upregions,args.binsize,args.outFile[i]),shell=True)
     
@@ -46,8 +46,10 @@ def run(parser):
             subprocess.call("gunzip -f %s" % args.outFile[i], shell=True)
     
     for i in range(len(args.out)):
-            #subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
+        if args.meth:
             subprocess.call("sh format.meth.sh %s" % args.outFile[i],shell=True)
+        else:
+            subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
     
     dt = pd.read_table("merge.ave.txt",header=None)
     

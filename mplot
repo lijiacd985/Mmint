@@ -229,7 +229,7 @@ def add_HistoneGenes_parsers(s):
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-
+    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
 def add_HistonePeaks_parsers(s):
 
     parser = s.add_parser("HistonePeaks",help="Classification of Peaks based on two histone markers")
@@ -244,7 +244,7 @@ def add_HistonePeaks_parsers(s):
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-
+    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
 
 if __name__=="__main__":
     main()
