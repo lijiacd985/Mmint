@@ -20,6 +20,7 @@ def run(parser):
         chr = t[0]
         start=int(t[1])
         end=int(t[2])
+        strand=t[5]
         if not chr in chrs: continue
             #raise Exception("Bamfile contains chr which not in genome")
         #if start+length>l[chr]:
@@ -28,7 +29,10 @@ def run(parser):
 #        read=bases[chr]
 #        ls=end-start
         reads_num+=1
-        cg=[bases[chr].count('CG',start,end)+bases[chr].count('Cg',start,end),bases[chr].count('cG',start,end)+bases[chr].count('cg',start,end)]
+        if strand=='+':
+            cg=[bases[chr].count('CG',start,end)+bases[chr].count('Cg',start,end),bases[chr].count('cG',start,end)+bases[chr].count('cg',start,end)]
+        else:
+            cg=[bases[chr].count('GC',start,end)+bases[chr].count('gC',start,end),bases[chr].count('Gc',start,end)+bases[chr].count('gc',start,end)]
 #We need to consider strand specific situation.
 #'+' strand we have CG but '-' we should count 'GC'.
         #print cg
