@@ -40,7 +40,7 @@ def run(parser):
     #rexp[np.where(rexp==0)]=0.01
     #low=np.sort(rexp)[len(rexp)//10]
 ##log transform the gene expression values    
-    #rexp = np.log(rexp)/np.log(10)
+    rexp = np.log(rexp+1)/np.log(10)
     max_exp = np.max(rexp)
     min_exp = np.nanmin(rexp)
     max_mlevel = np.max(mlevel)
@@ -49,13 +49,13 @@ def run(parser):
     #print(np.where(rexp>low)[0])
 #    plt.plot(rexp,mlevel,'b.',alpha=0.2)
     #t = np.arange(len(rexp))
-    plt.scatter(rexp,mlevel,c='b',alpha=0.1)
+    plt.scatter(mlevel,rexp,c='b',alpha=0.1)
     #plt.colorbar()
 #<<<<<<< HEAD
     #plt.xlim(0,15)
-    plt.xlim(min_exp*1.03,max_exp*1.03)
+    plt.ylim(min_exp*1.03,max_exp*1.03)
     #plt.ylim(-1,1)
-    plt.ylim(min_mlevel*1.05,max_mlevel*1.05)
+    plt.xlim(min_mlevel*1.05,max_mlevel*1.05)
     #plt.xlabel('Gene Expression Level (Log10)')
     #plt.ylabel('Methylation Ratio')
     plt.xlabel(args.xaxislabel)
@@ -80,9 +80,9 @@ def run(parser):
     #plt.text()
     #plt.text(0,1.1,s2)
     #plt.text(0,1.05,s1)
-    plt.text(min_exp,max_mlevel*0.9,s3)
-    plt.text(min_exp,max_mlevel*1.2,s2)
-    plt.text(min_exp,max_mlevel*1.1,s1)
+    plt.text(min_mlevel,max_exp*0.9,s3)
+    plt.text(min_mlevel,max_exp*1.1,s2)
+    plt.text(min_mlevel,max_exp*1.05,s1)
     plt.savefig(args.output+'.pdf')
 
 
