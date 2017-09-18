@@ -38,6 +38,11 @@ Example Command:
 mmint DepthvsReadsNum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
 
 
+3. CGratio
+
+This script will generate the distribution of reads based on if it include CGs and where the reads from (Repeat regions;Non-repeat regions). 
+
+
 3. PCA and cluster
 
 This script take methylation ratio matrix for multiple samples and the bed file for intereseted regions as input and output a PCA/cluster plot based on mCG/CG on certain regions (e.g. promoter, CpG Island ...) with certain coverage (e.g. >=10).
@@ -88,20 +93,20 @@ chr1    100816764       100816969       0.35706
 chr1    100817693       100817732       0.113485
 
 
-5. multiBw2bed.py / multiBw2multiBed.py
+6. multiBw2bed.py / multiBw2multiBed.py
 
-This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.
+This script generate the curve plot with multi-bigwig singal files against interested regions (one bed file or multiple bed files). Input files are multiple bigwig files and one bed (or multiple bed files) file.
 
-6. curveDualYaxis.py
+7. curveDualYaxis.py
 
-This script generate a two Yaxis (One for mCG/CG; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.
+This script generate a two Yaxis (One for mCG/CG ratio; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.
 
-7. horizonalHeatmap.py
+8. horizonalHeatmap.py
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
 
-8. multiTracks.py/multiTracks.meth.py
+9. multiTracks.py/multiTracks.meth.py
 
 This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically) 
 The multiTracks.meth.py is taking methylation bw files as input and output the up/dn 5000 bp of the intereseted regions;with 
