@@ -66,11 +66,12 @@ mplot  mcor -m test1.bed test2.bed test3.bed -o mCorr
 
 5. Meth2ChIP.py
 
-This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
+This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals); We separated the mehtylation level to four categories: UMR(0-0.1),LMR(0.1-0.5),MMR(0.5-0.9),HMR(0.9-1.0); and it will also output the numbers of regions that include the CpGs in your inputfile; the ratios of regions that fall into the four categories, respectively.
+In addition, it will generate a scatter plot with Xaxis as mCG/CG ratio and Yaxis as ChIPseq intensity. The input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
 Example Command:
 
-mplot meth2chip -m A.G.bed -p ChIP.bed -o meth2ChIP
+mmint meth2chip -m A.G.bed -p ChIP.bed -o meth2ChIP
 
 ChIP-seq signals intensity file:
 
