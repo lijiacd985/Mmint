@@ -40,7 +40,7 @@ mmint DepthvsReadsNum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
 
 3. CGratio
 
-This script will generate the distribution of reads based on if it include CGs and where the reads from (Repeat regions;Non-repeat regions). 
+This script will calculate the distributions of reads based on if it include CGs and where the reads from (Repeat regions;Non-repeat regions). It will generate one piechart and one histogram. The piechart can tell you the distributions of reads based on if the reads include CG and if the reads are from repeat regions; the histogram can tell you the ratio of reads that include how many CGs in one read.
 
 
 3. PCA and cluster
@@ -143,3 +143,14 @@ dmrtest.bed:
 chr1    start   end methylation_difference  p_value
 
 Fields seperate by tab.
+
+
+10. BedvsExpression
+
+This script will calculate the correlation between mCG/CG ratio on certain regions with associated genes expression. e.g. if you want to investigate how promoter mCG/CG correlate with associated gene expression, you just need to input methylation ratio, the gene expression file (two columns: GeneName\tFPKM) and the TSS bed file. It will generate a scatter plot to demonstrate the correlation. 
+
+11. HistoneGenes
+
+
+
+12. HistonePeaks
