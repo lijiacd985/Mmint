@@ -40,33 +40,31 @@ mmint DepthvsReadsNum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
 
 3. PCA and cluster
 
-This script take methylation ratio matrix for multiple samples as input output a PCA plot.
+This script take methylation ratio matrix for multiple samples and the bed file for intereseted regions as input and output a PCA/cluster plot based on mCG/CG on certain regions (e.g. promoter, CpG Island ...) with certain coverage (e.g. >=10).
 
 Example Command:
-
-mplot pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -o meth.PCA
-
-mplot cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
 A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least four columns:
 
 chr  start   end   methRatio
 
+mmint pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -b cpgisland.bed -c 10 -o meth.PCA
 
-3. mCor.py
+mmint cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
-This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.
+
+4. mCor.py
+
+This script will generate the correlation matrix for all the samples under certain coverage threshold and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.
+
+The input file is the same with PCA;
 
 Example Command:
 
 mplot  mcor -m test1.bed test2.bed test3.bed -o mCorr
 
-Input:
 
-chr start end methRatio
-
-
-4. Meth2ChIP.py
+5. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals);the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
 
