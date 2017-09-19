@@ -147,6 +147,10 @@ def add_curveDualYaxis_parsers(s):
     parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
+    parser.add_argument('-xlab','--xaxislabel',help="Xaxis Label1",required=True)
+    parser.add_argument('-ylab1','--yaxislabel1',help="Yaxis Label1",required=True)
+    parser.add_argument('-ylab2','--yaxislabel2',help="Yaxis Label2",required=True)
+
 
 def add_multibw2multibed_parsers(s):
     parser = s.add_parser("multibw2multibed",help="This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.")
