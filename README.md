@@ -1,4 +1,4 @@
-# Mmint
+# Mmint (Methylation data mining tools)
 
 <h3>Requirements:</h3>
 
