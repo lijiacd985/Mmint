@@ -178,6 +178,19 @@ This script will classify genes based on Histone peaks, so you can investigate h
 
 mmint -tss mm10.tss.bed -gene genes.bed -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1  -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -m 2000 -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneGenes.pdf
 
+The format of mm10.tss.bed:
+
+
+
+
+The format of mm10.GENE.bed (tab separated and should sorted by using sort -k4,4b):
+
+chr7	74817817	74819817	0610006L08Rik
+chr12	85814447	85816447	0610007P14Rik
+chr11	51684385	51686385	0610009B22Rik
+chr2	26444695	26446695	0610009E02Rik
+chr11	120347677	120349677	0610009L18Rik
+
 14. HistonePeaks
 
 This script is similar with HistoneGenes. It will classify the histone peaks based on the overlap between thw different histones peaks. And, then it can generate the mCG/CG curve on these four histone peaks groups (only histone A; only histone B; both histone A and B; No Histones).
