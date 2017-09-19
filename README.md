@@ -189,6 +189,6 @@ mmint -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1 Overlap.bed histone1Only
 
 <h3>Author/Support</h3>
 
-Jia Li: lijiacd@gmail.com/jli@ibt.tamhsc.edu; Yue Yin: yyin@medicine.tamhsc.edu
+Jia Li: lijiacd@gmail.com / jli@ibt.tamhsc.edu; Yue Yin: yyin@medicine.tamhsc.edu
 
 <h3>Reference</h3>
