@@ -12,6 +12,11 @@
 
 - pandas
 
+- subprocess
+
+- argparse
+ 
+- scipy
 
 Installation
 
