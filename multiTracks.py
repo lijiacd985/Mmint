@@ -27,6 +27,7 @@ parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
 parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
 parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
 parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
+parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
 '''
 def run(parser):
     args = parser.parse_args()
@@ -78,7 +79,10 @@ def run(parser):
             ax1 = subplot(len(y_trans),1,v)
             ax1.plot(x_smooth,y_smooth[i],color='white',linewidth=0.1)
             #print i,v
-            ax1.set_ylim(0,mmax[i//args.replicate])
+            if args.meth:
+                ax1.set_ylim(0,1.1)
+            else:
+                ax1.set_ylim(0,mmax[i//args.replicate])
             plt.ylabel(args.labels[i],rotation=90,fontsize=12)
             plt.axvline(x_trans[0][0]+args.upstream,color='red',linewidth=2,linestyle='dashed')
             plt.axvline(x_trans[0][-1]-args.downstream,color='red',linewidth=2,linestyle='dashed')

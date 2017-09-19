@@ -31,8 +31,8 @@ def run(parser):
     subprocess.call("rm merge.ave.txt", shell=True)
     ##iterate multiple input files
     for i in range(len(args.bigwig)):
-        subprocess.call("computeMatrix reference-point --referencePoint center -S %s -R %s -a %s -b %s -bs %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,out[i]),shell=True)
-
+        #subprocess.call("computeMatrix reference-point --referencePoint center -S %s -R %s -a %s -b %s -bs %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,out[i]),shell=True)
+        subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,args.scaleregion,out[i]),shell=True)
 
     for i in range(len(args.bigwig)):
         subprocess.call("gunzip -f %s" % out[i], shell=True)
@@ -58,8 +58,8 @@ def run(parser):
     y=array
     #a=np.arange(len(array[0])).reshape(1,len(array[0]))
     #x=np.repeat(a,len(array),axis=0)
-    #x=np.arange((int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize))
-    x=np.arange((int(args.upregions)+int(args.dnregions))/int(args.binsize))
+    x=np.arange((int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize))
+    #x=np.arange((int(args.upregions)+int(args.dnregions))/int(args.binsize))
     colours=['r','g','b','orange','c','m','orange','violet','lightpink']
     #plt.xlim(0, len(array[2]))
     #for i in range(len(x)):
@@ -75,10 +75,10 @@ def run(parser):
         plt.legend(loc="upper left")
         #print args.rowlabels[i]
         #ax=fig.get_figure()
-    #ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.scaleregion))/int(args.binsize),(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize)])
-    #ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Start','END',str(int(args.dnregions)/1000)+' kb'])
-    ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.dnregions))/int(args.binsize)])
-    ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Center',str(int(args.dnregions)/1000)+' kb'])
+    ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.scaleregion))/int(args.binsize),(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize)])
+    ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Start','END',str(int(args.dnregions)/1000)+' kb'])
+    #ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.dnregions))/int(args.binsize)])
+    #ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Center',str(int(args.dnregions)/1000)+' kb'])
     #plt.title(args.rowlabels[i])
     plt.xlabel('Regions Relative Positions')
     plt.ylabel('Signals')
