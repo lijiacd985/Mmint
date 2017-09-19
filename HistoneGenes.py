@@ -83,7 +83,8 @@ def run(parser):
     for i in range(len(array)):
         plt.plot(x,y[i],colours[i],linewidth=3,label=args.rowlabels[i])
         #plt.legend(args.rowlabels[i],loc="upper left")
-        plt.legend(loc="upper left")
+        plt.legend(loc="lower right")
+
             #print args.rowlabels[i]
             #ax=fig.get_figure()
     
