@@ -108,6 +108,9 @@ This script generate a two Yaxis (One for mCG/CG ratio; the other is for ChIP-se
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
+Example command:
+
+mmint -bw H3K4me1.bw H3K27me3.bw H3K27ac.bw ATAC.bw -bed interested.bed -after 2000 -before 2000 -bs 20 -m 2000 -L H3K4me1 H3K27me3 H3K27ac ATAC -n horizonal.heatmap.pdf
 
 10. multiTracks.py/multiTracks.meth.py
 
@@ -117,7 +120,7 @@ red dashed lines as the boundaries of the interested regions.
 
 Example command:
 
-python  multiTracks.py -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -out testRegions1.npz testRegions2.npz testRegions3.npz testRegions4.npz testRegions5.npz -outRawCounts testRegions1.tab testRegions2.tab testRegions3.tab testRegions4.tab testRegions5.tab -c r g b black yellow
+mmint multiTracks -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -out testRegions1.npz testRegions2.npz testRegions3.npz testRegions4.npz testRegions5.npz -outRawCounts testRegions1.tab testRegions2.tab testRegions3.tab testRegions4.tab testRegions5.tab -c r g b black yellow
 
 regions.txt:
 
@@ -159,11 +162,11 @@ mmint -m methRatio.bed -r hg19 -u 1000 -d 1000 -R gene.exp -o methvsExp -ylab Ge
 
 This script will classify genes based on Histone peaks, so you can investigate how these two histones interact with DNA methylation on different groups of genes classified by these two histones (eg. bivalend promoter (H3K4me3 and H3K27me3); active/inactive enhancers (H3K4me1 and H3K27ac)). It takes two different histones peaks, mCG/CG ratio bigwig file as input and output four genes groups (only histone A; only histone B; both histone A and B; No Histones) based on calculating the overlaps among two histone peaks and regions around TSS. It can give you four curves of mCG/CG ratio for the four classies along gene regions.
 
-mmint
+mmint -tss mm10.tss.bed -gene genes.bed -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1  -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -m 2000 -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneGenes.pdf
 
 14. HistonePeaks
 
 This script is similar with HistoneGenes. It will classify the histone peaks based on the overlap between thw different histones peaks. And, then it can generate the mCG/CG curve on these four histone peaks groups (only histone A; only histone B; both histone A and B; No Histones).
 
-mmint
+mmint -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1 Overlap.bed histone1Only.bed histone2Only.bed NoHistone.bed -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneOverlap.pdf
 
