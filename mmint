@@ -171,6 +171,7 @@ def add_multibw2bed_parsers(s):
     #parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
+    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")    
 
 def add_meth2chip_parsers(s):
     parser = s.add_parser("meth2chip",help="This script will plot the average ChIP-seq signals at certain methylation ratio range; the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.")

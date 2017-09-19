@@ -20,6 +20,9 @@ parser.add_argument('-m','--scaleregion',help="scale the input bed regions to ce
 parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
 parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
 parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
+parser.add_argument('-xlab','--xaxislabel',help="Xaxis Label1",required=True)
+parser.add_argument('-ylab1','--yaxislabel1',help="Yaxis Label1",required=True)
+parser.add_argument('-ylab2','--yaxislabel2',help="Yaxis Label2",required=True)
 '''
 def run(parser):
     args = parser.parse_args()
@@ -63,12 +66,16 @@ def run(parser):
     ax1.grid(False)
     ax2.grid(False)
     ax1.plot(x,y[0],color="red",linewidth=4)
-    ax1.set_xlabel('Regions',fontsize=13)
-    ax1.set_ylabel('Methylation Ratio',color="red",fontsize=13)
+    #ax1.set_xlabel('Regions',fontsize=13)
+    #ax1.set_ylabel('mCG/CG',color="red",fontsize=13)
+    ax1.set_xlabel(args.xaxislabel,fontsize=13)
+    ax1.set_ylabel(args.yaxislabel1,color="red",fontsize=13)
+    
     ax1.set_ylim((0,1))
 
     ax2.plot(x,y[1],color="dodgerblue",linewidth=4)
-    ax2.set_ylabel('Normalize 5hmC Signal',color="dodgerblue",fontsize=13)
+    #ax2.set_ylabel('Signal',color="dodgerblue",fontsize=13)
+    ax2.set_ylabel(args.yaxislabel2,color="dodgerblue",fontsize=13)
     ax2.set_ylim((1,(max(y[1])+1)))
     #ax2.set_yticklabels(fontsize=15)
     ax2.yaxis.set_tick_params(labelsize=13)
