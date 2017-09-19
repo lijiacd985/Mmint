@@ -20,7 +20,7 @@
 
 <h3>Installation</h3>
 
-
+This tool was written using python. 
 
 <h3>Usage</h3>
 
@@ -183,3 +183,12 @@ This script is similar with HistoneGenes. It will classify the histone peaks bas
 
 mmint -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1 Overlap.bed histone1Only.bed histone2Only.bed NoHistone.bed -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneOverlap.pdf
 
+15. DNA methylation Canyon
+
+
+
+<h3>Author/Support</h3>
+
+Jia Li: lijiacd@gmail.com/jli@ibt.tamhsc.edu; Yue Yin: yyin@medicine.tamhsc.edu
+
+<h3>Reference</h3>
