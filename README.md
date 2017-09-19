@@ -8,6 +8,9 @@
 
 - matplotlib
 
+- pybedtools
+
+- pandas
 
 
 Installation
@@ -150,7 +153,7 @@ This script will calculate the correlation between mCG/CG ratio on certain regio
 
 Example command:
 
-mmint 
+mmint -m methRatio.bed -r hg19 -u 1000 -d 1000 -R gene.exp -o methvsExp -ylab Genes.Exp.log10 -xlab mCG/CG
 
 13. HistoneGenes
 
