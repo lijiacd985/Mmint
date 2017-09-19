@@ -45,7 +45,7 @@ chr start end ratio total-C total-mC
 
 Example Command:
 
-mmint DepthvsReadsNum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
+mmint DepthvsReadsnum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
 
 
 3. CGratio
