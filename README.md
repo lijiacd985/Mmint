@@ -18,7 +18,9 @@
  
 - scipy
 
-Installation
+<h3>Installation</h3>
+
+
 
 <h3>Usage</h3>
 
