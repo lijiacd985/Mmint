@@ -1,4 +1,4 @@
-# Mplot
+# Mmint
 
 <h3>Requirements:</h3>
 
@@ -43,7 +43,7 @@ mmint DepthvsReadsNum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
 This script will calculate the distributions of reads based on if it include CGs and where the reads from (Repeat regions;Non-repeat regions). It will generate one piechart and one histogram. The piechart can tell you the distributions of reads based on if the reads include CG and if the reads are from repeat regions; the histogram can tell you the ratio of reads that include how many CGs in one read.
 
 
-3. PCA and cluster
+4. PCA and cluster
 
 This script take methylation ratio matrix for multiple samples and the bed file for intereseted regions as input and output a PCA/cluster plot based on mCG/CG on certain regions (e.g. promoter, CpG Island ...) with certain coverage (e.g. >=10).
 
@@ -58,7 +58,7 @@ mmint pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -b cpgisland.bed -c 10 -
 mmint cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
 
 
-4. mCor.py
+5. mCor.py
 
 This script will generate the correlation matrix for all the samples under certain coverage threshold and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.
 
@@ -66,10 +66,10 @@ The input file is the same with PCA;
 
 Example Command:
 
-mplot  mcor -m test1.bed test2.bed test3.bed -o mCorr
+mmint  mcor -m test1.bed test2.bed test3.bed -o mCorr
 
 
-5. Meth2ChIP.py
+6. Meth2ChIP.py
 
 This script will plot the average ChIP-seq signals at certain methylation ratio range (5% intervals); We separated the mehtylation level to four categories: UMR(0-0.1),LMR(0.1-0.5),MMR(0.5-0.9),HMR(0.9-1.0); and it will also output the numbers of regions that include the CpGs in your inputfile; the ratios of regions that fall into the four categories, respectively.
 In addition, it will generate a scatter plot with Xaxis as mCG/CG ratio and Yaxis as ChIPseq intensity. The input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.
@@ -93,26 +93,27 @@ chr1    100816764       100816969       0.35706
 chr1    100817693       100817732       0.113485
 
 
-6. multiBw2bed.py / multiBw2multiBed.py
+7. multiBw2bed.py / multiBw2multiBed.py
 
 This script generate the curve plot with multi-bigwig singal files against interested regions (one bed file or multiple bed files). Input files are multiple bigwig files and one bed (or multiple bed files) file.
 
-7. curveDualYaxis.py
+8. curveDualYaxis.py
 
 This script generate a two Yaxis (One for mCG/CG ratio; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.
 
-8. horizonalHeatmap.py
+9. horizonalHeatmap.py
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
 
-9. multiTracks.py/multiTracks.meth.py
+10. multiTracks.py/multiTracks.meth.py
 
 This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically) 
 The multiTracks.meth.py is taking methylation bw files as input and output the up/dn 5000 bp of the intereseted regions;with 
 red dashed lines as the boundaries of the interested regions.
 
 Example command:
+
 python  multiTracks.py -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -out testRegions1.npz testRegions2.npz testRegions3.npz testRegions4.npz testRegions5.npz -outRawCounts testRegions1.tab testRegions2.tab testRegions3.tab testRegions4.tab testRegions5.tab -c r g b black yellow
 
 regions.txt:
@@ -128,15 +129,13 @@ chr7:45915022:45924426	geneName4
 chr8:85068756:85078161	geneName5
 
 
-NOTE:
+11. volcano
 
-the #6,#7,#8 -o option need to be *.gz format and the number of -o option is the same to your input files number
-
-9. volcano
 This script will draw volcano plot about bed files
 
 Example command:
-mplot volcano -f dmrtest.bed -p 5 -o test
+
+mmint volcano -f dmrtest.bed -p 5 -o test
 
 dmrtest.bed:
 
@@ -145,14 +144,23 @@ chr1    start   end methylation_difference  p_value
 Fields seperate by tab.
 
 
-10. BedvsExpression
+12. BedvsExpression
 
 This script will calculate the correlation between mCG/CG ratio on certain regions with associated genes expression. e.g. if you want to investigate how promoter mCG/CG correlate with associated gene expression, you just need to input methylation ratio, the gene expression file (two columns: GeneName\tFPKM) and the TSS bed file. It will generate a scatter plot to demonstrate the correlation. 
 
-11. HistoneGenes
+Example command:
+
+mmint 
+
+13. HistoneGenes
 
 This script will classify genes based on Histone peaks, so you can investigate how these two histones interact with DNA methylation on different groups of genes classified by these two histones (eg. bivalend promoter (H3K4me3 and H3K27me3); active/inactive enhancers (H3K4me1 and H3K27ac)). It takes two different histones peaks, mCG/CG ratio bigwig file as input and output four genes groups (only histone A; only histone B; both histone A and B; No Histones) based on calculating the overlaps among two histone peaks and regions around TSS. It can give you four curves of mCG/CG ratio for the four classies along gene regions.
 
-12. HistonePeaks
+mmint
+
+14. HistonePeaks
 
 This script is similar with HistoneGenes. It will classify the histone peaks based on the overlap between thw different histones peaks. And, then it can generate the mCG/CG curve on these four histone peaks groups (only histone A; only histone B; both histone A and B; No Histones).
+
+mmint
+
