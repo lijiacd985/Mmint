@@ -59,9 +59,9 @@ This script take methylation ratio matrix for multiple samples and the bed file 
 
 Example Command:
 
-A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least four columns:
+A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least five columns:
 
-chr  start   end   methRatio
+chr  start   end   methRatio depth
 
 mmint pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -b cpgisland.bed -c 10 -o meth.PCA
 
