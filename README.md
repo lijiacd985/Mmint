@@ -116,7 +116,7 @@ mmint -bw H3K4me1.meth.bw H3K27me3.meth.bw H3K27ac.meth.bw ATAC.meth.bw -bed H3K
 
 This script generate a two Yaxis (One for mCG/CG ratio; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.
 
-mmint -bw H3K4me1.bw methRatio.bw -bed promoter.bed -after 2000 -before 2000 -bs 20 -m 2000 -L H3K4me1 mCG/CG -n H3K4me1.methOnPromoter.pdf
+mmint curveDualYaxis -bw PE.final.meth.bw d8.ATAC.bw -bed d8_peaks.narrowPeak -after 1000 -before 1000 -bs 20 -m 1000 -L mCG/CG ATAC.signal -n PE.meth.ATAC2 -xlab ATACpeaks -ylab1 mCG/CG -ylab2 ATACsignal
 
 9. horizonalHeatmap.py
 
