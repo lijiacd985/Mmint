@@ -294,12 +294,12 @@ def run(parser):
     g = sns.jointplot(x="y", y="x", data=merge,alpha=0.05,s=20,color="g")
     #g.plot_joint(plt.scatter, c="b", s=20, linewidth=1, marker=".",alpha=0.05)
     #g.ax_joint.collections[0].set_alpha(0)
-    regiony1=[np.max(array2)*0.75,np.max(array2)*0.75+1,np.max(array2)*0.75+1,np.max(array2)*0.75]
+    regiony1=[np.max(array2)*0.75,np.max(array2)*0.75+np.max(array2)*0.04,np.max(array2)*0.75+np.max(array2)*0.04,np.max(array2)*0.75]
     for j in range(4):
         r[j] = Decimal(str(r[j])).quantize(Decimal('0.00'))
     for j in range(4):
         g.ax_joint.plot(region[j],regiony1,lw=1.5,color='green')
-        g.ax_joint.text((region[j][1]+region[j][2])/2,np.max(array2)*0.75+2,str(r[j])+'%',ha='center', va='bottom')
+        g.ax_joint.text((region[j][1]+region[j][2])/2,np.max(array2)*0.75+np.max(array2)*0.05,str(r[j])+'%',ha='center', va='bottom')
     g.ax_joint.text(0,np.max(array2)*0.90,"Peaks with CpGs: %s; Total Peaks: %s" %(N,len(l)),fontsize=12)
     
     g.set_axis_labels("mCG/CG", "ChIP Signal")
