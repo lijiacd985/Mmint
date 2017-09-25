@@ -109,7 +109,7 @@ This script generate the curve plot with multi-bigwig singal files against inter
 
 Example command:
 
-mmint -bw H3K4me1.meth.bw H3K27me3.meth.bw H3K27ac.meth.bw ATAC.meth.bw -bed H3K4me1peaks.bed H3K27me3peaks.bed H3K27acpeaks.bed ATACpeaks.bed -after 2000 -before 2000 -bs 20 -m 2000 -L H3K4me1 H3K27me3 H3K27ac ATAC -n methOnMultipleRegions.pdf
+mmint multiBw2multiBed -bw H3K4me1.meth.bw H3K27me3.meth.bw H3K27ac.meth.bw ATAC.meth.bw -bed H3K4me1peaks.bed H3K27me3peaks.bed H3K27acpeaks.bed ATACpeaks.bed -after 2000 -before 2000 -bs 20 -m 2000 -L H3K4me1 H3K27me3 H3K27ac ATAC -n methOnMultipleRegions.pdf
 
 
 8. curveDualYaxis.py
@@ -134,7 +134,7 @@ red dashed lines as the boundaries of the interested regions.
 
 Example command:
 
-mmint multiTracks -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -out testRegions1.npz testRegions2.npz testRegions3.npz testRegions4.npz testRegions5.npz -outRawCounts testRegions1.tab testRegions2.tab testRegions3.tab testRegions4.tab testRegions5.tab -c r g b black yellow
+mmint multiTracks -bs 100 -f regions.txt -b H3K4me3_m24.merge.bw H3K27me3_m24.merge.bw KO-K4m3.norm.bw KO-K27m3.norm.bw  -labels m_H3K4me3 m_H3K4me3 KO_H3K4me3 KO_H3K27me3 -c r g b black yellow
 
 regions.txt:
 
@@ -170,7 +170,7 @@ This script will calculate the correlation between mCG/CG ratio on certain regio
 
 Example command:
 
-mmint -m methRatio.bed -r hg19 -u 1000 -d 1000 -R gene.exp -o methvsExp -ylab Genes.Exp.log10 -xlab mCG/CG
+mmint bedvsexpression -m methRatio.bed -r hg19 -u 1000 -d 1000 -R gene.exp -o methvsExp -ylab Genes.Exp.log10 -xlab mCG/CG
 
 13. HistoneGenes
 
