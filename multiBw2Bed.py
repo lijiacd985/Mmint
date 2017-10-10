@@ -46,9 +46,9 @@ def run(parser):
 
     for i in range(len(args.bigwig)):
         if args.meth:
-            subprocess.call("sh format.meth.sh %s" % out[i],shell=True)
+            subprocess.call("sh format.meth.sh %s" % outFile[i],shell=True)
         else:
-            subprocess.call("sh format.sh %s" % out[i],shell=True)
+            subprocess.call("sh format.sh %s" % outFile[i],shell=True)
         
         #subprocess.call("sh format.sh %s" % args.outFile[i],shell=True)
         #subprocess.call("sh format.meth.sh %s" % outFile[i],shell=True)
