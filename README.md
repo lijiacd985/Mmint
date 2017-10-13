@@ -118,7 +118,7 @@ This script generate a two Yaxis (One for mCG/CG ratio; the other is for ChIP-se
 
 mmint curveDualYaxis -bw PE.final.meth.bw d8.ATAC.bw -bed d8_peaks.narrowPeak -after 1000 -before 1000 -bs 20 -m 1000 -L mCG/CG ATAC.signal -n PE.meth.ATAC2 -xlab ATACpeaks -ylab1 mCG/CG -ylab2 ATACsignal
 
-9. horizonalHeatmap.py
+9. horizontalHeatmap.py
 
 This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.
 
