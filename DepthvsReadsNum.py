@@ -112,7 +112,8 @@ def run(parser):
     for i in range(len(args.methfile)):
         xaxis=[1,2,3,4,5,6,7,8,9,10]
         labels=[1,2,4,8,16,32,64,128,256,512]
-        plt.plot(xaxis,t[i],'-o',color=color[i],label=args.label[i])
+	c=next(color)
+        plt.plot(xaxis,t[i],'-o',color=c[i],label=args.label[i])
         plt.legend(loc="lower left")
     plt.axvline(x=100,color='red',linewidth=2,linestyle='dashed')
     plt.xticks(xaxis, labels)
