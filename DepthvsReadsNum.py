@@ -70,6 +70,7 @@ def run(parser):
     sum=[]
     color=iter(cm.rainbow(np.linspace(0,1,len(args.methfile))))
     #c=['r','b','g','y','k','c','m']
+    c=['r','b','g','y','k','c','m','sienna','lightsalmon','darkorange','darkgoldenrod','yellowgreen','skyblue','seagreen','fuchsia','orchid','stateblue','cyan']
     fig,ax = plt.subplots()
     plt.xlim(0,11)
     t=[]
@@ -112,7 +113,7 @@ def run(parser):
     for i in range(len(args.methfile)):
         xaxis=[1,2,3,4,5,6,7,8,9,10]
         labels=[1,2,4,8,16,32,64,128,256,512]
-	c=next(color)
+	#c=next(color)
         plt.plot(xaxis,t[i],'-o',color=c[i],label=args.label[i])
         plt.legend(loc="lower left")
     plt.axvline(x=100,color='red',linewidth=2,linestyle='dashed')
