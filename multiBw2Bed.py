@@ -72,7 +72,7 @@ def run(parser):
     fig,ax = plt.subplots()
     plt.xlim(0,len(array[0]))
     for i in range(len(array)):
-        plt.plot(x,y[i],colours[i],linewidth=3,label=args.rowlabels[i])
+        plt.plot(x,y[i],colours[i],linewidth=2,label=args.rowlabels[i])
         #plt.legend(args.rowlabels[i],loc="upper left")
         plt.legend(loc="upper left")
         #print args.rowlabels[i]
