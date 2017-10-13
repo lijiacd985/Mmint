@@ -68,7 +68,8 @@ def run(parser):
     ratio=[]
     cov=[]
     sum=[]
-    c=['r','b','g','y','k','c','m']
+    color=iter(cm.rainbow(np.linspace(0,1,len(args.methfile))))
+    #c=['r','b','g','y','k','c','m']
     fig,ax = plt.subplots()
     plt.xlim(0,11)
     t=[]
@@ -111,7 +112,7 @@ def run(parser):
     for i in range(len(args.methfile)):
         xaxis=[1,2,3,4,5,6,7,8,9,10]
         labels=[1,2,4,8,16,32,64,128,256,512]
-        plt.plot(xaxis,t[i],'-o',color=c[i],label=args.label[i])
+        plt.plot(xaxis,t[i],'-o',color=color[i],label=args.label[i])
         plt.legend(loc="lower left")
     plt.axvline(x=100,color='red',linewidth=2,linestyle='dashed')
     plt.xticks(xaxis, labels)
