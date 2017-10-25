@@ -55,7 +55,7 @@ def run(parser):
         for i in range(len(args.bigwig)):
     		subprocess.call("sed -i 's/nan/0/g' %s" % RawCounts[i], shell=True)
         for i in range(len(args.bigwig)):
-            subprocess.call("sh ./format.shareX.sh %s" % RawCounts[i],shell=True)
+            subprocess.call("sh format.shareX.sh %s" % RawCounts[i],shell=True)
         dt = pd.read_table("merge.clean",header=1)
         x_sub_flat = dt.as_matrix(columns=dt.columns[2:3])
         x_trans = map(list,zip(*x_sub_flat))
