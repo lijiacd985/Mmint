@@ -176,7 +176,7 @@ mmint bedvsexpression -m methRatio.bed -r hg19 -u 1000 -d 1000 -R gene.exp -o me
 
 This script will classify genes based on Histone peaks, so you can investigate how these two histones interact with DNA methylation on different groups of genes classified by these two histones (eg. bivalend promoter (H3K4me3 and H3K27me3); active/inactive enhancers (H3K4me1 and H3K27ac)). It takes two different histones peaks, mCG/CG ratio bigwig file as input and output four genes groups (only histone A; only histone B; both histone A and B; No Histones) based on calculating the overlaps among two histone peaks and regions around TSS. It can give you four curves of mCG/CG ratio for the four classies along gene regions.
 
-mmint -tss mm10.tss.bed -gene genes.bed -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1  -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -m 2000 -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneGenes.pdf
+mmint HistoneGenes -tss mm10.tss.bed -gene genes.bed -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1  -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -m 2000 -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneGenes.pdf
 
 The format of mm10.tss.bed:
 
