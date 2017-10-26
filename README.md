@@ -195,7 +195,7 @@ chr11	120347677	120349677	0610009L18Rik
 
 This script is similar with HistoneGenes. It will classify the histone peaks based on the overlap between thw different histones peaks. And, then it can generate the mCG/CG curve on these four histone peaks groups (only histone A; only histone B; both histone A and B; No Histones).
 
-mmint -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1 Overlap.bed histone1Only.bed histone2Only.bed NoHistone.bed -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneOverlap.pdf
+mmint HistonePeaks -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1 Overlap.bed histone1Only.bed histone2Only.bed NoHistone.bed -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneOverlap.pdf
 
 15. DNA methylation Canyon
 
