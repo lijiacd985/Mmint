@@ -1,5 +1,6 @@
 # Mmint (Methylation data mining tools)
 
+![alt tag](http://user-images.githubusercontent.com/28851868/30612111-1b7ad0a6-9d49-11e7-990a-2d1bc63b2cf5.png)
 
 <h3>Requirements:</h3>
 
