@@ -24,6 +24,9 @@
 
 This tool was written using python. 
 
+![Mmint Workflow](https://user-images.githubusercontent.com/28851868/32191201-40567074-bd7e-11e7-936d-6dec209ede6f.png)
+
+
 <h3>Usage</h3>
 
 1. mdepth
