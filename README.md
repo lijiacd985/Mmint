@@ -31,59 +31,64 @@ This tool was written using python.
 
  ```
  mmint -h
- usage: mmint [-h]   
-        {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+usage: mmint [-h]
+             
+             {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+             ...
 
--    mdepth              This script will plot the Mean CpG methylation ratio
+positional arguments:
+  {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+    mdepth              This script will plot the Mean CpG methylation ratio
                         and number of CpG sites under a series depth for
                         multiple samples. The input file is the output file
                         (*stat.txt) from mcall (MOABS).
--   pca                 This script take methylation ratio matrix for multiple
+    pca                 This script take methylation ratio matrix for multiple
                         samples as input output a PCA plot.
--    mcor                This script will generate the correlation matrix for
+    mcor                This script will generate the correlation matrix for
                         all the samples and some basic statistics. It will
                         also generate a plot with diagnol as histgram of
                         methylation ratio for each sample; offdiagnal as
                         pairwise density for methylation ratio.
--    meth2chip           This script will plot the average ChIP-seq signals at
+    meth2chip           This script will plot the average ChIP-seq signals at
                         certain methylation ratio range; the input files are
                         methylation ratio file (*.G.bed from mcall MOABS) and
                         the ChIP-seq signals intensity file.
--    multibw2Bed         This script generate the curve plot with multi-bigwig
+    multibw2Bed         This script generate the curve plot with multi-bigwig
                         singal files against interested regions (bed file).
                         Input files are multiple bigwig files and one bed (or
                         multiple bed files) file.
--    multibw2multibed    This script generate the curve plot with multi-bigwig
+    multibw2multibed    This script generate the curve plot with multi-bigwig
                         singal files against interested regions (bed file).
                         Input files are multiple bigwig files and one bed (or
                         multiple bed files) file.
--    curveDualYaxis      This script generate a two Yaxis (One for mCG/CG; the
+    curveDualYaxis      This script generate a two Yaxis (One for mCG/CG; the
                         other is for ChIP-seq or other datatype) curve plot.
                         This plot will show how methylation and other data
                         type distribution on interested regions.
--    horizonalHeatmap    This script will use bigwig and bed files as input and
+    horizonalHeatmap    This script will use bigwig and bed files as input and
                         plot multiple types of signals distribution on
                         interested locations (up/dnstream xxx bp) as a
                         horizonal heatmap.
--    multiTracks         This script will use bigwig and bed files as input and
+    multiTracks         This script will use bigwig and bed files as input and
                         output pictures of multi-bigwig signals for each loci
                         in the bedfiles. (similar with UCSC visualization
                         tracks but can generated many automatically)
--    annotate            annotate the bed file
--    multiTracksmeth     help
--    volcano             Volcano plot for bedfile
--   cluster             This script take methylation ratio matrix for multiplt
+    annotate            annotate the bed file
+    multiTracksmeth     help
+    volcano             Volcano plot for bedfile
+    cluster             This script take methylation ratio matrix for multiplt
                         samples as input to show the cluster result between
                         samples.
--    DepthVSReadnum      This script will draw figure about depth and reads'
+    DepthVSReadnum      This script will draw figure about depth and reads'
                         number.
--    BedvsExpression     Bed file versus expression profile
--    CGratio             CG containing reads ratio
--    HistoneGenes        Classification of genes based on two histone markers
--    HistonePeaks        Classification of Peaks based on two histone markers
+    BedvsExpression     Bed file versus expression profile
+    CGratio             CG containing reads ratio
+    HistoneGenes        Classification of genes based on two histone markers
+    HistonePeaks        Classification of Peaks based on two histone markers
 
 optional arguments:
   -h, --help            show this help message and exit
+
  ```
 
 
