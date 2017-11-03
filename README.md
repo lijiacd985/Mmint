@@ -28,15 +28,10 @@ This tool was written using python.
 
 
 <h3>Usage</h3>
-
+```
 mmint -h
-usage: mmint [-h]
-             
-             {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
-             ...
-
-positional arguments:
-  {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+usage: mmint [-h]   
+{multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
     mdepth              This script will plot the Mean CpG methylation ratio
                         and number of CpG sites under a series depth for
                         multiple samples. The input file is the output file
@@ -87,17 +82,17 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-
+```
 
 1. mdepth
 
 This script will plot the Mean CpG methylation ratio and the number of CpG sites under a series depths for multiple samples. The input file is the output file (*stat.txt) from mcall (MOABS).
 
 Example Command:
-
+```
 mmint mdepth -m DE_stat.txt GT_stat.txt FG_stat.txt PE_stat.txt -l DE GT FG PE -o mdepth.pdf
 
-
+```
 2. DepthvsReadsNum
 
 This script will plot the wig sum percentage (Y-axis) (total coverage for certain CpGs/total coverage for all CpGs) at depth >=x (x=1,2,4,8,16,32,64,128,256) (X-axis) to detect if there are high duplication level or sequence bias. If the sequence is randomly sequenced with no bias and no duplication, the total reads number should decrease to less than 10% with the depth increase to certain number (if the read length is 75 bp, the maximum coverage for one CpG supported by non-duplicate reads should be 75); if there is bias or high duplication level, the curve should be a flat line start at certain depth (eg. 100) with percentage of reads >= 20% (see the example).  
@@ -108,9 +103,9 @@ input file can be the ouput file (*.G.bed) from MOABS (mcall) or a file with at 
 chr start end ratio total-C total-mC
 
 Example Command:
-
+```
 mmint DepthvsReadsnum -m a.G.bed b.G.bed c.G.bed -l A B C -o depthvsReadsNum
-
+```
 
 3. CGratio
 
@@ -126,11 +121,11 @@ Example Command:
 A.G.bed is the output file from MAOBS (mcall) or it can be bed files with at least five columns:
 
 chr  start   end   methRatio depth
-
+```
 mmint pca -i A.G.bed B.G.bed C.G.bed -n 3 -r 1 -N A B C -b cpgisland.bed -c 10 -o meth.PCA
 
 mmint cluster -i A.G.bed B.G.bed C.G.bed -N A B C -o cluster -l average
-
+```
 
 5. mCor
 
