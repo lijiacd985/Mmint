@@ -33,6 +33,7 @@ This tool was written using python.
 mmint -h
 usage: mmint [-h]   
 {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+```
 -    mdepth              This script will plot the Mean CpG methylation ratio
                         and number of CpG sites under a series depth for
                         multiple samples. The input file is the output file
@@ -83,7 +84,7 @@ usage: mmint [-h]
 
 optional arguments:
   -h, --help            show this help message and exit
-```
+
 
 
 
