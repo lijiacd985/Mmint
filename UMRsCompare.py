@@ -35,15 +35,15 @@ def run(parser):
     args = parser.parse_args()    
     subprocess.call("cat %s %s|bedtools sort > tmp0" % (args.UMRsFile1,args.UMRsFile2),shell=True)
     subprocess.call("bedtools merge -i tmp0 > merge.UMRs",shell=True)
-    subprocess.call("bedtools intersect -a merge.UMRs -b %s -wao > tmp1" % (args.UMRsFile1), shell=True)
+    subprocess.call("bedtools intersect -a merge.UMRs -b %s -wao|bedtools groupby -i - -g 1,2,3 -c 10 -o sum > tmp1" % (args.UMRsFile1), shell=True)
     
     #tmp1=subprocess.Popen('bedtools intersect -a merge.UMRs -b N.common.canyon -wao ',stdout=subprocess.PIPE,shell=True).communicate()[0]
-    args1 = ["awk", r'{OFS="\t"; if($4!=".")print $1,$2,$3,$10/($3-$2)*100;else print $1,$2,$3,0}', "tmp1"]
+    args1 = ["awk", r'{OFS="\t"; if($4!=".")print $1,$2,$3,$4/($3-$2)*100;else print $1,$2,$3,0}', "tmp1"]
     with open("mergeUMRsRatio1","w") as out1:
         subprocess.call(args1, stdout=out1)
     #tmp2=subprocess.Popen('bedtools intersect -a merge.UMRs -b T.common.canyon -wao',stdout=subprocess.PIPE,shell=True).communicate()[0]
-    subprocess.call("bedtools intersect -a merge.UMRs -b %s -wao > tmp2" % (args.UMRsFile2), shell=True)
-    args2 = ["awk", r'{OFS="\t"; if($4!=".")print $1,$2,$3,$10/($3-$2)*100;else print $1,$2,$3,0}', "tmp2"]
+    subprocess.call("bedtools intersect -a merge.UMRs -b %s -wao |bedtools groupby -i - -g 1,2,3 -c 10 -o sum> tmp2" % (args.UMRsFile2), shell=True)
+    args2 = ["awk", r'{OFS="\t"; if($4!=".")print $1,$2,$3,$4/($3-$2)*100;else print $1,$2,$3,0}', "tmp2"]
     with open("mergeUMRsRatio2","w") as out2:
         subprocess.call(args2, stdout=out2)
     #subprocess.call("awk 'OFS="\t"{if($4!=".")print $1,$2,$3,$10/($3-$2)*100;else print $1,$2,$3,0}' tmp2 > merge.UMRs.Nratio",shell=True)
@@ -68,7 +68,7 @@ def run(parser):
        #g = sns.jointplot(x="y", y="x", data=merge,  kind="kde", color="m",n_levels=12)
     data = np.vstack([x1,y1]).T
     bins = np.linspace(0,100,25)
-    plt.hist(data,bins,alpha=0.5,label=['Normal','Tumor'])
+    plt.hist(data,bins,alpha=0.5,label=[args.UMRsFile1,args.UMRsFile2])
     plt.legend(loc='upper center')
     plt.ylabel('Number of UMRs')
     plt.xlabel('% UMRs Explained')
