@@ -51,6 +51,10 @@ def main():
         from HistonePeaks import run
     if subcommand=='UMRsCompare':
         from UMRsCompare import run
+    if subcommand=='UMRsExplain':
+        from UMRsExplain import run
+    if subcommand=='3dscatter':
+        from scatter3d import run
     run(argparser)
 
 def common_parser():
@@ -75,6 +79,8 @@ def common_parser():
     add_HistoneGenes_parsers(subparsers)
     add_HistonePeaks_parsers(subparsers)
     add_UMRsCompare_parsers(subparsers)
+    add_UMRsExplain_parsers(subparsers)
+    add_scatter3d_parsers(subparsers)
     return argparser
 
 def add_methvsexpression_parsers(s):
@@ -260,6 +266,17 @@ def add_UMRsCompare_parsers(s):
     parser.add_argument('-1','--UMRsFile1',help="UMRs file1 output from Mmint", metavar="FILE")
     parser.add_argument('-2','--UMRsFile2',help="UMRs file2 output from Mmint", metavar="FILE")
     parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
+def add_UMRsExplain_parsers(s):
+    parser = s.add_parser("UMRsExplain",help="UMRs Explained/overlapped with histones")
+    parser.add_argument('-i','--UMRsFile',help="UMRs file output from Mmint", metavar="FILE")
+    parser.add_argument('-1','--annotateFile1',help="annotate bed file1", metavar="FILE")
+    parser.add_argument('-2','--annotateFile2',help="annotate bed file2", metavar="FILE")
+    parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
+def add_scatter3d_parsers(s):
+    parser = s.add_parser("scatter3d",help="plot 3d scatter with 2d projection")
+    parser.add_argument('-DMRs','--DMRs',help="the file include DMRs and diff mCG/CG value",metavar="FILE")
+    parser.add_argument('-histRs','--DiffHistPeaks',help="the file include diff histone peaks and fold change",metavar="FILE")
+    parser.add_argument('-o','--outFile',help="output file name",metavar="FILE")
 
 
 if __name__=="__main__":
