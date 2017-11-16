@@ -58,15 +58,15 @@ def run(parser):
             subprocess.call("sh format.shareX.sh %s" % RawCounts[i],shell=True)
         dt = pd.read_table("merge.clean",header=1)
         x_sub_flat = dt.as_matrix(columns=dt.columns[2:3])
-        print 'A'
+        #print 'A'
         x_trans = map(list,zip(*x_sub_flat))
         
         y_sub = [a for a in dt.as_matrix(columns = dt.columns[3:dt.shape[1]])]
         y_trans = map(list,zip(*y_sub))
         plt.close('all')
-        x_smooth = np.linspace(min(x_trans[0]), max(x_trans[0]), 1000)
+        x_smooth = np.linspace(min(x_trans[0]), max(x_trans[0]), 300)
         y_smooth=[]
-        print len(y_trans)
+        #print len(y_trans)
         for i in range(len(y_trans)):
             y_smooth.append(spline(x_trans[0], y_trans[i], x_smooth))
             ymax.append(max(y_trans[i]))
@@ -90,7 +90,7 @@ def run(parser):
             plt.ylabel(args.labels[i],rotation=90,fontsize=12)
             plt.axvline(x_trans[0][0]+args.upstream,color='red',linewidth=2,linestyle='dashed')
             plt.axvline(x_trans[0][-1]-args.downstream,color='red',linewidth=2,linestyle='dashed')
-            d = scipy.zeros(1000)
+            d = scipy.zeros(300)
             ax1.fill_between(x_smooth,y_smooth[i],where=y_smooth[i]>=d,interpolate=True,color=args.color[i])
             ax1.spines['top'].set_visible(False)
             ax1.spines['right'].set_visible(False)
