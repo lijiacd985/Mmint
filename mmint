@@ -128,7 +128,7 @@ def add_multiTracks_parsers(s):
     parser.add_argument('-r','--replicate',help="Biological replicates. DEFAULT=1",type=int,default=1)
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
     parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
-    
+
 def add_depthvsreadsnum_parsers(s):
     parser = s.add_parser("DepthVSReadnum",help="This script will draw figure about depth and reads' number.")
     parser.add_argument('-m','--methfile',help="The output from mcall: *.G.bed",nargs="*", metavar="FILE")
@@ -184,7 +184,7 @@ def add_multibw2bed_parsers(s):
     #parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")    
+    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
 
 def add_meth2chip_parsers(s):
     parser = s.add_parser("meth2chip",help="This script will plot the average ChIP-seq signals at certain methylation ratio range; the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.")
@@ -211,6 +211,8 @@ def add_cluster_parsers(s):
     parser.add_argument('-N','--name',nargs='+',help="sample's name",required=True)
     parser.add_argument('-o','--output',help="output file name")
     parser.add_argument('-l','--linktype',help='linkage type for scipy, such as single,average,ward,cosine and so on.')
+    parser.add_argument('-b','--bed',metavar="FILE",default='',help="If -b available, only cpgs in these regions will be selected in cluster.")
+    parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
 
 def add_pca_parsers(s):
     parser = s.add_parser("pca",help="This script take methylation ratio matrix for multiple samples as input output a PCA plot.")
