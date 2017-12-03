@@ -284,9 +284,11 @@ chr10	13964044	13968496	hmr123_0.00123365	193	+
 
 17. UMRsExplain
 
-mmint UMRsExplain -i N.UMRs -1 histone1.bed -2 histon2.bed -o UMRsExpained
+mmint UMRsExplain -i N.UMRs -1 histone1.bed -2 histone2.bed -o UMRsExpained
 
+18. scatter3d
 
+mmint scatter3d -DMRs DMRs.bed -histRs histone.fold.bed -o scatter3d.pdf
 
 <h3>Author/Support</h3>
 
