@@ -30,14 +30,13 @@ This tool was written using python.
 <h3>Usage</h3>
 
  ```
- mmint -h
-usage: mmint [-h]
+ usage: mmint [-h]
              
-             {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+             {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,UMRsExplain,HistonePeaks,HistoneGenes,UMRsCompare,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,scatter3d,pca,BedvsExpression,meth2chip}
              ...
 
 positional arguments:
-  {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,HistonePeaks,HistoneGenes,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,pca,BedvsExpression,meth2chip}
+  {multibw2Bed,multiTracks,multiTracksmeth,CGratio,multibw2multibed,horizonalHeatmap,UMRsExplain,HistonePeaks,HistoneGenes,UMRsCompare,annotate,cluster,DepthVSReadnum,mcor,mdepth,volcano,curveDualYaxis,scatter3d,pca,BedvsExpression,meth2chip}
     mdepth              This script will plot the Mean CpG methylation ratio
                         and number of CpG sites under a series depth for
                         multiple samples. The input file is the output file
@@ -85,6 +84,9 @@ positional arguments:
     CGratio             CG containing reads ratio
     HistoneGenes        Classification of genes based on two histone markers
     HistonePeaks        Classification of Peaks based on two histone markers
+    UMRsCompare         Compare UMRs length change between two conditions
+    UMRsExplain         UMRs Explained/overlapped with histones
+    scatter3d           plot 3d scatter with 2d projection
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -247,9 +249,6 @@ This script will classify genes based on Histone peaks, so you can investigate h
 mmint HistoneGenes -tss mm10.tss.bed -gene genes.bed -b1 histone1.peaks.bed -b2 histone2.peaks.bed -o1  -o test1.gz test2.gz test3.gz test4.gz -bw methRatio.bw -m 2000 -after 2000 -before 2000 -bs 20 -L Overlap histone1Only histone2Only NoHistone  -n HistoneGenes.pdf
 
 The format of mm10.tss.bed:
-
-
-
 
 The format of mm10.GENE.bed (tab separated and should sorted by using sort -k4,4b):
 
