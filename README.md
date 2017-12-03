@@ -282,6 +282,11 @@ chr10	9898943	9902518	hmr78_0.0190414	171	+
 
 chr10	13964044	13968496	hmr123_0.00123365	193	+
 
+17. UMRsExplain
+
+mmint UMRsExplain -i N.UMRs -1 histone1.bed -2 histon2.bed -o UMRsExpained
+
+
 
 <h3>Author/Support</h3>
 
