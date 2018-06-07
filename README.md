@@ -20,6 +20,10 @@
  
 - scipy
 
+- seaborn
+
+- sklearn
+
 <h3>Installation</h3>
 
 This tool was written using python. 
