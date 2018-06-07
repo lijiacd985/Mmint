@@ -26,7 +26,7 @@
 
 <h3>Installation</h3>
 
-This tool was written using python. It can be download directly and run locally. Please make sure all the required packages are successfully installed and set them to the environment path.
+This tool was written using python. Please make sure all the required packages are successfully installed and set them to the environment path. Then it can be downloaded and run directly. 
 
 ![Mmint Workflow](https://user-images.githubusercontent.com/28851868/32191201-40567074-bd7e-11e7-936d-6dec209ede6f.png)
 
