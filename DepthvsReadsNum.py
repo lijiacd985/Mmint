@@ -13,7 +13,7 @@ from math import log
 import seaborn as sns
 import subprocess
 from matplotlib.pyplot import cm
-
+import time
 #sns.set(font_scale=1.5)
 
 
@@ -74,11 +74,14 @@ def run(parser):
     fig,ax = plt.subplots()
     plt.xlim(0,11)
     t=[]
+    outfile_name = 'tmp'+str(time.time())
     #with open("tmp", "w") as outfile:
+    #with open(outfile_name, "w") as outfile:
     for i in range(len(args.methfile)):
-        with open("tmp", "w") as outfile:
+        #outfile_name = 'tmp'+str(time.time())
+        with open(outfile_name, "w") as outfile:
             subprocess.call("cut -f1-5 %s | sed '1d'" % args.methfile[i], shell=True,stdout=outfile)
-        methfile=open("tmp",'r')
+        methfile=open(outfile_name,'r')
         next(methfile)
         for line1 in methfile:
             rows1=line1.strip().split("\t")
@@ -105,11 +108,12 @@ def run(parser):
         t.append(s)
         cov=[]
         s=[]
-        subprocess.call("rm tmp", shell=True)
+        methfile.close()
+        subprocess.call("rm "+outfile_name, shell=True)
 
 
-#print t[1]
-
+    print t[0]
+    print t[1]
     for i in range(len(args.methfile)):
         xaxis=[1,2,3,4,5,6,7,8,9,10]
         labels=[1,2,4,8,16,32,64,128,256,512]
@@ -121,4 +125,4 @@ def run(parser):
     plt.xlabel('Coverage (>=)')
     plt.ylabel('Wig sum for selected CpGs (Percentage)')
 
-    fig.savefig(args.output[0]+"-Cov.pdf")
+    fig.savefig(args.output[0]+".pdf")
