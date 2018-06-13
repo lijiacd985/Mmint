@@ -9,6 +9,7 @@ import argparse
 from scipy import stats
 #import seaborn as sns
 import subprocess
+import time
 '''
 parser = argparse.ArgumentParser()
 parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", nargs="*",metavar="FILE")
@@ -36,7 +37,11 @@ def run(parser):
     for i in args.rowlabels:
         outFile.append(i+'.gz')
     for i in range(len(args.bigwig)):
-
+        #fn = args.bigwig[i]
+        #if fn[-3:].lower()=='bed':
+        #    fnbed = 'temp.'+str(time.time())+'.bed'
+        #    subprocess.call("awk '{if ($1 ~ /^chr/) print}' "+fn+' | sort -k1,1 -k2n,2 > '+fnbed,shell=True)
+        #    subprocess.call("bedGraphToBigWig "+fnbed+"  ",shell=True)
         subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, outFile[i]),shell=True)
 
 
