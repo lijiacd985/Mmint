@@ -2,6 +2,8 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import colors
 import os,sys
@@ -31,6 +33,13 @@ def run(parser):
     subprocess.call("rm merge.ave.txt", shell=True)
     ##iterate multiple input files
     for i in range(len(args.bigwig)):
+        fn = args.bigwig[i]
+        if fn[-3:].lower()=='bed':
+            fnbed = 'temp.'+str(time.time())+'.bed'
+            subprocess.call("awk '{if ($1 ~ /^chr/) print}' "+fn+' | sort -k1,1 -k2n,2 > '+fnbed,shell=True)
+            subprocess.call("bedGraphToBigWig "+fnbed+" http://hgdownload.cse.ucsc.edu/goldenPath/"+args.genome+"/bigZips/"+args.genome+".chrom.sizes "+fn[:-3]+'bw',shell=True)
+            args.bigwig[i] = fn[:-3]+'bw'
+            subprocess.call('rm '+fnbed,shell=True)
         #subprocess.call("computeMatrix reference-point --referencePoint center -S %s -R %s -a %s -b %s -bs %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,out[i]),shell=True)
         subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed[i],args.dnregions,args.upregions,args.binsize,args.scaleregion,out[i]),shell=True)
 
