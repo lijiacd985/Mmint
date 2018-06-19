@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 #from sklearn import datasets
 from sklearn.decomposition import PCA
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.cm as cm
 import argparse
 import pandas as pd

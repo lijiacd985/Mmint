@@ -4,6 +4,8 @@
 import numpy as np
 import os,sys
 import argparse
+import matplotlib
+matplotlib.use('Agg')
 from io import StringIO
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab

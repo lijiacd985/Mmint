@@ -2,6 +2,8 @@
 
 import numpy as np
 import os,sys
+import matplotlib
+matplotlib.use('Agg')
 import argparse
 import subprocess
 from io import StringIO

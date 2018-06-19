@@ -3,6 +3,8 @@
 import numpy as np
 import os,sys
 import argparse
+import matplotlib
+matplotlib.use('Agg')
 import subprocess
 from io import StringIO
 import matplotlib.pyplot as plt

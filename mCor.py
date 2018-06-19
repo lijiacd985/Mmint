@@ -1,9 +1,11 @@
 #!/usr/bin/python
-
+import time
 import numpy as np
 import os,sys
 import argparse
 from io import StringIO
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import itertools
@@ -84,7 +86,8 @@ def run(parser):
     #pic = scatter_matrix(df,c=color,cmap='PuRd', alpha=0.2, figsize=(6, 6), diagonal='kde')
     g = sns.PairGrid(df)
     #g.map_diag(sns.kdeplot)
-    np.savetxt('df.txt',df)
+    filename = 'df.'+str(time.time())+'.txt'    
+    np.savetxt(filename,df)
     g.set(ylim=(0, 1))
     g.set(xlim=(0,1))
     g.map_diag(plt.hist)
@@ -93,6 +96,7 @@ def run(parser):
     #g.map_lower(sns.kdeplot, cmap="Blues_d")
     g.map_offdiag(sns.kdeplot, cmap="OrRd", n_levels=20,shade=True)
     pylab.savefig(args.output+".png")
+    os.system('rm '+filename)
 
 
 #usage: python *.py -m input1 input2 input3 ... -o Ratio-Cor

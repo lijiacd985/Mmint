@@ -1,4 +1,6 @@
 #!/usr/bin/env python    
+import matplotlib
+matplotlib.use('Agg')
 from mpl_toolkits.mplot3d import Axes3D
 import mpl_toolkits.mplot3d.art3d as a3d
 import matplotlib.pyplot as plt

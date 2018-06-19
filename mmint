@@ -241,7 +241,7 @@ def add_pca_parsers(s):
     parser.add_argument('-b','--bed',metavar="FILE",default='',help="If -b available, only cpgs in these regions will be selected in cluster.")
     parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
     parser.add_argument('-o','--output',help="the output file")
-    parser.add_argument('-m','--method',help="pca or TSNE")
+    parser.add_argument('-m','--method',help="pca or TSNE",default="pca")
 
 def add_qc_parsers(s):
     parser = s.add_parser("CGratio",help="CG containing reads ratio")
