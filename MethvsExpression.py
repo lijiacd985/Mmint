@@ -16,7 +16,7 @@ def run(parser):
         reffile = './mm10.tss.bed'
     ref = pb.BedTool(reffile)
     meth = pb.BedTool(args.bedfile)
-    methtss = ref.window(meth,l=args.upstream,r=args.downstream).groupby(g=[1,2,3,4,5,6],c=10,o=['mean'])
+    methtss = ref.window(meth,l=args.upstream,r=args.downstream).groupby(g=[1,2,3,4,5,6],c=9,o=['mean'])
     with open(args.RNAseq) as f:
         lines = f.readlines()
     dic={}
