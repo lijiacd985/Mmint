@@ -94,4 +94,4 @@ if __name__=="__main__":
     parser.add_argument('-DMRs','--DMRs',help="the file include DMRs and diff mCG/CG value",metavar="FILE")
     parser.add_argument('-histRs','--DiffHistPeaks',help="the file include diff histone peaks and fold change",metavar="FILE")
     parser.add_argument('-o','--outFile',help="output file name",metavar="FILE")
-    3dscatter(parser)
+    scatter3d(parser)
