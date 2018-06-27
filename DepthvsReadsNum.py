@@ -114,8 +114,8 @@ def run(parser):
         subprocess.call("rm "+outfile_name, shell=True)
 
 
-    print t[0]
-    print t[1]
+    #print t[0]
+    #print t[1]
     for i in range(len(args.methfile)):
         xaxis=[1,2,3,4,5,6,7,8,9,10]
         labels=[1,2,4,8,16,32,64,128,256,512]
