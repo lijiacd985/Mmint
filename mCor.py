@@ -64,7 +64,7 @@ def run(parser):
     plt.style.use('ggplot')
     fig = plt.figure()
     ax = plt.subplot()
-    fig.subplots_adjust(left=0.05)
+    fig.subplots_adjust(left=0.15)
     hm=ax.pcolor(col_max,cmap=plt.cm.OrRd)
     plt.colorbar(hm)
     ax.set_xticks(np.arange(0,labelnum)+0.5)
