@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 from pybedtools import BedTool
@@ -16,6 +18,9 @@ def run(parser):
     realpath = os.path.realpath(__file__)
     realpath = realpath[:realpath.rfind('/')+1]
     targetbed = pybedtools.BedTool(args.bedfile)
+
+    genebed = pybedtools.BedTool(realpath+'hg19.gene.bed')# closest gene bed
+
     bed1 = pybedtools.BedTool(realpath+'hg19.exon.bed')
     bed2 = pybedtools.BedTool(realpath+'hg19.Introns.bed')
     bed3 = pybedtools.BedTool(realpath+'hg19.cpgIsland.bed')
@@ -23,6 +28,9 @@ def run(parser):
     bed5 = pybedtools.BedTool(realpath+'hg19.3UTR.bed')
     bed6 = pybedtools.BedTool(realpath+'hg19.RepeatMask2.bed')
     bed7 = pybedtools.BedTool(realpath+'hg19.intergenic.bed')
+
+    #targetbed closest gene
+    targetbed.closest(genebed),saveas('closestGENE.bed')
 
     targetbed.intersect(bed1,wao=True).saveas('intersectExon.bed',trackline="track name='reads in exons' color=128,0,0")
 
