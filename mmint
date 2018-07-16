@@ -57,7 +57,7 @@ def main():
         from UMRsExplain import run
     if subcommand=='3dscatter':
         from scatter3d import run
-    if subcommand=='OnlineAnnotate':
+    if subcommand=='OnlineAnalysis':
         from OnlineAna import run
     run(argparser)
 
@@ -85,7 +85,7 @@ def common_parser():
     add_UMRsCompare_parsers(subparsers)
     add_UMRsExplain_parsers(subparsers)
     add_scatter3d_parsers(subparsers)
-    #add_onlineanalysis_parsers(subparsers)
+    add_onlineanalysis_parsers(subparsers)
     add_ucsctrack_parsers(subparsers)
     return argparser
 
@@ -104,9 +104,11 @@ def add_ucsctrack_parsers(s):
     parser.add_argument('-o','--output',help="output file name. default=ucsc.type.txt",required=False,default="ucsc.type.txt")
 
 def add_onlineanalysis_parsers(s):
-    parser = s.add_parser("OnlineAnalysis",help="Doing online analysis using GREAT or DAVID analysis api")
-    parser.add_argument('-r','--analysis',help=r'Select online analysis you want, great or david',required=True,default='david')
-    parser.add_argument('-n','--name',help=r"sample name (optional)",required=False,default='default')
+    parser = s.add_parser("OnlineAnalysis",help="Doing online analysis using DAVID analysis api")
+    #parser.add_argument('-r','--analysis',help=r'Select online analysis you want, great or david',required=True,default='david')
+    parser.add_argument('-f','--file',help=r"Output file name",required=True,default='david.genelist.txt')
+    parser.add_argument('-g','--genelist',help=r"Genelist file name. Use gene name or ensembl id")
+    parser.add_argument('-t','--type',help=r"Gene list type: ensembl(0) or gene name(1)")
     #need arguments to finish online analysis
 
 def add_methvsexpression_parsers(s):
