@@ -62,7 +62,7 @@ open(WRTER,">$ucsc_text_file") or die " can not open $ucsc_text_file: $!";
 open(WRTDB,">$ucsc_text_file.db") or die " can not open $ucsc_text_file.db: $!";
 #print WRTER "browser hide all\nbrowser full all\n"; 
 my $file_abs_path = $path . $ucsc_text_file;
-system( "ssh selenium018 'cd $remote_www && ln -s $file_abs_path' " );
+#system( "ssh selenium018 'cd $remote_www && ln -s $file_abs_path' " );
 print STDERR "This is the link for $db, $type:\n";
 print STDERR "http://genome.ucsc.edu/cgi-bin/hgTracks?db=$db&position=chr1:46897500-46918500&hgt.customText=http://dldcc-web.brc.bcm.edu/lilab/deqiangs$relative_path$ucsc_text_file\n";	
 foreach my $file ( @selected_files )
@@ -73,7 +73,7 @@ foreach my $file ( @selected_files )
 	my $newFile = "https://dsunlab.srv.tamhsc.edu/jiali$relative_path".$file;
 	
 	$file_abs_path = $path . $file;
-	system( "ssh selenium018 'cd $remote_www && ln -s $file_abs_path' " );
+    #system( "ssh selenium018 'cd $remote_www && ln -s $file_abs_path' " );
 	
 	
 	if($type eq 'peaks.bed')
