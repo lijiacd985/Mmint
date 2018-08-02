@@ -69,7 +69,7 @@ def run(parser):
     plt.xlim(np.min(X_r[:,0])-0.2*np.abs(np.min(X_r[:,0])),np.max(X_r[:,0])+0.2*np.abs(np.max(X_r[:,0])))
     plt.ylim(np.min(X_r[:,1])-0.2*np.abs(np.min(X_r[:,1])),np.max(X_r[:,1])+0.2*np.abs(np.max(X_r[:,1])))
     fig.subplots_adjust(left=0.1,right=0.8)
-    for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^','o', '^','o','^','o','^')):
+    for c, i, name, markers in zip(colors, np.arange(0,int(args.number)+2), names, ('o', '^','v','<','>','1','2', '3','4','8','s','P','p', '*','H','h','x','X','D', 'd','|','_','+')):
     	plt.scatter(X_r[Y == i, 0], X_r[Y == i, 1], c=c, label=name,alpha=0.8,marker=markers,s=80)
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.savefig(args.output+".pdf")
