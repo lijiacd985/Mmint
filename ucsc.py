@@ -12,5 +12,5 @@ def run(parser):
     #files genome scale output
     #os.system('mkdir ')
     os.system("perl ucsc_tracks.pl -t "+str(args.type)+" -g "+str(args.genome)+" -s " \
-            +args.scale+" -o "+str(args.output))
+            +str(args.scale)+" -o "+str(args.output))
 
