@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 
-import numpy as np
-import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import colors
 import os,sys
 import argparse
 from scipy import stats
 #import seaborn as sns
+import matplotlib.cm as cm
 import subprocess
 import time
 '''
@@ -74,14 +75,17 @@ def run(parser):
     #a=np.arange(len(array[0])).reshape(1,len(array[0]))
     #x=np.repeat(a,len(array),axis=0)
     x=np.arange((int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize))
-    colours=['r','g','b','orange','c','m','orange','violet','lightpink']
+    temp1 = np.arange(len(args.bigwig))
+    ys = [i+temp1+(i*temp1)**2 for i in range(len(args.bigwig))]
+    colours = cm.rainbow(np.linspace(0, 1, len(ys)))
+    #colours=['r','g','b','orange','c','m','orange','violet','lightpink']
     #plt.xlim(0, len(array[2]))
     #for i in range(len(x)):
         #fig=plt.figure()
     fig,ax = plt.subplots()
     plt.xlim(0,len(array[0]))
     for i in range(len(array)):
-        plt.plot(x,y[i],colours[i],linewidth=2,label=args.rowlabels[i])
+        plt.plot(x,y[i],color=colours[i],linewidth=2,label=args.rowlabels[i])
         #plt.legend(args.rowlabels[i],loc="upper left")
         plt.legend(loc="upper left")
         #print args.rowlabels[i]
