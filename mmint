@@ -1,4 +1,3 @@
-#! /usr/bin/env python2
 # coding=utf-8
 
 import sys
@@ -247,8 +246,8 @@ def add_cluster_parsers(s):
 def add_pca_parsers(s):
     parser = s.add_parser("pca",help="This script take methylation ratio matrix for multiple samples as input output a PCA plot.")
     parser.add_argument('-i','--inputfile',nargs='+',help="input bedfile name", metavar="FILE")
-    parser.add_argument('-n','--number',help="the number of samples")
-    parser.add_argument('-r','--replicate',help="the replicates for each sample")
+    #parser.add_argument('-n','--number',help="the number of samples")
+    #parser.add_argument('-r','--replicate',help="the replicates for each sample")
     parser.add_argument('-N','--name', nargs='+', help="the samples' names", required=True)
     parser.add_argument('-b','--bed',metavar="FILE",default='',help="If -b available, only cpgs in these regions will be selected in cluster.")
     parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
