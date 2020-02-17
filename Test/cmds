@@ -1,0 +1,2 @@
+ 1108  python ../Mmint/cluster.py -i /data/yyin/LiBis_test/data/MB_refill_bam_bed/MB2_first.bam.G.bed /data/yyin/LiBis_test/data/MB_refill_bam_bed/MB2_split.bam.G.bed /data/yyin/LiBis_test/data/MB_refill_bam_bed/MB1_first.bam.G.bed -N MB2 MB2_split MB1 -o cluster.pdf 
+ 1109  history 2 >> cmds
