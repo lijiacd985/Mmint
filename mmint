@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # coding=utf-8
 
 import sys
@@ -11,53 +12,56 @@ def main():
     subcommand = args.subcommand
     #print subcommand
     if subcommand=='ucsctrack':
-        from ucsc import run
+        from Mmint.ucsc import run
     if subcommand=='mdepth':
-        from mdepth import run
+        from Mmint.mdepth import run
        # mdepth(argparser)
     if subcommand=='pca':
-        from PCAmeth import run
+        from Mmint.PCAmeth import run
        # pca(argparser)
     if subcommand=='cluster':
-        from cluster import run
+        from Mmint.cluster import run
     if subcommand=='mcor':
-        from mCor import run
+        from Mmint.mCor import run
     if subcommand=='meth2chip':
-        from Meth2ChIP import run
+        from Mmint.Meth2ChIP import run
     if subcommand=='multibw2Bed':
-        from multiBw2Bed import run
+        from Mmint.multiBw2Bed import run
     if subcommand=='multibw2multibed':
-        from multiBw2multiBed import run
+        from Mmint.multiBw2multiBed import run
     if subcommand=='curveDualYaxis':
-        from curveDualYaxis import run
+        from Mmint.curveDualYaxis import run
     if subcommand=='horizonalHeatmap':
-        from horizonalHeatmap import run
+        from Mmint.horizonalHeatmap import run
     if subcommand=='multiTracks':
-        from multiTracks import run
+        from Mmint.multiTracks import run
     if subcommand=='annotate':
-        from annotate import run
+        from Mmint.annotate import run
     if subcommand=='multiTracksmeth':
-        from multiTracksmeth import run
+        from Mmint.multiTracksmeth import run
     if subcommand=='volcano':
-        from volcano import run
+        from Mmint.volcano import run
     if subcommand=='BedvsExpression':
-        from MethvsExpression import run
+        from Mmint.MethvsExpression import run
     if subcommand=='DepthVSReadnum':
-        from DepthvsReadsNum import run
+        from Mmint.DepthvsReadsNum import run
     if subcommand=='CGratio':
-        from CGratio import run
+        from Mmint.CGratio import run
     if subcommand=='HistoneGenes':
-        from HistoneGenes import run
+        from Mmint.HistoneGenes import run
     if subcommand=='HistonePeaks':
-        from HistonePeaks import run
+        from Mmint.HistonePeaks import run
     if subcommand=='UMRsCompare':
-        from UMRsCompare import run
+        from Mmint.UMRsCompare import run
     if subcommand=='UMRsExplain':
-        from UMRsExplain import run
+        from Mmint.UMRsExplain import run
     if subcommand=='3dscatter':
-        from scatter3d import run
+        from Mmint.scatter3d import run
     if subcommand=='OnlineAnalysis':
-        from OnlineAna import run
+        from Mmint.OnlineAna import run 
+    if subcommand==None:
+        argparser.print_help()
+        sys.exit()
     run(argparser)
 
 def common_parser():
@@ -225,8 +229,10 @@ def add_meth2chip_parsers(s):
 def add_mcor_parsers(s):
     parser = s.add_parser("mcor",help="This script will generate the correlation matrix for all the samples and some basic statistics. It will also generate a plot with diagnol as histgram of methylation ratio for each sample; offdiagnal as pairwise density for methylation ratio.")
     parser.add_argument('-m','--methfile',help="The output from mcall",nargs='*', metavar="FILE")
+    parser.add_argument('-l','--label',help="Label for methylation files", nargs='*')
+    parser.add_argument('-g','--gridsize',help="Size of grid in scatterplot.default=20.",default=20)
     parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
-    parser.add_argument('-o','--output',help="The output file", metavar="FILE")
+    parser.add_argument('-o','--output',help="The output file prefix.", metavar="FILE")
 
 def add_mdepth_parsers(s):
     parser = s.add_parser("mdepth",help="This script will plot the Mean CpG methylation ratio and number of CpG sites under a series depth for multiple samples. The input file is the output file (*stat.txt) from mcall (MOABS).")
