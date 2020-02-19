@@ -30,6 +30,16 @@ def formdata(files,cov=0,bedfile=''):
             result.append(dic[key])
     return result
 
+
+
+def chip_transfer(data,axis=0):
+    d=np.nan_to_num(data)
+    return np.mean(d,axis=axis)
+
+def meth_transfer(data,axis=0):
+    d = deepcopy(data)
+    return np.nanmean(d,axis=axis)
+
 if __name__=="__main__":
     import sys
     argv = sys.argv[1:]
