@@ -208,16 +208,16 @@ def add_multibw2multibed_parsers(s):
 def add_multibw2bed_parsers(s):
     parser = s.add_parser("multibw2Bed",help="This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.")
     parser.add_argument('-bw','--bigwig',help="bigwig or bed for the computeMatrix", nargs="*",metavar="FILE")
-    parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
-    parser.add_argument('-after','--dnregions',help="downstream regions to plot")
-    parser.add_argument('-before','--upregions',help="upstream regions to plot")
-    parser.add_argument('-bs','--binsize',help="bins size to use")
-    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)")
-    #parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
+    parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE", nargs="*")
+    parser.add_argument('-after','--dnregions',help="downstream regions to plot", default=1000)
+    parser.add_argument('-before','--upregions',help="upstream regions to plot", default=1000)
+    parser.add_argument('-bs','--binsize',help="bins size to use", default=100)
+    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)", default=1000)
     parser.add_argument('-g','--genome',help="Genome for transfering bed to bw. Not necessary if there's bed file in -bw. Select from: hg19,hg38,mm9,mm10",default="hg19")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples")
-    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
+    parser.add_argument('-M','--marker',help="Information type of bigwig. Single base resolution(0)/region(1) resolution have different methods to calculate the average. For example: -M 1 0 1 means the first/third are region data. default: all samples are single base data.", nargs="*")
+    parser.add_argument('-n','--pdfname',help="Prefix for output pdf file.", metavar="FILE")
+   
 
 def add_meth2chip_parsers(s):
     parser = s.add_parser("meth2chip",help="This script will plot the average ChIP-seq signals at certain methylation ratio range; the input files are methylation ratio file (*.G.bed from mcall MOABS) and the ChIP-seq signals intensity file.")
