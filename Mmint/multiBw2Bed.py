@@ -21,6 +21,13 @@ def run(parser):
     filenum = len(args.bigwig)
     if not(len(args.bed)==1 or len(args.bed)==filenum):
         raise Exception("Number of bed file should either be 1 or be equal to the number of bigwig files.")
+    if args.marker and len(args.marker)>0:
+        if len(args.marker)!=filenum:
+            raise Exception("Number of markers should be equal to the number of samples!")
+    else:
+        args.marker = [0] * filenum
+        
+
     if filenum!=len(args.rowlabels):
         raise Exception("Number of rowlabels should be equal to the number of samples!")
     for bwf in args.bigwig:
@@ -48,18 +55,18 @@ def run(parser):
 
     if len(args.bed)==1:
         outFile = [outFile[0]]
-        if args.scaleregion==0:
+        if args.scaleregion!=0:
             cmd = "computeMatrix scale-regions -p 6 -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (' '.join(args.bigwig) \
                     ,args.bed[0], args.upregions, args.dnregions, args.binsize, args.scaleregion, outFile[0])
         else:
             cmd = "computeMatrix reference-point --referencePoint center -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig) \
                     ,args.bed[0], args.upregions, args.dnregions, args.binsize, outFile[0])
-        # print(cmd)
+        #print(cmd)
         subprocess.call(cmd, shell=True)
 
     else:
         for i, bwf in enumerate(args.bigwig):
-            if args.scaleregion==0:
+            if args.scaleregion!=0:
                 cmd = "computeMatrix scale-regions -p 6 -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i] \
                         ,args.bed[i], args.upregions, args.dnregions, args.binsize, args.scaleregion, outFile[i])
             else:

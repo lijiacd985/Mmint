@@ -21,7 +21,12 @@ import scipy
 def run(parser):
     args = parser.parse_args()
 
-    args.marker = list(map(lambda x:int(x), args.marker))
+    if args.marker and len(args.marker)>0 and (len(args.marker)!=len(args.bigwig) or len(args.marker)!=len(args.labels) or len(args.marker)!=len(args.labels)):
+        raise Exception("Please enter the corresponding bigwig files, titles and markers.")
+    if args.marker and len(args.marker)>0:
+        args.marker = list(map(lambda x:int(x), args.marker))
+    else:
+        args.marker = [0] * len(args.bigwig)
 
     FILE = open(args.file,'r')
     colours = cm.rainbow(np.linspace(0, 1, len(args.labels)))
@@ -38,6 +43,7 @@ def run(parser):
     #    end = str(int(end)+args.downstream)
     #    array1.append(chr+':'+start+':'+end)
     #    array2.append(line[1])
+    args.binsize = int(args.binsize)
     for k in FILE:
         kk = k.strip().split()
         chr, start, end = kk[:3]

@@ -61,7 +61,7 @@ def run(parser):
     for i,label in enumerate(extend_label):
         plt.scatter(X_r[i,0], X_r[i,1], c=colors[ind[i]], label=label, alpha=0.8, marker=markers[ind[i]],s=80)
     plt.legend(loc='center left', bbox_to_anchor=(1.04, 0.5))
-    plt.savefig(args.output, bbox_inches="tight")
+    plt.savefig(args.output+'.pdf', bbox_inches="tight")
 
 
     ##python PCA.meth.py -i inputfile -n 5 -r 2 -N A B C D E -o PCA

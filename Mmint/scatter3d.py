@@ -1,4 +1,3 @@
-#!/usr/bin/env python    
 import matplotlib
 matplotlib.use('Agg')
 from mpl_toolkits.mplot3d import Axes3D
@@ -12,7 +11,6 @@ import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import pandas as pd
 plt.style.use('ggplot')
-#from Format import formdata
 import seaborn as sns
 import pybedtools
 sns.set(color_codes=True)

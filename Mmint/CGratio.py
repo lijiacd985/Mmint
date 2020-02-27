@@ -1,5 +1,5 @@
 import subprocess
-from Genome_fasta import get_fasta
+from .Genome_fasta import get_fasta
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
