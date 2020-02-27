@@ -38,7 +38,7 @@ def run(parser):
     ax.set_xlim(0, array.shape[1])
     fig.colorbar(heatmap)
     ax.invert_yaxis()
-    fig.savefig(str(args.name)+'.pdf', bbox_inches="tight")
+    fig.savefig(str(args.output)+'.pdf', bbox_inches="tight")
     if os.path.exists(out[0]):
         os.remove(out[0])
     if os.path.exists(out[0][:-3]):
@@ -53,5 +53,5 @@ if __name__=="__main__":
     parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE",default=100)
     parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE",default=1000)
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE",required=True)
-    parser.add_argument('-n','--name',help="prefix for the output PDF file", metavar="FILE",required=True)
+    parser.add_argument('-o','--output',help="prefix for the output PDF file", metavar="FILE",required=True)
     run(parser)

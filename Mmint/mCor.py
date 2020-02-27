@@ -14,7 +14,7 @@ from pandas.plotting import scatter_matrix
 import pylab
 from scipy import stats, integrate
 import seaborn as sns
-from Format import formdata
+from .Format import formdata
 
 def run(parser):
     

@@ -120,7 +120,7 @@ def run(parser):
         ax1.set_ylabel('Signals',fontsize=13)
     else:
         ax1.set_ylabel('Single base Signals(-)',fontsize=13)
-    fig.savefig(args.pdfname +".pdf", bbox_inches="tight")
+    fig.savefig(args.output +".pdf", bbox_inches="tight")
 
 
     for name in outFile:
@@ -142,5 +142,5 @@ if __name__=="__main__":
     parser.add_argument('-g','--genome',help="Genome for transfering bed to bw. Not necessary if there's bed file in -bw. Select from: hg19,hg38,mm9,mm10",default="hg19")
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples")
     parser.add_argument('-M','--marker',help="Information type of bigwig. Single base resolution(0)/region(1) resolution have different methods to calculate the average. For example: -M 1 0 1 means the first/third are region data. default: all samples are single base data.", nargs="*")
-    parser.add_argument('-n','--pdfname',help="Prefix for output pdf file.", metavar="FILE")
+    parser.add_argument('-o','--output',help="Prefix for output pdf file.", metavar="FILE")
     run(parser)

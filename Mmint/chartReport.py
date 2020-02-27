@@ -5,8 +5,6 @@ import sys
 sys.path.append('../')
 
 import logging
-import traceback as tb
-import suds.metrics as metrics
 from tests import *
 from suds import *
 from suds.client import Client

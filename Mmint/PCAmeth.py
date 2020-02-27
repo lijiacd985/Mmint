@@ -8,7 +8,7 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 import matplotlib.cm as cm
 import argparse
-from Format import formdata
+from .Format import formdata
 import os
 
 def run(parser):

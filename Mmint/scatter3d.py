@@ -88,11 +88,11 @@ def run(parser):
     ax.set_xlabel('mCG/CG')
     ax.set_ylabel('Signal(log2)')
     ax.set_zlabel('Overlap Ratio')
-    fig.savefig(args.outFile+".pdf", bbox_inches="tight")
+    fig.savefig(args.output+".pdf", bbox_inches="tight")
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-DMRs','--DMRs',help="the file include DMRs and diff mCG/CG value",metavar="FILE")
     parser.add_argument('-histRs','--DiffHistPeaks',help="the file include diff histone peaks and fold change",metavar="FILE")
-    parser.add_argument('-o','--outFile',help="output file name",metavar="FILE")
+    parser.add_argument('-o','--output',help="output file name",metavar="FILE")
     run(parser)

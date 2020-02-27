@@ -63,7 +63,7 @@ def run(parser):
     ax.xaxis.set_tick_params(labelsize=13)
     plt.xlabel('Regions Relative Positions',fontsize=13)
     plt.ylabel('Signals',fontsize=13)
-    fig.savefig(args.pdfName +".pdf", bbox_inches="tight")
+    fig.savefig(args.output +".pdf", bbox_inches="tight")
     for o in out_gz:
         if os.path.exists(o[:-3]):
             os.remove(o[:-3])
@@ -78,5 +78,5 @@ if __name__=="__main__":
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-M','--methmarker',help="If bw file is methylation file, use -M.",action="store_true")
     parser.add_argument('-fb','--filterbed',help="Only use regions overlapped with given bed.")
-    parser.add_argument('-n','--pdfName',help="Prefix for the result PDF file", metavar="FILE")
+    parser.add_argument('-o','--output',help="Prefix for the result PDF file", metavar="FILE")
     run(parser)

@@ -6,8 +6,6 @@ except:
     from distutils.core import setup
 
 
-#!/usr/bin/env python
-
 
 import sys
 if sys.version_info < (3, 4):
@@ -32,20 +30,20 @@ LICENSE = "MIT"
 
 
 setup(
-    name='LiBis',
+    name='Mmint',
     version=VERSION,
     description=(
-        'Low input Bisulfite sequencing alignment'
+        'Methylation data mining tools'
     ),
     long_description='',
-    author='Yue Yin',
-    author_email='dangertrip@tamu.edu',
+    author='Jia Li',
+    author_email='jiali@tamu.edu',
     maintainer='Deqiang Sun',
     maintainer_email='dsun@tamu.edu',
     license=LICENSE,
     packages=find_packages(),
     platforms=["all"],
-    url='https://github.com/Dangertrip/LiBis',
+    url='https://github.com/lijiacd985/Mmint',
     install_requires=[
         "matplotlib",
         "numpy",
@@ -55,11 +53,8 @@ setup(
         "seaborn",
         "pysam",
         "deepTools",
-        "traceback",
         "suds-py3",
-        "pylab",
         "pybedtools",
-        "mpl_toolkits",
     ],
     scripts=[
         "mmint",

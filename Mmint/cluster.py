@@ -10,7 +10,7 @@ import argparse
 import pandas as pd
 import seaborn as sns
 from scipy.cluster.hierarchy import dendrogram, linkage
-from Format import formdata
+from .Format import formdata
 '''
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--inputfile',help="input file name", metavar="FILE")
