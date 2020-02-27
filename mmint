@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# coding=utf-8
+
 
 import sys
 import argparse
@@ -7,18 +7,14 @@ import argparse
 
 def main():
     argparser = common_parser()
-    #print(argparser)
     args = argparser.parse_args()
     subcommand = args.subcommand
-    #print subcommand
     if subcommand=='ucsctrack':
         from Mmint.ucsc import run
     if subcommand=='mdepth':
         from Mmint.mdepth import run
-       # mdepth(argparser)
     if subcommand=='pca':
         from Mmint.PCAmeth import run
-       # pca(argparser)
     if subcommand=='cluster':
         from Mmint.cluster import run
     if subcommand=='mcor':
@@ -27,18 +23,12 @@ def main():
         from Mmint.Meth2ChIP import run
     if subcommand=='multibw2Bed':
         from Mmint.multiBw2Bed import run
-    if subcommand=='multibw2multibed':
-        from Mmint.multiBw2multiBed import run
-    if subcommand=='curveDualYaxis':
-        from Mmint.curveDualYaxis import run
     if subcommand=='horizonalHeatmap':
         from Mmint.horizonalHeatmap import run
     if subcommand=='multiTracks':
         from Mmint.multiTracks import run
     if subcommand=='annotate':
         from Mmint.annotate import run
-    if subcommand=='multiTracksmeth':
-        from Mmint.multiTracksmeth import run
     if subcommand=='volcano':
         from Mmint.volcano import run
     if subcommand=='BedvsExpression':
@@ -47,8 +37,6 @@ def main():
         from Mmint.DepthvsReadsNum import run
     if subcommand=='CGratio':
         from Mmint.CGratio import run
-    if subcommand=='HistoneGenes':
-        from Mmint.HistoneGenes import run
     if subcommand=='HistonePeaks':
         from Mmint.HistonePeaks import run
     if subcommand=='UMRsCompare':
@@ -72,18 +60,14 @@ def common_parser():
     add_mcor_parsers(subparsers)
     add_meth2chip_parsers(subparsers)
     add_multibw2bed_parsers(subparsers)
-    add_multibw2multibed_parsers(subparsers)
-    add_curveDualYaxis_parsers(subparsers)
     add_horizonalHeatmap_parsers(subparsers)
     add_multiTracks_parsers(subparsers)
     add_annotate_parsers(subparsers)
-    add_multiTracksmeth_parsers(subparsers)
     add_volcano_parsers(subparsers)
     add_cluster_parsers(subparsers)
     add_depthvsreadsnum_parsers(subparsers)
     add_methvsexpression_parsers(subparsers)
     add_qc_parsers(subparsers)
-    add_HistoneGenes_parsers(subparsers)
     add_HistonePeaks_parsers(subparsers)
     add_UMRsCompare_parsers(subparsers)
     add_UMRsExplain_parsers(subparsers)
@@ -94,7 +78,6 @@ def common_parser():
 
 def add_ucsctrack_parsers(s):
     parser = s.add_parser("ucsctrack",help="Forming a UCSC track for several files")
-    #parser.add_argument('-f','--files',help="track files")
     '''
     -t  <str>   type 'peaks.bed', 'origin.bw', 'diff.bw', 'bw', 'bam','bb'
     -r  <str>   mm9 or hg18
@@ -106,24 +89,24 @@ def add_ucsctrack_parsers(s):
     parser.add_argument('-s','--scale',type=int,help=r"scale default=250",required=False,default=250)
     parser.add_argument('-o','--output',help="output file name. default=ucsc.type.txt",required=False,default="ucsc.type.txt")
 
+
 def add_onlineanalysis_parsers(s):
     parser = s.add_parser("OnlineAnalysis",help="Doing online analysis using DAVID analysis api")
-    #parser.add_argument('-r','--analysis',help=r'Select online analysis you want, great or david',required=True,default='david')
     parser.add_argument('-f','--file',help=r"Output file name",required=True,default='david.genelist.txt')
     parser.add_argument('-g','--genelist',help=r"Genelist file name. Use gene name or ensembl id")
     parser.add_argument('-t','--type',help=r"Gene list type: ensembl(0) or gene name(1)")
-    #need arguments to finish online analysis
+
 
 def add_methvsexpression_parsers(s):
     parser = s.add_parser("BedvsExpression",help="Bed file versus expression profile")
-    parser.add_argument('-b','--bedfile',help=r"Bed files, 4 columns: chr\tstart\tend\tvalue",required=True)
-    parser.add_argument('-r','--reference',help="select from hg19/mm10 or the TSS region self defined. The format should be as same as hg19.tss.bed",required=True)
-    parser.add_argument('-u','--upstream',help='TSS upstream (default 1000 bp)',type=int,default=1000)
-    parser.add_argument('-d','--downstream',help="TSS downstream (default 1000 bp)",type=int,default=1000)
-    parser.add_argument('-R','--RNAseq',help=r"result, format(\t==Tab): Genename\tExpression_level",required=True)
+    parser.add_argument('-m','--methfile',help="Bed files describe sample",required=True)
+    parser.add_argument('-r','--reference',help="select from hg19/mm10 or the TSS region self defined",required=True)
+    parser.add_argument('-u','--upstream',help='TSS upstream (default 1000bp)',type=int,default=1000)
+    parser.add_argument('-d','--downstream',help="TSS downstream (default 1000bp)",type=int,default=1000)
+    parser.add_argument('-R','--RNAseq',help="Expression information, format(\\t==Tab): Genename\\tExpression_level",required=True)
     parser.add_argument('-o','--output',help="output file name",required=True)
-    parser.add_argument('-ylab','--yaxislabel',help="Yaxis Label",required=True)
-    parser.add_argument('-xlab','--xaxislabel',help="Xaxis Label",required=True)
+    parser.add_argument('-ylab','--yaxislabel',help="Yaxis Label, default='Expression level'",default='Expression level')
+    parser.add_argument('-xlab','--xaxislabel',help="Xaxis Label, default='Methylation level'",default='Methylation level')
 
 
 def add_volcano_parsers(s):
@@ -132,39 +115,29 @@ def add_volcano_parsers(s):
     parser.add_argument('-p','--p',help='cutoff p value',type=float)
     parser.add_argument('-o','--output',help='output file name')
 
-def add_multiTracksmeth_parsers(s):
-    parser = s.add_parser("multiTracksmeth",help="help")
-    parser.add_argument('-b','--bigwig',help="input file (bw format)",nargs="*", metavar="FILE")
-    parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
-    parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
-    parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
-    #parser.add_argument('-out','--out',help="output",nargs="*",metavar="FILE")
-    #parser.add_argument('-outRawCounts','--RawCounts',help="Raw counts output",nargs="*",metavar="FILE")
-    #parser.add_argument('-r','--regions',help="regions to plot",metavar="FILE")
-    parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
 
 def add_annotate_parsers(s):
     parser = s.add_parser("annotate",help="annotate the bed file")
     parser.add_argument('-b','--bedfile',help="bedfile to annotate", metavar="FILE")
+    parser.add_argument('-r','--reference',help="Bed files as reference to annotate.",nargs="*")
+    parser.add_argument('-l','--label',help="Labels for reference bed files.", nargs='*')
     parser.add_argument('-o','--output',help="the output file", metavar="FILE")
 
 def add_multiTracks_parsers(s):
     parser = s.add_parser("multiTracks",help="This script will use bigwig and bed files as input and output pictures of multi-bigwig signals for each loci in the bedfiles. (similar with UCSC visualization tracks but can generated many automatically)")
     parser.add_argument('-b','--bigwig',help="input file (bw format)",nargs="*", metavar="FILE")
     parser.add_argument('-labels','--labels',help="labels for the input files",nargs="*", metavar="FILE")
-    parser.add_argument('-c','--color',help="colors for the input file tracks",nargs="*", metavar="FILE")
-    parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE")
-    parser.add_argument('-up','--upstream',help="upstream length of regions in bed file. DEFAULT=1000",type=int,default=1000)
-    parser.add_argument('-dn','--downstream',help="downstream length of regions in bed file. DEFAULT=1000",type=int,default=1000)
-    parser.add_argument('-r','--replicate',help="Biological replicates. DEFAULT=1",type=int,default=1)
+    parser.add_argument('-bs','--binsize',help="bins size",metavar="FILE",default=100)
+    parser.add_argument('-after','--downstream',help="downstream regions to plot",metavar="FILE",default=1000)
+    parser.add_argument('-before','--upstream',help="upstream regions to plot",metavar="FILE",default=1000)
     parser.add_argument('-f','--file',help="file include all the regions to plot",metavar="FILE")
-    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
+    parser.add_argument('-M','--marker',help="Information type of bigwig. Single base resolution(0)/region(1) resolution have different methods to calculate the average. For example: -M 1 0 1 means the first/third are region data. default: all samples are single base data.", nargs="*")
 
 def add_depthvsreadsnum_parsers(s):
     parser = s.add_parser("DepthVSReadnum",help="This script will draw figure about depth and reads' number.")
     parser.add_argument('-m','--methfile',help="The output from mcall: *.G.bed",nargs="*", metavar="FILE")
     parser.add_argument('-l','--label',help="The labels",nargs="*", metavar="FILE")
-    parser.add_argument('-o','--output',help="The output file",nargs="*", metavar="FILE")
+    parser.add_argument('-o','--output',help="Prefix of output PDF file", metavar="FILE")
 
 def add_horizonalHeatmap_parsers(s):
     parser = s.add_parser("horizonalHeatmap",help="This script will use bigwig and bed files as input and plot multiple types of signals distribution on interested locations (up/dnstream xxx bp) as a horizonal heatmap.")
@@ -177,33 +150,6 @@ def add_horizonalHeatmap_parsers(s):
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
     parser.add_argument('-n','--name',help="name for picture", metavar="FILE")
 
-def add_curveDualYaxis_parsers(s):
-    parser = s.add_parser("curveDualYaxis",help="This script generate a two Yaxis (One for mCG/CG; the other is for ChIP-seq or other datatype) curve plot. This plot will show how methylation and other data type distribution on interested regions.")
-    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", nargs="*",metavar="FILE")
-    parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
-    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
-    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
-    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
-    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
-    parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
-    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-    parser.add_argument('-xlab','--xaxislabel',help="Xaxis Label1",required=True)
-    parser.add_argument('-ylab1','--yaxislabel1',help="Yaxis Label1",required=True)
-    parser.add_argument('-ylab2','--yaxislabel2',help="Yaxis Label2",required=True)
-
-
-def add_multibw2multibed_parsers(s):
-    parser = s.add_parser("multibw2multibed",help="This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.")
-    parser.add_argument('-bw','--bigwig',help="bigwig or bed for the computeMatrix", nargs="*",metavar="FILE")
-    parser.add_argument('-bed','--bed',help="the regions to plot",nargs="*", metavar="FILE")
-    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
-    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)")
-    parser.add_argument('-after','--dnregions',help="downstream regions to plot")
-    parser.add_argument('-g','--genome',help="Genome for transfering bed to bw. Not necessary if there's bed file in -bw. Select from: hg19,hg38,mm9,mm10",default="hg19")
-    parser.add_argument('-before','--upregions',help="upstream regions to plot")
-    parser.add_argument('-bs','--binsize',help="bins size to use")
-    parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
-    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
 
 def add_multibw2bed_parsers(s):
     parser = s.add_parser("multibw2Bed",help="This script generate the curve plot with multi-bigwig singal files against interested regions (bed file). Input files are multiple bigwig files and one bed (or multiple bed files) file.")
@@ -238,7 +184,7 @@ def add_mdepth_parsers(s):
     parser = s.add_parser("mdepth",help="This script will plot the Mean CpG methylation ratio and number of CpG sites under a series depth for multiple samples. The input file is the output file (*stat.txt) from mcall (MOABS).")
     parser.add_argument('-m','--methfile',help="The output *stat.txt from mcall",nargs="*",metavar="FILE")
     parser.add_argument('-l','--label',help="Labels for samples",nargs="*",metavar="FILE")
-    parser.add_argument('-o','--output',help="The output file: *.pdf, *.png...", metavar="FILE")
+    parser.add_argument('-o','--output',help="Prefix of the result PDF file.", metavar="FILE")
 
 def add_cluster_parsers(s):
     parser = s.add_parser("cluster",help="This script take methylation ratio matrix for multiplt samples as input to show the cluster result between samples.")
@@ -252,13 +198,12 @@ def add_cluster_parsers(s):
 def add_pca_parsers(s):
     parser = s.add_parser("pca",help="This script take methylation ratio matrix for multiple samples as input output a PCA plot.")
     parser.add_argument('-i','--inputfile',nargs='+',help="input bedfile name", metavar="FILE")
-    #parser.add_argument('-n','--number',help="the number of samples")
-    #parser.add_argument('-r','--replicate',help="the replicates for each sample")
     parser.add_argument('-N','--name', nargs='+', help="the samples' names", required=True)
     parser.add_argument('-b','--bed',metavar="FILE",default='',help="If -b available, only cpgs in these regions will be selected in cluster.")
     parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
     parser.add_argument('-o','--output',help="the output file")
     parser.add_argument('-m','--method',help="pca or TSNE",default="pca")
+
 
 def add_qc_parsers(s):
     parser = s.add_parser("CGratio",help="CG containing reads ratio")
@@ -266,49 +211,35 @@ def add_qc_parsers(s):
     parser.add_argument('-g','--genome',help="Genome fasta file path")
     parser.add_argument('-o','--output',help="pie figure's filename")
 
-def add_HistoneGenes_parsers(s):
-    parser = s.add_parser("HistoneGenes",help="Classification of genes based on two histone markers")
-    parser.add_argument('-tss','--TSS',help="Genes TSS updn 1k bed file",metavar="FILE")
-    parser.add_argument('-gene','--GENE',help="Genes bed file",metavar="FILE")
-    parser.add_argument('-b1','--bed1',help="the first bedfile",metavar="FILE")
-    parser.add_argument('-b2','--bed2',help="the second bedfile",metavar="FILE")
-    parser.add_argument('-o1','--out',help="output file name",nargs="*",metavar="FILE")
-    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
-    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", metavar="FILE")
-    #parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
-    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
-    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
-    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
-    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
-    parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
-    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
-def add_HistonePeaks_parsers(s):
 
+def add_HistonePeaks_parsers(s):
     parser = s.add_parser("HistonePeaks",help="Classification of Peaks based on two histone markers")
-    parser.add_argument('-b1','--bed1',help="the first bedfile",metavar="FILE")
-    parser.add_argument('-b2','--bed2',help="the second bedfile",metavar="FILE")
-    parser.add_argument('-o1','--out',help="output file name",nargs="*",metavar="FILE")
-    parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
-    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", metavar="FILE")
-    #parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
-    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
-    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
-    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
+    parser.add_argument('-bed','--bed',help="Two bedfiles representing two different histone modification.",nargs='*',metavar="FILE",required=True)
+    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", metavar="FILE",required=True)
+    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE",default=1000)
+    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE",default=1000)
+    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE",default=100)
     parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
-    parser.add_argument('-n','--pdfName',help="name for pdf", metavar="FILE")
-    parser.add_argument('-M','--meth',help="If bw file is methylation file, use -M.",action="store_true")
+    parser.add_argument('-M','--methmarker',help="If bw file is methylation file, use -M.",action="store_true")
+    parser.add_argument('-fb','--filterbed',help="Only use regions overlapped with given bed.")
+    parser.add_argument('-n','--pdfName',help="Prefix for the result PDF file", metavar="FILE")
+
+
 def add_UMRsCompare_parsers(s):
     parser = s.add_parser("UMRsCompare",help="Compare UMRs length change between two conditions")
     parser.add_argument('-1','--UMRsFile1',help="UMRs file1 output from Mmint", metavar="FILE")
     parser.add_argument('-2','--UMRsFile2',help="UMRs file2 output from Mmint", metavar="FILE")
     parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
+
+
 def add_UMRsExplain_parsers(s):
     parser = s.add_parser("UMRsExplain",help="UMRs Explained/overlapped with histones")
     parser.add_argument('-i','--UMRsFile',help="UMRs file output from Mmint", metavar="FILE")
     parser.add_argument('-1','--annotateFile1',help="annotate bed file1", metavar="FILE")
     parser.add_argument('-2','--annotateFile2',help="annotate bed file2", metavar="FILE")
     parser.add_argument('-o','--output',help="output file name pre-index", metavar="FILE")
+
+
 def add_scatter3d_parsers(s):
     parser = s.add_parser("scatter3d",help="plot 3d scatter with 2d projection")
     parser.add_argument('-DMRs','--DMRs',help="the file include DMRs and diff mCG/CG value",metavar="FILE")

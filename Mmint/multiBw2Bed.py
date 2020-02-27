@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib import colors
 import os,sys
 import argparse
-from utils import format_gz
+from .utils import format_gz
 from scipy import stats
 #import seaborn as sns
 import matplotlib.cm as cm
@@ -52,7 +52,7 @@ def run(parser):
             cmd = "computeMatrix scale-regions -p 6 -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (' '.join(args.bigwig) \
                     ,args.bed[0], args.upregions, args.dnregions, args.binsize, args.scaleregion, outFile[0])
         else:
-            cmd = "computeMatrix reference-point -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig) \
+            cmd = "computeMatrix reference-point --referencePoint center -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig) \
                     ,args.bed[0], args.upregions, args.dnregions, args.binsize, outFile[0])
         # print(cmd)
         subprocess.call(cmd, shell=True)
@@ -63,7 +63,7 @@ def run(parser):
                 cmd = "computeMatrix scale-regions -p 6 -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i] \
                         ,args.bed[i], args.upregions, args.dnregions, args.binsize, args.scaleregion, outFile[i])
             else:
-                cmd = "computeMatrix reference-point -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig) \
+                cmd = "computeMatrix reference-point --referencePoint center -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig) \
                         ,args.bed[0], args.upregions, args.dnregions, args.binsize, outFile[0])
             subprocess.call(cmd, shell=True)
 

@@ -57,7 +57,7 @@ def run(parser):
     ax1.set_ylabel('Mean CpG Meth Ratio(-)')
     ax2.set_ylabel('Million of CpG sites(---)')
     ax1.set_xlabel('Depth')
-    plt.savefig(args.output, bbox_inches="tight")
+    plt.savefig(args.output+'.pdf', bbox_inches="tight")
 
 if __name__=="__main__":
     argparser = argparse.ArgumentParser()

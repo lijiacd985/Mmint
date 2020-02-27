@@ -9,7 +9,7 @@ import os,sys
 import subprocess
 import argparse
 from scipy import stats
-from utils import format_gz
+from .utils import format_gz
 plt.style.use('seaborn-white')
 
 def run(parser):
@@ -20,7 +20,7 @@ def run(parser):
     if args.scaleregion>0:
         subprocess.call("computeMatrix scale-regions -p 6 -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (' '.join(args.bigwig),args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, out[0]),shell=True)
     else:
-        subprocess.call("computeMatrix reference-point -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig),args.bed,args.dnregions,args.upregions,args.binsize, out[0]),shell=True)
+        subprocess.call("computeMatrix reference-point --referencePoint center -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig),args.bed,args.dnregions,args.upregions,args.binsize, out[0]),shell=True)
     subprocess.call("gunzip -f %s" % out[0], shell=True)
 
     array = format_gz(out,(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))//int(args.binsize),[1]*len(args.rowlabels))
