@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -11,69 +9,49 @@ import os,sys
 import subprocess
 import argparse
 from scipy import stats
-
-'''
-parser = argparse.ArgumentParser()
-parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", nargs="*",metavar="FILE")
-parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE")
-parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE")
-parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE")
-parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE")
-parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE")
-parser.add_argument('-o','--outFile',help="output file name",nargs="*",metavar="FILE")
-parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE")
-parser.add_argument('-n','--name',help="name for picture", metavar="FILE")
-'''
-
-#args.outFile should be *.gz!!!!!!!!!!!!!!!!!!!!!!!
+from .utils import format_gz
+plt.style.use('seaborn-white')
 
 def run(parser):
     args = parser.parse_args()
     out=[]
-    for label in args.rowlabels:
-        out.append(label+'.gz')
+    out.append(args.rowlabels[0]+'.gz')
 
-    ##need to install computeMatrix and add it to your ~/.bashrc file
-    ##pass the python variables to subprocess
+    if args.scaleregion>0:
+        subprocess.call("computeMatrix scale-regions -p 6 -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (' '.join(args.bigwig),args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, out[0]),shell=True)
+    else:
+        subprocess.call("computeMatrix reference-point --referencePoint center -p 6 -S %s -R %s -a %s -b %s -bs %s -o %s" % (' '.join(args.bigwig),args.bed,args.dnregions,args.upregions,args.binsize, out[0]),shell=True)
+    subprocess.call("gunzip -f %s" % out[0], shell=True)
 
-    subprocess.call("rm merge.ave.txt",shell=True)
-
-    ##iterate multiple input files
-    for i in range(len(args.bigwig)):
-
-        subprocess.call("computeMatrix scale-regions -S %s -R %s -a %s -b %s -bs %s -m %s -o %s" % (args.bigwig[i],args.bed,args.dnregions,args.upregions,args.binsize,args.scaleregion, out[i]),shell=True)
-
-
-    for i in range(len(args.bigwig)):
-        subprocess.call("gunzip -f %s" % out[i], shell=True)
-
-    for i in range(len(args.bigwig)):
-        subprocess.call("sh format.sh %s" % out[i],shell=True)
-        #subprocess.call("sh format.meth.sh %s" % outFile[i],shell=True)
-    ##plot horizon heatmap
-    dt = pd.read_table("merge.ave.txt",header=None)
-    row_labels = [a for a in args.rowlabels]
-    #
-    array= dt.as_matrix(columns=dt.columns[0:])
+    array = format_gz(out,(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))//int(args.binsize),[1]*len(args.rowlabels))
     fig,ax = plt.subplots()
     cmap = plt.cm.get_cmap('YlOrRd')
-
-    #cmap=ListedColormap('YlOrRd')
-    #heatmap=ax.pcolor(stats.zscore(array,axis=1),cmap=cmap)
     heatmap=ax.pcolor(array,cmap=cmap,vmin=0,vmax=2)
-    #cbar = plt.colorbar(heatmap)
-    #cbar.ax.set_yticklabels(['0','1','2','3','4','5','6','7','8'])
-    #heatmap.set_clim(vmin=-1,vmax=4)
     ax.set_yticks(np.arange(array.shape[0])+0.5, minor=False)
-    ax.set_yticklabels(row_labels, minor=False)
-    ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.scaleregion))/int(args.binsize),(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize)])
-    #ax.set_xticklabels(['-'+str(int(args.upregions)/1000)+' kp','Start','END',str(int(args.dnregions)/1000)+' kb'])
-    ax.set_xticklabels(['-'+str(int(args.upregions)/1)+' bp','Start','END',str(int(args.dnregions)/1)+' bp'])
+    ax.set_yticklabels(args.rowlabels, minor=False)
+    if args.scaleregion>0:
+        ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.scaleregion))/int(args.binsize),(int(args.upregions)+int(args.scaleregion)+int(args.dnregions))/int(args.binsize)])
+        ax.set_xticklabels(['-'+str(int(args.upregions)/1)+' bp','Start','END',str(int(args.dnregions)/1)+' bp'])
+    else:
+        ax.set_xticks([0,int(args.upregions)/int(args.binsize),(int(args.upregions)+int(args.dnregions))/int(args.binsize)])
+        ax.set_xticklabels(['-'+str(int(args.upregions)/1)+' bp','Middle point',str(int(args.dnregions)/1)+' bp'])
     ax.set_xlim(0, array.shape[1])
-    #ax.set_ylim(0,10)
     fig.colorbar(heatmap)
     ax.invert_yaxis()
-    #plt.show()
-    fig.savefig(str(args.name)+'.pdf')
-    #fig.savefig("d01.Top5000.correlation.pdf")
-    subprocess.call("rm merge.ave.txt",shell=True)
+    fig.savefig(str(args.output)+'.pdf', bbox_inches="tight")
+    if os.path.exists(out[0]):
+        os.remove(out[0])
+    if os.path.exists(out[0][:-3]):
+        os.remove(out[0][:-3])
+
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-bw','--bigwig',help="bigwig for the computeMatrix", nargs="*",metavar="FILE",required=True)
+    parser.add_argument('-bed','--bed',help="the regions to plot", metavar="FILE",required=True)
+    parser.add_argument('-after','--dnregions',help="downstream regions to plot",metavar="FILE",default=1000)
+    parser.add_argument('-before','--upregions',help="upstream regions to plot",metavar="FILE",default=1000)
+    parser.add_argument('-bs','--binsize',help="bins size to use", metavar="FILE",default=100)
+    parser.add_argument('-m','--scaleregion',help="scale the input bed regions to certain length(bp)",metavar="FILE",default=1000)
+    parser.add_argument('-L','--rowlabels',nargs="*",help="row labels for samples", metavar="FILE",required=True)
+    parser.add_argument('-o','--output',help="prefix for the output PDF file", metavar="FILE",required=True)
+    run(parser)

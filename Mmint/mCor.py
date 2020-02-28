@@ -10,56 +10,37 @@ import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import itertools
 import pandas as pd
-from pandas.tools.plotting import scatter_matrix
+from pandas.plotting import scatter_matrix
 import pylab
 from scipy import stats, integrate
 import seaborn as sns
-from Format import formdata
+from .Format import formdata
+
 def run(parser):
+    
+    args = parser.parse_args()
+
+    if len(args.label)!=len(args.methfile):
+        raise("The number of bed files and labels should be the same!")
     sns.set(color_codes=True)
     plt.style.use('ggplot')
-
-
-
-    #parser = argparse.ArgumentParser()
-    #parser.add_argument('-m','--methfile',help="The output from mcall",nargs='*', metavar="FILE")
-    #parser.add_argument('-o','--output',help="The output file", metavar="FILE")
-
-    args = parser.parse_args()
-    #print args.methfile
-    #print(reduce(print, args.methfile))
-    #for n in args.methfile:
-	#print (n)
-    #df_list = [pd.read_table(f,header=None,names=['chr','start','end','ratio']) for f in args.methfile]
-    #dfs = [f for f in args.methfile]
-    #print df_list
-    #dfs=[test3,test3,test1]
-    #merge = pd.concat(df_list,axis = 1,join='inner')
-    #merge = reduce(lambda x,y:formdata([x,y],args.cov), args.methfile)
-    #print merge.ix[:,3:]#extract from the third column to the last column
-
-    #merge.columns = [x for x in args.methfile]
-    #merge.rename(columns= lambda x : for x in args.methfile, inplace=True)
-    #print merge
-    #merge.columns = ['chr', 'start', 'end','s1','s2','s3','s4']
-    #merge2 = merge#.ix[:,3:]
     merge2 = pd.DataFrame(formdata(args.methfile,args.cov))
-    merge2.columns = [x for x in args.methfile]
-    array = merge2.as_matrix(columns=merge2.columns[0:])
-    #array = merge.as_matrix(columns=merge.columns[3:])
-    #print array
-    array2=[[float(y) for y in x] for x in array]
-    #print [[float(y) for y in x] for x in array]
-    #df = pd.DataFrame(array2, columns=['T2', 'P2', 'P3'])
-    df = pd.DataFrame(array2, columns=[f for f in args.methfile]) # set the input file name as the column names
+    #merge2.columns = [x for x in args.methfile]
+    array2 = merge2.values.astype('float')
+    #print(merge2.head())
+    #array = merge2.as_matrix(columns=merge2.columns[0:])
+    #array2=[[float(y) for y in x] for x in array]
+    df = pd.DataFrame(array2, columns=args.label) # set the input file name as the column names
+    #print(df.head())
     print((df.corr())) #calculate the correlation bewteen any two columns
 
 #===============================New feature: correlationship heatmap=======================
-    labelname=[]
-    for name in args.methfile:
-        labelname.append(name[name.rfind('/')+1:name.rfind('.')])
-    df.columns = labelname
-    labelnum=len(labelname)
+    #labelname=[]
+    #for name in args.methfile:
+    #    labelname.append(name[name.rfind('/')+1:name.rfind('.')])
+    #df.columns = labelname
+    #labelnum=len(labelname)
+    labelname, labelnum = args.label, len(args.label)
     col_max=df.corr().values
     plt.style.use('ggplot')
     fig = plt.figure()
@@ -80,25 +61,23 @@ def run(parser):
     plt.savefig(args.output+'_heatmap.pdf')
 #==========================================================================================
 
-    print((df.describe())) #output the basic statistics of each column
-    #color = [[x for x in np.arange(0,1,0.1)] for y in np.arange(0,1,0.1)]
-    #color =[[0.1,0.2,0.3],[0.1,0.2,0.3]]
-    #pic = scatter_matrix(df,c=color,cmap='PuRd', alpha=0.2, figsize=(6, 6), diagonal='kde')
     g = sns.PairGrid(df)
-    #g.map_diag(sns.kdeplot)
     filename = 'df.'+str(time.time())+'.txt'    
     np.savetxt(filename,df)
     g.set(ylim=(0, 1))
-    g.set(xlim=(0,1))
+    g.set(xlim=(0, 1))
     g.map_diag(plt.hist)
-    #g = g.map(plt.scatter)
-    #g.map_upper(plt.scatter,s=5)
-    #g.map_lower(sns.kdeplot, cmap="Blues_d")
-    g.map_offdiag(sns.kdeplot, cmap="OrRd", n_levels=20,shade=True)
-    pylab.savefig(args.output+".png")
+    g.map_offdiag(sns.kdeplot, cmap="OrRd", n_levels=20,shade=True,gridsize=int(args.gridsize))
+    pylab.savefig(args.output+".pdf")
     os.system('rm '+filename)
 
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m','--methfile',help="The output from mcall",nargs='*', metavar="FILE")
+    parser.add_argument('-l','--label',help="Label for methylation files", nargs='*')
+    parser.add_argument('-g','--gridsize',help="Size of grid in scatterplot.default=20.",default=20)
+    parser.add_argument('-c','--cov',type=int,help="minimal coverage of cpg sites for every sample,default=0",default=0)
+    parser.add_argument('-o','--output',help="The output file prefix.", metavar="FILE")
+    run(parser)
 
-#usage: python *.py -m input1 input2 input3 ... -o Ratio-Cor
-#input format: chr	start	end	methRatio
 

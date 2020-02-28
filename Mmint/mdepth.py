@@ -48,8 +48,8 @@ def run(parser):
         cg_num, cg_ratio = mdepth_reader(filename)
         c=next(color)
         ax2 = ax1.twinx()
-        ax1.plot(x_value,cg_ratio,c=c,label=args.label[i],marker="+")
-        ax2.plot(x_value,cg_num,marker="+",linestyle='--',c=c)
+        ax1.plot(x_value,cg_ratio,c=c,label=args.label[i])
+        ax2.plot(x_value,cg_num,linestyle=(0, (5, 10)),c=c)
         ax2.set_ylim([0,30])
     ax1.legend(bbox_to_anchor=(1.10,0.5), loc="center left", borderaxespad=0,fontsize=10)
     ax1.set_ylim([0,1])
@@ -57,7 +57,7 @@ def run(parser):
     ax1.set_ylabel('Mean CpG Meth Ratio(-)')
     ax2.set_ylabel('Million of CpG sites(---)')
     ax1.set_xlabel('Depth')
-    plt.savefig(args.output, bbox_inches="tight")
+    plt.savefig(args.output+'.pdf', bbox_inches="tight")
 
 if __name__=="__main__":
     argparser = argparse.ArgumentParser()

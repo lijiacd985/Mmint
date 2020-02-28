@@ -1,6 +1,6 @@
 import urllib.request, urllib.parse, urllib.error
 import argparse
-import chartReport
+import .chartReport
 #def great(args):
 #    baseurl = 'http://bejerano.stanford.edu/great/public/cgi-bin/greatStart.php'
 #    text=['requestURL','requestSpecies','requestName','requestSender','bgURL','bgName','outputType']

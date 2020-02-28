@@ -1,0 +1,5 @@
+include RELEASE
+include Mmint/BED/*
+include Mmint/*.pl
+include Mmint/*.pm
+include Mmint/ensemblGene.v3.geneSymbolToId
