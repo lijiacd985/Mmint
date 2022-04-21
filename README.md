@@ -4,7 +4,7 @@
 
 <h3>Requirements:</h3>
 
-- python2
+- python3
 
 - DeepTools
 
